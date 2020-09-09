@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.SIGNINFragment">
+
+
+
+    <LinearLayout
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/user"/>
+
+        <EditText
+            android:fontFamily="@font/roboto"
+            android:layout_marginLeft="10dp"
+            android:background="@null"
+            android:textSize="16sp"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:hint="Username"
+            android:textColorHint="@color/colorgray"
+            android:textColor="@color/colorBlack"
+            android:id="@+id/u_name"/>
+    </LinearLayout>
+
+    <View
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginHorizontal="40dp"
+        android:background="@color/colorgray"/>
+
+    <LinearLayout
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/password"/>
+
+        <EditText
+            android:fontFamily="@font/roboto"
+            android:layout_marginLeft="10dp"
+            android:background="@null"
+            android:textSize="16sp"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:hint="Password"
+            android:textColorHint="@color/colorgray"
+            android:textColor="@color/colorBlack"
+            android:id="@+id/u_password"/>
+    </LinearLayout>
+
+    <View
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginHorizontal="40dp"
+        android:background="@color/colorgray"/>
+
+    <Button
+        android:id="@+id/signin"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SIGN IN"
+        android:textSize="18sp"
+        android:textColor="#ffffff"
+        android:background="@color/colorBlack"/>
+
+
+    <Button
+        android:id="@+id/fb"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login with Facebook"
+        android:textSize="18sp"
+        android:textColor="#ffffff"
+        android:background="#3b5999"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:textColor="@color/colorBlack"
+            android:textSize="16sp"
+            android:layout_marginTop="40dp"
+            android:layout_marginHorizontal="40dp"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Forgot Password?"
+            android:id="@+id/forgotpassword"/>
+
+        <View
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginHorizontal="40dp"
+            android:background="@color/colorgray"/>
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
