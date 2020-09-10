@@ -1,4 +1,4 @@
-package com.example.e_commerce_admin.fragment;
+package com.example.e_commerce_admin.ui.fragment;
 
 import android.os.Bundle;
 

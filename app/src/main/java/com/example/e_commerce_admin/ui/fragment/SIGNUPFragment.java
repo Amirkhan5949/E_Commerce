@@ -1,6 +1,10 @@
-package com.example.e_commerce_admin.fragment;
+package com.example.e_commerce_admin.ui.fragment;
 
-import android.content.Intent;
+
+
+
+
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.e_commerce_admin.R;
+import com.example.e_commerce_admin.utils.Loader;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -39,6 +44,7 @@ public class SIGNUPFragment extends Fragment {
     EditText username,password,conpaass,email;
     Button signup;
     TextView signin;
+    private Loader loader;
 
 
     public SIGNUPFragment() {
@@ -51,29 +57,33 @@ public class SIGNUPFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view=inflater.inflate(R.layout.fragment_s_i_g_n_u_p, container, false);
+
+
         username=view.findViewById(R.id.u_name);
         password=view.findViewById(R.id.u_password);
         conpaass=view.findViewById(R.id.u_confirmpassword);
         email=view.findViewById(R.id.u_email);
         signup=view.findViewById(R.id.signup);
         signin=view.findViewById(R.id.signin);
+        loader = new Loader(getContext());
+
 
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (TextUtils.isEmpty(username.getText().toString())){
+                if (TextUtils.isEmpty(username.getText().toString().trim())){
                     Toast.makeText(getContext(), "Please enter user name", Toast.LENGTH_SHORT).show();
                 }
-                else if (TextUtils.isEmpty(password.getText().toString())){
+                else if (TextUtils.isEmpty(password.getText().toString().trim())){
                     Toast.makeText(getContext(), "Pleas Enter Password", Toast.LENGTH_SHORT).show();
                 }
                 else if (password.getText().toString().length()<6){
                     Toast.makeText(getContext(), "Pleas Enter 6 or more than digit password", Toast.LENGTH_SHORT).show();
                 }
-                else if (!(password.getText().toString()).equals(conpaass.getText().toString())){
+                else if (!(password.getText().toString().trim()).equals(conpaass.getText().toString().trim())){
                     Toast.makeText(getContext(), "password not match", Toast.LENGTH_SHORT).show();
                 }
-                else if (TextUtils.isEmpty(email.getText().toString())){
+                else if (TextUtils.isEmpty(email.getText().toString().trim())){
                     Toast.makeText(getContext(), "Pleas Enter Email Address", Toast.LENGTH_SHORT).show();
                 }
                 else if (!Patterns.EMAIL_ADDRESS.matcher(email.getText().toString().trim()).matches()){
@@ -81,6 +91,7 @@ public class SIGNUPFragment extends Fragment {
                 }
                 else {
                     registration();
+
                 }
             }
         });
@@ -88,6 +99,7 @@ public class SIGNUPFragment extends Fragment {
     }
 
     private void registration() {
+        loader.show();
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email.getText().toString().trim(),password.getText().toString())
                 .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
 
@@ -106,10 +118,21 @@ public class SIGNUPFragment extends Fragment {
                                 .addOnCompleteListener(new OnCompleteListener() {
                                     @Override
                                     public void onComplete(@NonNull Task task) {
+
                                         Toast.makeText(getContext(), "Registration Successful", Toast.LENGTH_SHORT).show();
+                                       loader.dismiss();
+                                        getActivity().finish();
+
 
                                     }
-                                });
+                                }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(getContext(), "Failed :"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                                Log.i("dfsfsv", "onFailure: "+e.getMessage());
+                                Log.i("dfsfsv", "onFailure: "+toString());
+                            }
+                        });
 
 
 
@@ -117,6 +140,7 @@ public class SIGNUPFragment extends Fragment {
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
+                loader.dismiss();
                 Toast.makeText(getContext(), "Failed :"+e.getMessage(), Toast.LENGTH_SHORT).show();
                 Log.i("dfsfsv", "onFailure: "+e.getMessage());
                 Log.i("dfsfsv", "onFailure: "+toString());

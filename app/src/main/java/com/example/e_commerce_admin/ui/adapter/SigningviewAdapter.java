@@ -1,4 +1,4 @@
-package com.example.e_commerce_admin;
+package com.example.e_commerce_admin.ui.adapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -6,14 +6,15 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.example.e_commerce_admin.fragment.SIGNINFragment;
-import com.example.e_commerce_admin.fragment.SIGNUPFragment;
+import com.example.e_commerce_admin.ui.fragment.SIGNINFragment;
+import com.example.e_commerce_admin.ui.fragment.SIGNUPFragment;
 
 public class SigningviewAdapter extends FragmentPagerAdapter {
 
     public SigningviewAdapter(@NonNull FragmentManager fm) {
         super(fm);
     }
+
 
     public SigningviewAdapter(@NonNull FragmentManager fm, int behavior) {
         super(fm, behavior);
