@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 
 import com.example.e_commerce_admin.R;
 import com.example.e_commerce_admin.model.Category;
+import com.example.e_commerce_admin.model.Product;
+import com.example.e_commerce_admin.ui.adapter.BrandAdapter;
 import com.example.e_commerce_admin.ui.adapter.CategoryAdapter;
 import com.example.e_commerce_admin.ui.adapter.MainSliderAdapter;
 import com.example.e_commerce_admin.ui.adapter.ProductAdapter;
@@ -23,7 +25,7 @@ import ss.com.bannerslider.Slider;
 
 public class HomeFragment extends Fragment {
      View view;
-     private RecyclerView rv_Category,p_recycler;
+     private RecyclerView rv_Category,p_recycler,brand_recycler,recomded_recycler;
 
 
 
@@ -54,11 +56,21 @@ public class HomeFragment extends Fragment {
     private void init() {
         rv_Category = view.findViewById(R.id.rv_Category);
         p_recycler=view.findViewById(R.id.p_recycler);
+        brand_recycler=view.findViewById(R.id.brandrecycler);
+        recomded_recycler=view.findViewById(R.id.recommanded_recycler);
+
+        brand_recycler.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
+        brand_recycler.setAdapter(new BrandAdapter());
+
+
+        recomded_recycler.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
+       recomded_recycler.setAdapter(new ProductAdapter(getproduct(),getContext() ));
+
         rv_Category.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
         rv_Category.setAdapter(new CategoryAdapter(getCategory(),getContext()));
 
         p_recycler.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
-        p_recycler.setAdapter(new ProductAdapter(getContext()));
+        p_recycler.setAdapter(new ProductAdapter(getproduct(),getContext()));
     }
 
     private List<Category> getCategory() {
@@ -67,6 +79,13 @@ public class HomeFragment extends Fragment {
         list.add(new Category("Woman",R.drawable.woman));
         list.add(new Category("Boy",R.drawable.boy));
         list.add(new Category("Girl",R.drawable.girl));
+        return list;
+    }
+
+    private List<Product> getproduct(){
+        List<Product> list = new ArrayList<>();
+        list.add(new Product("Aamir",R.drawable.aamir));
+        list.add(new Product("Avani",R.drawable.whatapp));
         return list;
     }
 }

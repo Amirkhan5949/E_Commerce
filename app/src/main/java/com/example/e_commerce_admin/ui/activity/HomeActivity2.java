@@ -10,11 +10,16 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import com.example.e_commerce_admin.R;
+import com.example.e_commerce_admin.model.Category;
+import com.example.e_commerce_admin.model.Product;
 import com.example.e_commerce_admin.ui.fragment.CartFragment;
 import com.example.e_commerce_admin.ui.fragment.CategoryFragment;
 import com.example.e_commerce_admin.ui.fragment.HomeFragment;
 import com.example.e_commerce_admin.ui.fragment.MenuFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomeActivity2 extends AppCompatActivity {
 
@@ -64,5 +69,7 @@ public class HomeActivity2 extends AppCompatActivity {
         ft.replace(R.id.frame,fragment);
         ft.commit();
     }
+
+
 
 }

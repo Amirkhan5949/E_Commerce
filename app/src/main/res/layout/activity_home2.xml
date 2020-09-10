@@ -14,6 +14,7 @@
         android:layout_above="@+id/bottom"/>
     <com.google.android.material.bottomnavigation.BottomNavigationView
         app:menu="@menu/main"
+        android:background="#ffffff"
         android:layout_alignParentBottom="true"
         app:itemIconTint="@color/naviagation"
         app:itemTextColor="@color/naviagation"
