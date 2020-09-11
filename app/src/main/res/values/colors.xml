@@ -10,4 +10,19 @@
     <color name="colorblue">#3b5999</color>
 
     <color name="colorDarkblue">#7b38ff</color>
+
+
+    <color name="background">#FAF9F9</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="green">#00DC1D</color>
+    <color name="blue">#0019FE</color>
+
+    <color name="gray">#929292</color>
+    <color name="light_gray">#D9FADD</color>
+    <color name="dark_gray">#F1F1F1</color>
+
+    <color name="yellow">#FFC107</color>
+    <color name="red">#FF113F</color>
 </resources>
