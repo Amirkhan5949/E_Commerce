@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:background="@color/white"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_marginVertical="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+         android:layout_marginHorizontal="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_gravity="center_horizontal"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:text="Aamir khan"
+            android:id="@+id/user_name"/>
+
+        <TextView
+            android:paddingHorizontal="10dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/dark_gray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:text="Work Address" />
+
+        <RadioButton
+            android:layout_width="32dp"
+            android:layout_height="24dp"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_marginHorizontal="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_marginVertical="10dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:text="Range Road Shamshabad,mp,464111"
+            android:id="@+id/user_add"/>
+
+        <ImageView
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/ic_baseline_edit_24"
+            android:layout_width="32dp"
+            android:layout_height="24dp"
+            android:id="@+id/iv_edit"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+         android:layout_marginHorizontal="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:text="9144155949"
+            android:id="@+id/alladd_mob_no"/>
+
+        <ImageView
+            app:tint="@color/black"
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/delete"
+            android:layout_width="32dp"
+            android:layout_height="24dp"
+            android:id="@+id/iv_delete"/>
+
+    </LinearLayout>
+
+</LinearLayout>

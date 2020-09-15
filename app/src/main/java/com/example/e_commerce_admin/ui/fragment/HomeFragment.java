@@ -1,5 +1,6 @@
 package com.example.e_commerce_admin.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import com.example.e_commerce_admin.R;
 import com.example.e_commerce_admin.model.Category;
 import com.example.e_commerce_admin.model.Product;
+import com.example.e_commerce_admin.ui.activity.WishlistActivity;
 import com.example.e_commerce_admin.ui.adapter.BrandAdapter;
 import com.example.e_commerce_admin.ui.adapter.CategoryAdapter;
 import com.example.e_commerce_admin.ui.adapter.MainSliderAdapter;
@@ -26,6 +28,7 @@ import ss.com.bannerslider.Slider;
 public class HomeFragment extends Fragment {
      View view;
      private RecyclerView rv_Category,p_recycler,brand_recycler,recomded_recycler;
+
 
 
 
@@ -64,13 +67,17 @@ public class HomeFragment extends Fragment {
 
 
         recomded_recycler.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
-       recomded_recycler.setAdapter(new ProductAdapter(getproduct(),getContext() ));
+       recomded_recycler.setAdapter(new ProductAdapter(getproduct()
+
+       ));
 
         rv_Category.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
         rv_Category.setAdapter(new CategoryAdapter(getCategory(),getContext()));
 
         p_recycler.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
-        p_recycler.setAdapter(new ProductAdapter(getproduct(),getContext()));
+        p_recycler.setAdapter(new ProductAdapter(getproduct()));
+
+
     }
 
     private List<Category> getCategory() {
@@ -86,6 +93,13 @@ public class HomeFragment extends Fragment {
         List<Product> list = new ArrayList<>();
         list.add(new Product("Aamir",R.drawable.aamir));
         list.add(new Product("Avani",R.drawable.whatapp));
+        list.add(new Product("neha",R.drawable.back1));
+        list.add(new Product( "PrintOctopus Women's",R.drawable.nike));
+        list.add(new Product(" Inkast Denim Co. Women's",R.drawable.red));
+        list.add(new Product("Offbeat Women's Graphic",R.drawable.black));
+        list.add(new Product("Frog",R.drawable.din));
+        list.add(new Product("Bikni",R.drawable.dress));
+        list.add(new Product("chaddi[",R.drawable.pink));
         return list;
     }
 }
