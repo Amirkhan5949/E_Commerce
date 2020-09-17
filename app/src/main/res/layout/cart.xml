@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:tools="http://schemas.android.com/tools"
-    android:background="#FFFFFF"
-     android:orientation="vertical"
-    android:layout_marginTop="5dp"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,7 +12,7 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_marginLeft="20dp"
+            android:layout_marginHorizontal="10dp"
             android:layout_width="140dp"
             android:layout_height="170dp"
             android:src="@drawable/woman"
@@ -35,13 +31,12 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:ellipsize="end"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Ultimate Dress"
                     android:textColor="@color/colorBlack"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/bold"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     android:maxLines="1"
                     android:id="@+id/name"/>
 
@@ -51,9 +46,9 @@
                     android:layout_height="wrap_content"
                     android:text="Description"
                     android:textColor="@color/colorBlack"
-                    android:fontFamily="@font/simple"
                     android:textSize="16sp"
                     android:maxLines="1"
+                    android:ellipsize="end"
                     android:id="@+id/description"/>
 
                 <LinearLayout
@@ -67,7 +62,6 @@
                         android:layout_height="wrap_content"
                         android:text="Color:"
                         android:textColor="@color/colorBlack"
-                        android:fontFamily="@font/roboto"
                         android:textSize="14sp"
                         android:maxLines="1"
                         android:id="@+id/color"/>
@@ -93,7 +87,6 @@
                         android:layout_height="wrap_content"
                         android:text="Size:M"
                         android:textColor="@color/colorBlack"
-                        android:fontFamily="@font/roboto"
                         android:textSize="14sp"
                         android:maxLines="1"
                         android:id="@+id/size"/>
@@ -104,7 +97,6 @@
                         android:layout_height="wrap_content"
                         android:text="Qty:1"
                         android:textColor="@color/colorBlack"
-                        android:fontFamily="@font/roboto"
                         android:textSize="14sp"
                         android:maxLines="1"
                         android:id="@+id/quantity"/>
@@ -112,8 +104,8 @@
                     <ImageView
                         android:id="@+id/expandqty"
                         android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/expand"/>
+                        android:layout_height="match_parent"
+                        android:src="@drawable/expand" />
 
 
 
@@ -182,7 +174,6 @@
         </LinearLayout>
 
     </LinearLayout>
-
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -199,12 +190,13 @@
         <TextView
             android:padding="10dp"
             android:gravity="center"
-             android:layout_width="0dp"
+            android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Remove from wishlist"
+            android:text="Save for later"
+            android:textColor="@color/colorDarkblue"
             android:textSize="16sp"
-            android:id="@+id/r_wishlist"/>
+            android:id="@+id/tv_save4later"/>
 
         <View
             android:layout_width="1dp"
@@ -213,13 +205,14 @@
 
         <TextView
             android:padding="10dp"
-             android:gravity="center"
-             android:layout_width="0dp"
+            android:gravity="center"
+            android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="Remove"
+            android:textColor="@color/red"
             android:textSize="16sp"
-            android:id="@+id/remove"/>
+            android:id="@+id/tv_remove"/>
 
 
     </LinearLayout>
@@ -230,8 +223,4 @@
         android:background="@color/dark_gray"/>
 
 
-
 </LinearLayout>
-
-
-

@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.activity.ProfileActivity">
+
+
+    <LinearLayout
+         android:paddingVertical="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_marginLeft="20dp"
+             android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/back"
+            android:id="@+id/iv_back"
+            app:tint="@color/black" />
+
+        <TextView
+            android:layout_marginRight="20dp"
+            android:gravity="center_horizontal"
+             android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Profile"
+            android:textSize="20sp"
+            android:textColor="@color/black"/>
+
+    </LinearLayout>
+
+
+
+    <RelativeLayout
+
+        android:layout_marginVertical="30dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="120dp"
+        android:layout_height="120dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_margin="10dp"
+            app:civ_border_color="@color/black"
+            app:civ_border_width="2dp"
+             android:layout_gravity="center"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/girl"
+            android:id="@+id/iv_profile"/>
+
+
+        <LinearLayout
+            android:background="@drawable/bg_blue_circle"
+            android:layout_marginTop="15dp"
+             android:layout_alignParentRight="true"
+            android:padding="5dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp">
+
+            <ImageView
+                app:tint="@color/white"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:id="@+id/iv_edit_profile"
+                android:src="@drawable/ic_baseline_edit_24" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:padding="10dp"
+        android:background="@drawable/whitebackground"
+        android:layout_margin="16sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:gravity="center_horizontal"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Aamir khan"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:fontFamily="@font/bold"
+                android:id="@+id/tv_p_name"/>
+
+            <ImageView
+                android:layout_marginRight="20dp"
+                android:layout_gravity="center_vertical"
+                android:padding="5dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                app:tint="@color/white"
+                android:id="@+id/iv_edit_name"
+                android:src="@drawable/ic_baseline_edit_24"
+                android:background="@drawable/bg_blue_circle"/>
+
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Aamir@gmail2.com"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:id="@+id/tv_gmail"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mobile no    |"
+                android:textSize="16sp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="    9144155949"
+                android:textSize="16sp"
+                android:textColor="@color/black"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginVertical="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date of birth  |   "
+                android:textSize="16sp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="   29-oct-1997"
+                android:textSize="16sp"
+                android:textColor="@color/black"/>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:padding="10dp"
+        android:background="@drawable/whitebackground"
+        android:layout_margin="16sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:gravity="center_horizontal"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Address"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:fontFamily="@font/bold"
+                 />
+
+            <ImageView
+                android:layout_marginRight="20dp"
+                android:layout_gravity="center_vertical"
+                android:padding="5dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                app:tint="@color/white"
+                android:id="@+id/iv_edit_add"
+                android:src="@drawable/ic_baseline_edit_24"
+                android:background="@drawable/bg_blue_circle"/>
+
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Range Road Neasr Bus Stand Shamshabad"
+            android:textSize="16sp"
+            android:textColor="@color/black" />
+
+        <LinearLayout
+             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name    |   "
+                android:textSize="16sp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" Aamir khan"
+                android:textSize="16sp"
+                android:textColor="@color/black"/>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_marginVertical="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mobile no   |"
+                android:textSize="16sp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="    9144155949"
+                android:textSize="16sp"
+                android:textColor="@color/black"/>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

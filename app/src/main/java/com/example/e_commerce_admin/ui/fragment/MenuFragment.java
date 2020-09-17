@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.e_commerce_admin.R;
 import com.example.e_commerce_admin.ui.activity.AddressActivity;
+import com.example.e_commerce_admin.ui.activity.CartActivity;
 import com.example.e_commerce_admin.ui.activity.OrdersActivity;
 import com.example.e_commerce_admin.ui.activity.WishlistActivity;
 
@@ -41,6 +42,13 @@ public class MenuFragment extends Fragment {
         share=view.findViewById(R.id.share);
         logout=view.findViewById(R.id.logout);
 
+        cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getActivity(), CartActivity.class);
+                startActivity(intent);
+            }
+        });
         orders.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

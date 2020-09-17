@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_marginHorizontal="30dp"
+        android:paddingVertical="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageView
+             android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/back"
+            android:id="@+id/iv_back"
+            app:tint="@color/black" />
+
+        <TextView
+             android:gravity="center_horizontal"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Edit Profile"
+            android:textSize="20sp"
+            android:textColor="@color/black"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:background="@drawable/whitebackground"
+        android:padding="20dp"
+        android:layout_marginTop="20dp"
+         android:layout_marginHorizontal="20sp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_marginVertical="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:textColor="@color/gray"
+            android:textSize="20dp"/>
+
+        <EditText
+            android:layout_marginTop="10dp"
+            android:background="@null"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Aamir"
+            android:textSize="20sp"
+            android:textColorHint="@color/black"
+            android:id="@+id/et_name"/>
+
+        <View
+            android:layout_marginVertical="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"/>
+
+
+        <TextView
+            android:layout_marginVertical="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Email"
+            android:textColor="@color/gray"
+            android:textSize="20dp"/>
+
+        <EditText
+            android:layout_marginTop="10dp"
+            android:background="@null"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Aamir@12324gmail.com"
+            android:textSize="20sp"
+            android:textColorHint="@color/black"
+            android:id="@+id/et_email"/>
+
+        <View
+            android:layout_marginVertical="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"/>
+
+
+        <TextView
+            android:layout_marginVertical="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mobile"
+            android:textColor="@color/gray"
+            android:textSize="20dp"/>
+
+        <EditText
+            android:layout_marginTop="10dp"
+            android:background="@null"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="9144155949"
+            android:textSize="20sp"
+            android:textColorHint="@color/black"
+            android:id="@+id/et_mobno"/>
+
+        <View
+            android:layout_marginVertical="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"/>
+
+        <TextView
+            android:layout_marginVertical="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dob"
+            android:textColor="@color/gray"
+            android:textSize="20dp"/>
+
+        <EditText
+            android:layout_marginTop="10dp"
+            android:background="@null"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="29oct2020"
+            android:textSize="20sp"
+            android:textColorHint="@color/black"
+            android:id="@+id/et_dob"/>
+
+
+        <View
+            android:layout_marginVertical="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"/>
+
+        <Button
+            android:layout_marginTop="20dp"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Save"
+             android:textSize="20sp"
+            android:fontFamily="@font/bold"
+            android:background="@color/blue"
+            android:textColor="@color/white"
+            android:id="@+id/btn_save"/>
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
