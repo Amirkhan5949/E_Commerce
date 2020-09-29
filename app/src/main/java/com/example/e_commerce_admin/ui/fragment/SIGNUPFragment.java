@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.e_commerce_admin.R;
+import com.example.e_commerce_admin.ui.activity.MainActivity;
 import com.example.e_commerce_admin.utils.Loader;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -66,6 +67,13 @@ public class SIGNUPFragment extends Fragment {
         signup=view.findViewById(R.id.signup);
         signin=view.findViewById(R.id.signin);
         loader = new Loader(getContext());
+
+        signin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MainActivity)getActivity()).goToSignUp();
+            }
+        });
 
 
         signup.setOnClickListener(new View.OnClickListener() {
@@ -112,7 +120,7 @@ public class SIGNUPFragment extends Fragment {
                         map.put("email",email.getText().toString());
 
                         FirebaseDatabase.getInstance().getReference()
-                                .child("Users")
+                                .child("Admin")
                                 .child(FirebaseAuth.getInstance().getUid())
                                 .setValue(map)
                                 .addOnCompleteListener(new OnCompleteListener() {
@@ -121,7 +129,6 @@ public class SIGNUPFragment extends Fragment {
 
                                         Toast.makeText(getContext(), "Registration Successful", Toast.LENGTH_SHORT).show();
                                        loader.dismiss();
-                                        getActivity().finish();
 
 
                                     }
@@ -136,6 +143,9 @@ public class SIGNUPFragment extends Fragment {
 
 
 
+
+
+
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -147,4 +157,7 @@ public class SIGNUPFragment extends Fragment {
             }
         });
     }
+
+
+
 }

@@ -16,6 +16,7 @@ public class Loader {
                 .setContentHolder(new ViewHolder(R.layout.loader))
                 .setCancelable(false)
                 .setGravity(Gravity.CENTER)
+                .setContentBackgroundResource(R.color.transparent)
                 .create();
     }
 

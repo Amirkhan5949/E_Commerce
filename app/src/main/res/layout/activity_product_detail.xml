@@ -41,6 +41,7 @@
 
 
                 <androidx.appcompat.widget.Toolbar
+                    android:background="@color/colorDarkblue"
                     app:layout_collapseMode="pin"
                     android:id="@+id/toolbar"
                     app:titleTextColor="@color/white"
@@ -160,22 +161,41 @@
                             android:textSize="20sp" />
 
                         <ImageView
-                            android:layout_gravity="center_vertical"
                             android:id="@+id/iv_color"
                             android:layout_width="24dp"
                             android:layout_height="24dp"
+                            android:layout_gravity="center_vertical"
                             android:scaleType="centerCrop"
                             android:src="@drawable/whitebackground"
                             android:text="XL"
                             android:textColor="@color/black"
                             android:textSize="20dp"
-                            app:tint="@color/blue" />
+                            app:tint="@color/colorDarkblue" />
 
 
                     </LinearLayout>
 
 
                 </LinearLayout>
+
+
+                <TextView
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Color"
+                    android:fontFamily="@font/bold"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/rv_color"/>
+
+
 
                 <TextView
                     android:layout_width="match_parent"
@@ -220,7 +240,7 @@
                     android:id="@+id/rv_review"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/dark_gray" />
+                    android:background="@color/white" />
 
 
             </LinearLayout>
@@ -268,7 +288,7 @@
             android:textSize="24sp"
             android:paddingVertical="5dp"
             android:paddingHorizontal="30dp"
-            android:background="@color/blue"/>
+            android:background="@drawable/buttonbackground"/>
 
 
     </LinearLayout>

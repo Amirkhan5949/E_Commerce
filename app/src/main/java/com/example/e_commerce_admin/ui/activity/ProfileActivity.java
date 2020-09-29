@@ -6,25 +6,38 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import androidx.appcompat.app.AppCompatActivity;
+ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.example.e_commerce_admin.R;
+import com.example.e_commerce_admin.utils.Loader;
+
+import com.myhexaville.smartimagepicker.ImagePicker;
+import com.myhexaville.smartimagepicker.OnImagePickedListener;
 import com.orhanobut.dialogplus.DialogPlus;
 import com.orhanobut.dialogplus.ViewHolder;
+
+import com.yalantis.ucrop.UCrop;
 
 import java.io.File;
 import java.io.IOException;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class ProfileActivity extends AppCompatActivity {
 
-    ImageView iv_edit_name,iv_edit_add,iv_edit_profile;
-//    ImagePicker imagePicker;
+    ImageView iv_edit_name, iv_edit_add, iv_edit_profile;
+    ImagePicker imagePicker;
+    CircleImageView imageView;
+    private final int PERMISSION_ALL = 1234;
+    Loader loader;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,26 +45,11 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
 
-
-        iv_edit_name=findViewById(R.id.iv_edit_name);
-        iv_edit_add=findViewById(R.id.iv_edit_add);
-        iv_edit_profile=findViewById(R.id.iv_edit_profile);
-
-        iv_edit_profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//
-//                if (!hasPermissions( getContext(), PERMISSIONS)) {
-//                    ActivityCompat.requestPermissions(getActivity(), PERMISSIONS, PERMISSION_ALL);
-//                }
-//                else {
-//                    imagePicker.choosePicture(true /*show camera intents*/);
-//
-//                }
-
-
-            }
-        });
+        iv_edit_name = findViewById(R.id.iv_edit_name);
+        iv_edit_add = findViewById(R.id.iv_edit_add);
+        iv_edit_profile = findViewById(R.id.iv_edit_profile);
+        imageView=findViewById(R.id.iv_profile);
+        loader=new Loader(this);
 
 
         final String[] PERMISSIONS = {
@@ -60,26 +58,39 @@ public class ProfileActivity extends AppCompatActivity {
                 android.Manifest.permission.CAMERA
         };
 
-//        imagePicker = new ImagePicker(this, /* activity non null*/
-//                this, /* fragment nullable*/
-//                new OnImagePickedListener() {
-//                    @Override
-//                    public void onImagePicked(Uri imageUri) {
-//                        UCrop.of(imageUri, getTempUri())
-//                                .withAspectRatio(1, 1)
-//                                .start ((AppCompatActivity) getActivity());
-//
-//
-//                    }
-//                }
-//
-//        );
+
+        iv_edit_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (!hasPermissions(ProfileActivity.this, PERMISSIONS)) {
+                    ActivityCompat.requestPermissions(ProfileActivity.this, PERMISSIONS, PERMISSION_ALL);
+                } else {
+                    imagePicker.choosePicture(true /*show camera intents*/);
+                }
+
+
+            }
+        });
+
+        imagePicker = new ImagePicker(this, /* activity non null*/
+                null, /* fragment nullable*/
+                new OnImagePickedListener() {
+                    @Override
+                    public void onImagePicked(Uri imageUri) {
+                        UCrop.of(imageUri, getTempUri())
+                                .withAspectRatio(1, 1)
+                                .start(ProfileActivity.this);
+                    }
+                }
+
+        );
 
 
         iv_edit_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(iv_edit_add.getContext(),AddressActivity.class);
+                Intent intent = new Intent(iv_edit_add.getContext(), AddressActivity.class);
                 startActivity(intent);
             }
         });
@@ -95,7 +106,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                 View viewholder = dialog.getHolderView();
 
-                Button button=viewholder.findViewById(R.id.btn_save);
+                Button button = viewholder.findViewById(R.id.btn_save);
 
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -105,30 +116,28 @@ public class ProfileActivity extends AppCompatActivity {
                 });
 
 
-
             }
         });
 
 
-     }
+    }
 
-
-    private  Uri getTempUri(){
-
-        String dri= Environment.getExternalStorageDirectory()+ File.separator+"Temp";
-
-        File drifile= new File(dri);
-        drifile.mkdir();
-
-        String file=dri+File.separator+"Temp.png";
-        File tempfile=new File(file);
+    private Uri getTempUri(){
+        String dri = Environment.getExternalStorageDirectory()+File.separator+"Temp";
+        File dirFile = new File(dri);
+        dirFile.mkdir();
+        String file = dri+File.separator+"temp.png";
+        File tempFile = new File(file);
         try {
-            tempfile.createNewFile();
+            tempFile.createNewFile();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return Uri.fromFile(tempfile);
+        return Uri.fromFile(tempFile);
     }
+
+
+
 
     public static boolean hasPermissions(Context context, String... permissions) {
         if (context != null && permissions != null) {
@@ -142,31 +151,47 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
 
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, String permissionsList[], int[] grantResults) {
-//
-//        super.onRequestPermissionsResult(requestCode, permissionsList, grantResults);
-//        imagePicker.handlePermission(requestCode, grantResults);
-//        switch (requestCode) {
-//            case PERMISSION_ALL:{
-//                if (grantResults.length > 0) {
-//                    boolean flag=true;
-//                    for (int i=0;i<permissionsList.length;i++) {
-//                        if(grantResults[i] == PackageManager.PERMISSION_DENIED){
-//
-//                            flag=false;
-//                        }
-//                    }
-//
-//                    if (flag=true){
-//                        imagePicker.choosePicture(true /*show camera intents*/);
-//
-//                    }
-//                    // Show permissionsDenied
-//                }
-//                return;
-//            }
-//        }
-//    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissionsList[], int[] grantResults) {
 
-}
+        super.onRequestPermissionsResult(requestCode, permissionsList, grantResults);
+        imagePicker.handlePermission(requestCode, grantResults);
+        switch (requestCode) {
+            case PERMISSION_ALL: {
+                if (grantResults.length > 0) {
+                    boolean flag = true;
+                    for (int i = 0; i < permissionsList.length; i++) {
+                        if (grantResults[i] == PackageManager.PERMISSION_DENIED) {
+                            flag = false;
+                        }
+                    }
+
+                    if (flag = true) {
+                        imagePicker.choosePicture(true /*show camera intents*/);
+
+                    }
+                    // Show permissionsDenied
+                }
+                return;
+            }
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        imagePicker.handleActivityResult(resultCode, requestCode, data);
+
+        if (resultCode == RESULT_OK && requestCode == UCrop.REQUEST_CROP) {
+            final Uri resultUri = UCrop.getOutput(data);
+            imageView.setImageURI(null);
+            imageView.setImageURI(resultUri);
+        } else if (resultCode == UCrop.RESULT_ERROR) {
+            final Throwable cropError = UCrop.getError(data);
+            Log.i("dsjknjsdkn", "onActivityResult: "+cropError.getMessage());
+        }
+        Log.i("nhnnhnghghn", "onActivityResult: done ");
+    }
+
+
+ }

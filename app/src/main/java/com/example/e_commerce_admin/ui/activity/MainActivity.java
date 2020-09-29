@@ -47,4 +47,8 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(new SigningviewAdapter(getSupportFragmentManager()));
         tabLayout.setupWithViewPager(viewPager);
     }
+
+    public void goToSignUp(){
+            viewPager.setCurrentItem(0);
+    }
 }

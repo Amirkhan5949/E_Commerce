@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.e_commerce_admin.R;
 import com.example.e_commerce_admin.model.Category;
 import com.example.e_commerce_admin.model.Product;
+import com.example.e_commerce_admin.ui.activity.ProductDetailActivity;
 import com.example.e_commerce_admin.ui.activity.WishlistActivity;
 import com.example.e_commerce_admin.utils.util;
 
@@ -44,6 +45,14 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.p_name.setText(product.get(position).getTitle());
         holder.p_image.setImageResource(product.get(position).getImage());
 
+        holder.p_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent inten =new Intent(holder.p_layout.getContext(), ProductDetailActivity.class);
+                holder.p_layout.getContext().startActivity(inten);
+            }
+        });
+
 
     }
 
@@ -57,11 +66,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         TextView p_name;
         LinearLayout p_layout;
 
+
         public ProductViewholder(@NonNull View itemView) {
             super(itemView);
             p_image=itemView.findViewById(R.id.p_img);
             p_name=itemView.findViewById(R.id.p_name);
             p_layout=itemView.findViewById(R.id.p_layout);
+
         }
     }
 }

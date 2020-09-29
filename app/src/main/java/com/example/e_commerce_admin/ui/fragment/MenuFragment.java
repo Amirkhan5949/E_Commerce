@@ -14,6 +14,7 @@ import com.example.e_commerce_admin.R;
 import com.example.e_commerce_admin.ui.activity.AddressActivity;
 import com.example.e_commerce_admin.ui.activity.CartActivity;
 import com.example.e_commerce_admin.ui.activity.OrdersActivity;
+import com.example.e_commerce_admin.ui.activity.ProfileActivity;
 import com.example.e_commerce_admin.ui.activity.WishlistActivity;
 
 public class MenuFragment extends Fragment {
@@ -41,6 +42,14 @@ public class MenuFragment extends Fragment {
         policy=view.findViewById(R.id.policy);
         share=view.findViewById(R.id.share);
         logout=view.findViewById(R.id.logout);
+
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getActivity(), ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
 
         cart.setOnClickListener(new View.OnClickListener() {
             @Override

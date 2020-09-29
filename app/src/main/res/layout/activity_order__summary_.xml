@@ -11,7 +11,7 @@
 
     <androidx.appcompat.widget.Toolbar
         android:paddingHorizontal="20dp"
-        android:background="@color/blue"
+        android:background="@color/colorDarkblue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -220,7 +220,7 @@
                     android:layout_height="wrap_content"
                     android:text="Change or Add Address"
                     android:textColor="@color/white"
-                    android:background="@color/blue"
+                    android:background="@color/colorDarkblue"
                     android:textSize="16sp"
                     android:layout_margin="20dp"/>
 
@@ -391,7 +391,7 @@
                 android:layout_height="wrap_content"
                 android:text="View price details"
                 android:id="@+id/tv_price"
-                android:textColor="@color/blue"
+                android:textColor="@color/colorDarkblue"
                 android:textSize="14sp"/>
 
         </LinearLayout>
@@ -400,11 +400,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Continue"
+            android:id="@+id/tv_continue"
             android:textColor="@color/white"
             android:textSize="24sp"
             android:paddingVertical="5dp"
             android:paddingHorizontal="30dp"
-            android:background="@color/blue"/>
+            android:background="@color/colorDarkblue"/>
 
 
     </LinearLayout>

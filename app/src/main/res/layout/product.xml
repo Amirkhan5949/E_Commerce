@@ -13,7 +13,7 @@
         app:cardCornerRadius="15dp">
 
         <LinearLayout
-            android:id="@+id/rel"
+            android:id="@+id/ll_rel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -108,8 +108,8 @@
                         android:id="@+id/add"
                         android:layout_width="28dp"
                         android:layout_height="28dp"
-                        android:background="@drawable/whitebackground"
-                        android:padding="5dp"
+                        android:background="@color/colorDarkblue"
+                         android:padding="5dp"
                         android:src="@drawable/add" />
 
 
