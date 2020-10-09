@@ -3,22 +3,34 @@ package com.example.e_commerce_admin.ui.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.e_commerce_admin.R;
+import com.example.e_commerce_admin.model.Banner;
+import com.example.e_commerce_admin.model.Brand;
 import com.example.e_commerce_admin.model.Category;
 import com.example.e_commerce_admin.model.Product;
+import com.example.e_commerce_admin.model.SuperCategory;
 import com.example.e_commerce_admin.ui.activity.WishlistActivity;
 import com.example.e_commerce_admin.ui.adapter.BrandAdapter;
 import com.example.e_commerce_admin.ui.adapter.CategoryAdapter;
 import com.example.e_commerce_admin.ui.adapter.MainSliderAdapter;
 import com.example.e_commerce_admin.ui.adapter.ProductAdapter;
+import com.example.e_commerce_admin.utils.FirebaseConstants;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,11 +40,15 @@ import ss.com.bannerslider.Slider;
 public class HomeFragment extends Fragment {
      View view;
      private RecyclerView rv_Category,p_recycler,brand_recycler,recomded_recycler;
+     private BrandAdapter brandAdapter;
+     private CategoryAdapter adapter;
+     private Slider slider;
+     final DatabaseReference base = FirebaseDatabase.getInstance().getReference().child(FirebaseConstants.SuperCategory.key);
 
+     private ProductAdapter productAdapter;
+     private ProductAdapter recomdedAdapter;
 
-
-
-     public HomeFragment() {
+    public HomeFragment() {
         // Required empty public constructor
     }
 
@@ -46,12 +62,12 @@ public class HomeFragment extends Fragment {
 
 
 
-        Slider slider = view.findViewById(R.id.banner_slider1);
-        slider.setAdapter(new MainSliderAdapter());
-        slider.setInterval(4000);
+        slider = view.findViewById(R.id.banner_slider1);
+
 
 
         init();
+        getBanner();
 
         return view;
     }
@@ -62,20 +78,65 @@ public class HomeFragment extends Fragment {
         brand_recycler=view.findViewById(R.id.brandrecycler);
         recomded_recycler=view.findViewById(R.id.recommanded_recycler);
 
-        brand_recycler.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
-        brand_recycler.setAdapter(new BrandAdapter());
+
+        FirebaseRecyclerOptions<Product> option =
+                new FirebaseRecyclerOptions.Builder<Product>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference()
+                                .child(FirebaseConstants.ProductRecommendedList.key)
+                                .child("1")
+                                .child(FirebaseConstants.ProductRecommendedList.Product), Product.class)
+                        .build();
+
+        recomdedAdapter=new ProductAdapter(option);
+        recomded_recycler.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
+        recomded_recycler.setAdapter(recomdedAdapter);
+
 
 
         recomded_recycler.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
-       recomded_recycler.setAdapter(new ProductAdapter(getproduct()
+        recomded_recycler.setAdapter(recomdedAdapter);
 
-       ));
+
+        brand_recycler.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
+
+        FirebaseRecyclerOptions<Brand> opt =
+                new FirebaseRecyclerOptions.Builder<Brand>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child(FirebaseConstants.Brand.key), Brand.class)
+                        .build();
+
+        brandAdapter=new BrandAdapter(opt);
+        brand_recycler.setAdapter(brandAdapter);
+
+
 
         rv_Category.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
-        rv_Category.setAdapter(new CategoryAdapter(getCategory(),getContext()));
+        FirebaseRecyclerOptions<SuperCategory> options =
+                new FirebaseRecyclerOptions.Builder<SuperCategory>()
+                        .setQuery(base, SuperCategory.class)
+                        .build();
+
+        adapter=new CategoryAdapter(options);
+        rv_Category.setAdapter(adapter);
+
 
         p_recycler.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
-        p_recycler.setAdapter(new ProductAdapter(getproduct()));
+        FirebaseRecyclerOptions<Product> option2 =
+                new FirebaseRecyclerOptions.Builder<Product>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference()
+                                .child(FirebaseConstants.ProductRecommendedList.key)
+                                .child("2")
+                                .child(FirebaseConstants.ProductRecommendedList.Product), Product.class)
+                        .build();
+
+        productAdapter=new ProductAdapter(option2);
+        p_recycler.setAdapter(productAdapter);
+
+
+
+
+
+
+
 
 
     }
@@ -89,17 +150,51 @@ public class HomeFragment extends Fragment {
         return list;
     }
 
-    private List<Product> getproduct(){
-        List<Product> list = new ArrayList<>();
-        list.add(new Product("Aamir",R.drawable.aamir));
-        list.add(new Product("Avani",R.drawable.whatapp));
-        list.add(new Product("neha",R.drawable.back1));
-        list.add(new Product( "PrintOctopus Women's",R.drawable.nike));
-        list.add(new Product(" Inkast Denim Co. Women's",R.drawable.red));
-        list.add(new Product("Offbeat Women's Graphic",R.drawable.black));
-        list.add(new Product("Frog",R.drawable.din));
-        list.add(new Product("Bikni",R.drawable.dress));
-        list.add(new Product("chaddi[",R.drawable.pink));
-        return list;
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        adapter.startListening();
+        productAdapter.startListening();
+        brandAdapter.startListening();
+        recomdedAdapter.startListening();
     }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        adapter.stopListening();
+        brandAdapter.stopListening();
+        productAdapter.stopListening();
+        recomdedAdapter.stopListening();
+    }
+
+    private void getBanner(){
+
+        FirebaseDatabase.getInstance().getReference()
+                .child(FirebaseConstants.Banner_Slider.key)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        List<Banner>list;
+                        list=new ArrayList<>();
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren())
+                            list.add(dataSnapshot.getValue(Banner.class));
+                        Log.i("rrgrgf", "onDataChange: " + list.toString());
+//                        slider.setAdapter(new MainSliderAdapter(list));
+//                        slider.setInterval(4000);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+    }
+
+
+
+
+
 }

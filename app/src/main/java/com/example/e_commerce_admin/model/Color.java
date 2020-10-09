@@ -1,6 +1,10 @@
 package com.example.e_commerce_admin.model;
 
 public class Color {
+
+    public Color() {
+    }
+
     public String getColor() {
         return color;
     }

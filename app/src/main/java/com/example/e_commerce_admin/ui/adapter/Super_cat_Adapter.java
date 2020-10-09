@@ -4,19 +4,30 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.e_commerce_admin.R;
+import com.example.e_commerce_admin.model.SuperCategory;
 import com.example.e_commerce_admin.utils.util;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 
-public class Super_cat_Adapter extends RecyclerView.Adapter<Super_cat_Adapter.Super_cat_Viewholder> {
+public class Super_cat_Adapter extends FirebaseRecyclerAdapter<SuperCategory,Super_cat_Adapter.Super_cat_Viewholder> {
     Context context;
 
-    public Super_cat_Adapter(Context context) {
-        this.context=context;
+    /**
+     * Initialize a {@link RecyclerView.Adapter} that listens to a Firebase query. See
+     * {@link FirebaseRecyclerOptions} for configuration options.
+     *
+     * @param options
+     */
+    public Super_cat_Adapter(@NonNull FirebaseRecyclerOptions<SuperCategory> options) {
+        super(options);
     }
+
 
     @NonNull
     @Override
@@ -27,19 +38,21 @@ public class Super_cat_Adapter extends RecyclerView.Adapter<Super_cat_Adapter.Su
         return new Super_cat_Viewholder(view);
     }
 
-    @Override
-    public void onBindViewHolder(@NonNull Super_cat_Viewholder holder, int position) {
 
-    }
 
     @Override
-    public int getItemCount() {
-        return 4;
+    protected void onBindViewHolder(@NonNull Super_cat_Viewholder holder, int position, @NonNull SuperCategory model) {
+
+        holder.tv_supercat_name.setText(model.getName());
     }
+
 
     class Super_cat_Viewholder extends RecyclerView.ViewHolder {
+
+        TextView tv_supercat_name;
         public Super_cat_Viewholder(@NonNull View itemView) {
             super(itemView);
+            tv_supercat_name=itemView.findViewById(R.id.tv_supercat_name);
         }
     }
 }

@@ -18,15 +18,17 @@
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:src="@drawable/back"
-            android:id="@+id/iv_back"/>
+            android:id="@+id/iv_back"
+            app:tint="@color/white" />
 
         <TextView
+            android:layout_marginRight="32dp"
             android:gravity="center_horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Order Details"
             android:textSize="24sp"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:fontFamily="@font/simple"/>
 
     </androidx.appcompat.widget.Toolbar>
@@ -53,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <LinearLayout
-                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginHorizontal="16dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -90,7 +92,7 @@
 
                 <TextView
                     android:layout_marginTop="10dp"
-                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginHorizontal="16dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Date:29-oct-2020 12:00 pm"
@@ -108,7 +110,7 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginHorizontal="16dp"
                         android:layout_width="140dp"
                         android:layout_height="170dp"
                         android:src="@drawable/woman"
@@ -274,7 +276,7 @@
                     android:background="@color/dark_gray"/>
 
                 <LinearLayout
-                    android:layout_marginHorizontal="2dp"
+                    android:layout_marginHorizontal="16dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -332,7 +334,7 @@
 
                 <TextView
                     android:layout_marginVertical="10dp"
-                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginHorizontal="16dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
@@ -346,7 +348,7 @@
 
                 <TextView
                     android:layout_marginVertical="10dp"
-                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginHorizontal="16dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
@@ -356,7 +358,7 @@
 
                 <TextView
                     android:layout_marginVertical="10dp"
-                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginHorizontal="16dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
@@ -366,7 +368,7 @@
 
                 <TextView
                     android:layout_marginVertical="10dp"
-                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginHorizontal="16dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
@@ -391,7 +393,7 @@
 
                 <TextView
                     android:layout_marginVertical="10dp"
-                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginHorizontal="16dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
@@ -405,7 +407,7 @@
 
                 <LinearLayout
                     android:layout_marginVertical="10dp"
-                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginHorizontal="16dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -429,7 +431,7 @@
 
                 <LinearLayout
                     android:layout_marginVertical="10dp"
-                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginHorizontal="16dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -451,7 +453,7 @@
                 </LinearLayout>
                 <LinearLayout
                     android:layout_marginVertical="10dp"
-                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginHorizontal="16dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -480,7 +482,7 @@
 
                 <LinearLayout
                     android:layout_marginVertical="10dp"
-                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginHorizontal="16dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">

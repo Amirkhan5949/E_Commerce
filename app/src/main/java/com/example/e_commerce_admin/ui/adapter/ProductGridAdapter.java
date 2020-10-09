@@ -15,14 +15,18 @@ import com.example.e_commerce_admin.R;
 import com.example.e_commerce_admin.model.Product;
 import com.example.e_commerce_admin.ui.activity.WishlistActivity;
 import com.example.e_commerce_admin.utils.util;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class ProductGridAdapter extends RecyclerView.Adapter<ProductGridAdapter.ProductViewholder> {
+public class ProductGridAdapter extends FirebaseRecyclerAdapter<Product,ProductGridAdapter.ProductViewholder> {
 
-    List<Product> product;
-    public ProductGridAdapter(List<Product> product) {
-        this.product=product;
+
+
+    public ProductGridAdapter(@NonNull FirebaseRecyclerOptions<Product> options) {
+        super(options);
     }
 
     @NonNull
@@ -35,18 +39,14 @@ public class ProductGridAdapter extends RecyclerView.Adapter<ProductGridAdapter.
 
     }
 
-    @Override
-    public void onBindViewHolder(@NonNull final ProductViewholder holder, int position) {
 
-        holder.p_name.setText(product.get(position).getTitle());
-        holder.p_image.setImageResource(product.get(position).getImage());
-
-
-    }
 
     @Override
-    public int getItemCount() {
-        return product.size();
+    protected void onBindViewHolder(@NonNull ProductViewholder holder, int position, @NonNull Product model) {
+        holder.p_name.setText(model.getName());
+        Picasso.get().load(model.getImg()).into(holder.p_image);
+
+
     }
 
     class ProductViewholder extends RecyclerView.ViewHolder {

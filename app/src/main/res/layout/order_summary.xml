@@ -9,7 +9,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
-        android:layout_marginHorizontal="20dp"
+        android:layout_marginHorizontal="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -46,7 +46,7 @@
 
     <TextView
         android:layout_marginTop="10dp"
-        android:layout_marginHorizontal="20dp"
+        android:layout_marginHorizontal="14sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Date:29-oct-2020 12:00 pm"
@@ -65,7 +65,7 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_marginHorizontal="10dp"
+            android:layout_marginHorizontal="16dp"
             android:layout_width="140dp"
             android:layout_height="170dp"
             android:src="@drawable/woman"
@@ -89,7 +89,7 @@
                     android:layout_height="wrap_content"
                     android:text="Ultimate Dress"
                     android:textColor="@color/colorBlack"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:maxLines="1"
                     android:id="@+id/name"/>
 
@@ -99,7 +99,7 @@
                     android:layout_height="wrap_content"
                     android:text="Description"
                     android:textColor="@color/colorBlack"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:maxLines="1"
                     android:ellipsize="end"
                     android:id="@+id/description"/>
@@ -179,7 +179,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="$20.00"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     android:textColor="@color/colorBlack"
                     android:id="@+id/rupees"/>
@@ -194,7 +194,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="$30.00"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         android:textColor="@color/colorBlack"
                         android:id="@+id/crossrupees"
                         tools:ignore="MissingConstraints" />
@@ -217,7 +217,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="70%off"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:textColor="@color/colorDarkblue"
                     android:id="@+id/off"
                     tools:ignore="MissingConstraints" />

@@ -6,55 +6,53 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.os.RecoverySystem;
 
 import com.example.e_commerce_admin.R;
 import com.example.e_commerce_admin.model.GridSpacingItemDecoration;
 import com.example.e_commerce_admin.model.Product;
-import com.example.e_commerce_admin.ui.adapter.ProductAdapter;
 import com.example.e_commerce_admin.ui.adapter.ProductGridAdapter;
 import com.example.e_commerce_admin.utils.FirebaseConstants;
 import com.example.e_commerce_admin.utils.util;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.ArrayList;
-import java.util.List;
+public class ProductListActivity extends AppCompatActivity {
 
-public class WishlistActivity extends AppCompatActivity {
-
-    RecyclerView recycler_wishlist;
-    private ProductGridAdapter wishlistAdapter;
-
+    private RecyclerView rv_p_list;
+    private ProductGridAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_wishlist);
+        setContentView(R.layout.activity_product_list);
 
-        recycler_wishlist=findViewById(R.id.recycler_wishlist);
+        rv_p_list=findViewById(R.id.rv_p_list);
 
-        recycler_wishlist.setLayoutManager(new GridLayoutManager(this,2));
-        recycler_wishlist.addItemDecoration(new GridSpacingItemDecoration(2, util.dpToPx(recycler_wishlist.getContext(),0),true));
+        rv_p_list.setLayoutManager(new GridLayoutManager(this,2));
+        rv_p_list.addItemDecoration(new GridSpacingItemDecoration(2, util.dpToPx(this,0),true));
+
+
         FirebaseRecyclerOptions<Product> option2 =
                 new FirebaseRecyclerOptions.Builder<Product>()
                         .setQuery(FirebaseDatabase.getInstance().getReference()
                                 .child(FirebaseConstants.Product.key), Product.class)
                         .build();
 
-        wishlistAdapter=new ProductGridAdapter(option2);
-        recycler_wishlist.setAdapter(wishlistAdapter);
+        adapter=new ProductGridAdapter(option2);
+        rv_p_list.setAdapter(adapter);
 
-    }
+     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        wishlistAdapter.startListening();
+        adapter.startListening();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        wishlistAdapter.stopListening();
+        adapter.stopListening();
     }
 
- }
+}

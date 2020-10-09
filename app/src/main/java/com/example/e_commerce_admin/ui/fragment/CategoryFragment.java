@@ -13,18 +13,26 @@ import android.view.ViewGroup;
 
 import com.example.e_commerce_admin.R;
 import com.example.e_commerce_admin.model.GridSpacingItemDecoration;
+import com.example.e_commerce_admin.model.SuperCategory;
 import com.example.e_commerce_admin.ui.adapter.Cat_Adapter;
 import com.example.e_commerce_admin.ui.adapter.Super_cat_Adapter;
+import com.example.e_commerce_admin.utils.FirebaseConstants;
 import com.example.e_commerce_admin.utils.util;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class CategoryFragment extends Fragment {
     View view;
-    RecyclerView super_cat,catrecycler;
+    RecyclerView catrecycler;
+    private Cat_Adapter adapter;
+
+    final DatabaseReference base = FirebaseDatabase.getInstance().getReference().child(FirebaseConstants.Category.key);
+
 
     public CategoryFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -32,16 +40,34 @@ public class CategoryFragment extends Fragment {
         // Inflate the layout for this fragment
         view=inflater.inflate(R.layout.fragment_category, container, false);
 
-        super_cat=view.findViewById(R.id.super_cat);
-        catrecycler=view.findViewById(R.id.cat_recycler);
+         catrecycler=view.findViewById(R.id.cat_recycler);
 
-        super_cat.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
-        super_cat.setAdapter(new Super_cat_Adapter(getContext()));
+
 
        catrecycler.setLayoutManager(new GridLayoutManager(getContext(),3));
        catrecycler.addItemDecoration(new GridSpacingItemDecoration(3, util.dpToPx(getContext(),16),true));
-        catrecycler.setAdapter(new Cat_Adapter());
+
+        FirebaseRecyclerOptions<SuperCategory> options =
+                new FirebaseRecyclerOptions.Builder<SuperCategory>()
+                        .setQuery(base, SuperCategory.class)
+                        .build();
+        adapter=new Cat_Adapter(options);
+        catrecycler.setAdapter(adapter);
+
 
         return view;
     }
+    @Override
+    public void onStart() {
+        super.onStart();
+        adapter.startListening();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        adapter.stopListening();
+    }
+
+
 }

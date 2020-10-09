@@ -6,12 +6,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activity.OrdersActivity">
+    tools:context=".ui.activity.ProductListActivity">
+
 
     <androidx.appcompat.widget.Toolbar
-         android:layout_width="match_parent"
         android:background="@color/colorDarkblue"
-        android:layout_height="56dp">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <ImageView
             android:layout_width="32dp"
@@ -25,8 +26,8 @@
             android:gravity="center_horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="My Orders"
-            android:textSize="20sp"
+            android:text="Product List"
+            android:textSize="24sp"
             android:textColor="@color/white"
             android:fontFamily="@font/simple"/>
 
@@ -35,6 +36,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/order_recycler"/>
+        android:id="@+id/rv_p_list"/>
+
 
 </LinearLayout>

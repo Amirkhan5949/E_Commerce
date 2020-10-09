@@ -16,7 +16,7 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="16dp"
             android:layout_width="140dp"
             android:layout_height="170dp"
             android:src="@drawable/woman"
@@ -52,7 +52,7 @@
                     android:text="Description"
                     android:textColor="@color/colorBlack"
                     android:fontFamily="@font/simple"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:maxLines="1"
                     android:id="@+id/description"/>
 
@@ -134,7 +134,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="$20.00"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     android:textColor="@color/colorBlack"
                     android:id="@+id/rupees"/>
@@ -149,7 +149,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="$30.00"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         android:textColor="@color/colorBlack"
                         android:id="@+id/crossrupees"
                         tools:ignore="MissingConstraints" />
@@ -172,7 +172,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="70%off"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:textColor="@color/colorDarkblue"
                     android:id="@+id/off"
                     tools:ignore="MissingConstraints" />

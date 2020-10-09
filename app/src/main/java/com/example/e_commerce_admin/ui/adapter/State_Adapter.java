@@ -18,10 +18,6 @@ public class State_Adapter extends RecyclerView.Adapter<State_Adapter.State_Adap
     List<State> list;
     ClickCallBack clickCallBack;
 
-
-
-
-
     public State_Adapter(List<State> list,ClickCallBack clickCallBack) {
         this.list = list;
         this.clickCallBack = clickCallBack;

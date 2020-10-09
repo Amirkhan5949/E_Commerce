@@ -34,6 +34,8 @@ public class Color_Adapter extends RecyclerView.Adapter<Color_Adapter.Color_Adap
     @Override
     public void onBindViewHolder(@NonNull final Color_Adapter_View holder, final int position) {
 
+        holder.iv_color.setImageResource(list.get(position).getColor().equals("#FFFFFF")?R.drawable.right_black:R.drawable.right_white);
+
         holder.iv_color.setVisibility(selectedPosition == position?View.VISIBLE:View.GONE);
         holder.ll_color.setBackgroundColor(android.graphics.Color.parseColor(list.get(position).getColor()));
 

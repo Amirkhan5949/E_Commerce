@@ -20,23 +20,24 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.activity.Address_EditActivity"></activity>
+        <activity android:name=".ui.activity.ProductListActivity">
+
+        </activity>
+        <activity android:name=".ui.activity.Address_EditActivity" />
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".ui.activity.PaymentActivity"></activity>
-        <activity android:name=".ui.activity.Order_Summary_Activity"></activity>
+        <activity android:name=".ui.activity.PaymentActivity" />
+        <activity android:name=".ui.activity.Order_Summary_Activity" />
         <activity android:name=".ui.activity.ProfileActivity" />
         <activity android:name=".ui.activity.CartActivity" />
-        <activity android:name=".ui.activity.ProductDetailActivity"></activity>
-        <activity android:name=".ui.activity.AddressActivity">
-        </activity>
-        <activity android:name=".ui.activity.OrderDetailActivity"></activity>
+        <activity android:name=".ui.activity.ProductDetailActivity" />
+        <activity android:name=".ui.activity.AddressActivity"></activity>
+        <activity android:name=".ui.activity.OrderDetailActivity" />
         <activity android:name=".ui.activity.OrdersActivity" />
         <activity android:name=".ui.activity.WishlistActivity" />
-        <activity android:name=".ui.activity.HomeActivity2"></activity>
-        <activity android:name=".ui.activity.MainActivity">
+        <activity android:name=".ui.activity.HomeActivity2">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -44,7 +45,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
+
         </activity>
+        <activity android:name=".ui.activity.MainActivity"></activity>
     </application>
 
 </manifest>

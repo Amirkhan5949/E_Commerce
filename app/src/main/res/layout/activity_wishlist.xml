@@ -12,21 +12,23 @@
      <androidx.appcompat.widget.Toolbar
          android:background="@color/colorDarkblue"
          android:layout_width="match_parent"
-         android:layout_height="wrap_content">
+         android:layout_height="56dp">
 
          <ImageView
               android:layout_width="32dp"
              android:layout_height="32dp"
              android:src="@drawable/back"
-             android:id="@+id/iv_back"/>
+             android:id="@+id/iv_back"
+             app:tint="@color/white" />
 
          <TextView
+             android:layout_marginRight="32dp"
              android:gravity="center_horizontal"
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
              android:text="Wishlist"
-             android:textColor="@color/black"
-             android:textSize="24sp"
+             android:textColor="@color/white"
+             android:textSize="20sp"
              android:fontFamily="@font/bold"/>
 
      </androidx.appcompat.widget.Toolbar>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
      android:layout_marginHorizontal="10dp"
-    android:layout_marginVertical="20dp"
+    android:layout_marginVertical="16dp"
     android:background="@drawable/whitebackground"
     android:orientation="horizontal"
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -10,6 +10,7 @@
 
 
     <ImageView
+        android:id="@+id/iv_brand"
         android:layout_margin="10dp"
         android:layout_gravity="center_vertical"
          android:layout_width="56dp"
@@ -17,28 +18,28 @@
         android:src="@drawable/hp"/>
 
     <LinearLayout
-        android:layout_marginRight="20dp"
+        android:layout_marginRight="16dp"
         android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/brandname"
+            android:id="@+id/tv_brandname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Samsung"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="@color/colorBlack"
             android:fontFamily="@font/roboto"/>
 
         <TextView
-             android:id="@+id/productquant"
+             android:id="@+id/tv_productquant"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="200 products"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:fontFamily="@font/roboto"/>
 
 

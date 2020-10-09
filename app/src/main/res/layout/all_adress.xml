@@ -10,8 +10,8 @@
 
     <LinearLayout
         android:id="@+id/ll_radio"
-        android:layout_marginTop="10dp"
-         android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="16dp"
+         android:layout_marginHorizontal="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -47,7 +47,7 @@
 
     <LinearLayout
         android:gravity="center"
-        android:layout_marginHorizontal="20dp"
+        android:layout_marginHorizontal="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -63,7 +63,7 @@
             android:id="@+id/user_add"/>
 
         <ImageView
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="16dp"
              android:src="@drawable/ic_baseline_edit_24"
             android:layout_width="32dp"
             android:layout_height="24dp"
@@ -72,7 +72,7 @@
     </LinearLayout>
 
     <LinearLayout
-         android:layout_marginHorizontal="20dp"
+         android:layout_marginHorizontal="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -88,7 +88,7 @@
 
         <ImageView
             app:tint="@color/black"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="16dp"
             android:layout_gravity="center_horizontal"
             android:src="@drawable/delete"
             android:layout_width="32dp"

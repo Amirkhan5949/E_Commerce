@@ -18,14 +18,17 @@ import com.example.e_commerce_admin.model.Product;
 import com.example.e_commerce_admin.ui.activity.ProductDetailActivity;
 import com.example.e_commerce_admin.ui.activity.WishlistActivity;
 import com.example.e_commerce_admin.utils.util;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewholder> {
+public class ProductAdapter extends FirebaseRecyclerAdapter<Product,ProductAdapter.ProductViewholder> {
 
-    List<Product> product;
-    public ProductAdapter(List<Product> product) {
-        this.product=product;
+
+    public ProductAdapter(@NonNull FirebaseRecyclerOptions<Product> options) {
+        super(options);
     }
 
     @NonNull
@@ -39,27 +42,28 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
     }
 
-    @Override
-    public void onBindViewHolder(@NonNull final ProductViewholder holder, int position) {
-
-        holder.p_name.setText(product.get(position).getTitle());
-        holder.p_image.setImageResource(product.get(position).getImage());
-
-        holder.p_layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent inten =new Intent(holder.p_layout.getContext(), ProductDetailActivity.class);
-                holder.p_layout.getContext().startActivity(inten);
-            }
-        });
-
-
-    }
 
     @Override
-    public int getItemCount() {
-        return product.size();
+    protected void onBindViewHolder(@NonNull final ProductViewholder holder, int position, @NonNull Product model) {
+        {
+            final String id=getRef(position).getKey();
+
+            holder.p_name.setText(model.getName());
+            Picasso.get().load(model.getImg()).into(holder.p_image);
+
+            holder.p_layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent inten =new Intent(holder.p_layout.getContext(), ProductDetailActivity.class);
+                   inten.putExtra("id",id);
+                    holder.p_layout.getContext().startActivity(inten);
+                }
+            });
+
+
+        }
     }
+
 
     class ProductViewholder extends RecyclerView.ViewHolder {
         ImageView p_image;

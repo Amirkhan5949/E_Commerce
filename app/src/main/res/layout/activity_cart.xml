@@ -23,7 +23,7 @@
                 android:padding="10dp"
                 android:background="@color/colorDarkblue"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="56dp"
                 android:orientation="horizontal">
                 <ImageView
                     android:layout_marginHorizontal="20dp"
@@ -34,6 +34,8 @@
                     app:tint="@color/white" />
 
                 <TextView
+                    android:gravity="center"
+                    android:layout_marginRight="52dp"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
@@ -63,7 +65,7 @@
                     android:layout_height="wrap_content"
                     android:text="Price Details"
                     android:textColor="@color/black"
-                    android:textSize="18sp"/>
+                    android:textSize="16sp"/>
 
                 <View
                     android:layout_width="match_parent"
@@ -79,10 +81,12 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:textSize="14sp"
                         android:text="Price (2items)"
                         android:id="@+id/tv_id_item"/>
 
                     <TextView
+                        android:textSize="14sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="$1234"
@@ -101,6 +105,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:textSize="14sp"
                         android:text="Discount"
                         android:id="@+id/tv_discount"/>
 
@@ -108,6 +113,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="-$124"
+                        android:textSize="14sp"
                         android:textColor="@color/blue"
                         android:id="@+id/tv_dis_rs"/>
 
@@ -120,6 +126,7 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:textSize="14sp"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -130,6 +137,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="FREE"
+                        android:textSize="14sp"
                         android:textColor="@color/blue"
                         android:id="@+id/tv_del_rs"/>
 
@@ -155,7 +163,7 @@
                         android:text="Total Amount"
                         android:textColor="@color/black"
                         android:fontFamily="@font/bold"
-                        android:textSize="18sp"/>
+                        android:textSize="16sp"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -164,7 +172,7 @@
                         android:id="@+id/tv_total_amnt"
                         android:textColor="@color/black"
                         android:fontFamily="@font/bold"
-                        android:textSize="18sp"/>
+                        android:textSize="16sp"/>
 
 
                 </LinearLayout>
@@ -206,7 +214,7 @@
                 android:textColor="@color/black"
                 android:fontFamily="@font/bold"
                 android:id="@+id/tv_rs"
-                android:textSize="18sp"/>
+                android:textSize="16sp"/>
 
             <TextView
                 android:layout_width="wrap_content"
