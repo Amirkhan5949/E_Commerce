@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,19 +12,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.e_commerce_admin.R;
 import com.example.e_commerce_admin.model.SuperCategory;
+import com.example.e_commerce_admin.ui.activity.MainActivity;
+import com.example.e_commerce_admin.ui.fragment.ManFragment;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.squareup.picasso.Picasso;
 
 public class Cat_Adapter extends FirebaseRecyclerAdapter<SuperCategory,Cat_Adapter.Cat_Adapter_View> {
-    /**
-     * Initialize a {@link RecyclerView.Adapter} that listens to a Firebase query. See
-     * {@link FirebaseRecyclerOptions} for configuration options.
-     *
-     * @param options
-     */
-    public Cat_Adapter(@NonNull FirebaseRecyclerOptions<SuperCategory> options) {
+
+   ClickCallBack clickCallBack;
+
+
+    public Cat_Adapter(@NonNull FirebaseRecyclerOptions<SuperCategory> options, ClickCallBack clickCallBack) {
         super(options);
+        this.clickCallBack = clickCallBack;
+
     }
 
     @NonNull
@@ -35,9 +38,18 @@ public class Cat_Adapter extends FirebaseRecyclerAdapter<SuperCategory,Cat_Adapt
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull Cat_Adapter_View holder, int position, @NonNull SuperCategory model) {
+    protected void onBindViewHolder(@NonNull Cat_Adapter_View holder, final int position, @NonNull SuperCategory model) {
+        final String id=getRef(position).getKey();
+
         Picasso.get().load(model.getImage()).into(holder.iv_cat);
         holder.tv_supercat_name.setText(model.getName());
+
+        holder.ll_main.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                clickCallBack.click(position,id);
+             }
+        });
 
     }
 
@@ -45,11 +57,19 @@ public class Cat_Adapter extends FirebaseRecyclerAdapter<SuperCategory,Cat_Adapt
     class Cat_Adapter_View extends RecyclerView.ViewHolder {
         TextView tv_supercat_name;
         ImageView iv_cat;
+        LinearLayout ll_main;
 
         public Cat_Adapter_View(@NonNull View itemView) {
             super(itemView);
+            ll_main=itemView.findViewById(R.id.ll_main);
             tv_supercat_name=itemView.findViewById(R.id.tv_supercat_name);
             iv_cat=itemView.findViewById(R.id.iv_cat);
         }
     }
+
+    public interface ClickCallBack{
+        void click(int i,String id);
+
+    }
+
 }

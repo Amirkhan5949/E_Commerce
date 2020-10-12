@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.e_commerce_admin.R;
+import com.example.e_commerce_admin.ui.activity.HomeActivity;
 import com.example.e_commerce_admin.ui.adapter.ReviewAdapter;
 
 public class CartFragment extends Fragment {
@@ -28,6 +29,7 @@ public class CartFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view=inflater.inflate(R.layout.fragment_cart, container, false);
+        ((HomeActivity)getActivity()).setCheckedNavigationItem(1);
         review_recycler=view.findViewById(R.id.review_recycler);
 
         review_recycler.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));

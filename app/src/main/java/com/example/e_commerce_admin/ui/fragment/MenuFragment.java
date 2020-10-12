@@ -13,14 +13,18 @@ import android.widget.TextView;
 import com.example.e_commerce_admin.R;
 import com.example.e_commerce_admin.ui.activity.AddressActivity;
 import com.example.e_commerce_admin.ui.activity.CartActivity;
+import com.example.e_commerce_admin.ui.activity.HomeActivity;
+import com.example.e_commerce_admin.ui.activity.MainActivity;
 import com.example.e_commerce_admin.ui.activity.OrdersActivity;
 import com.example.e_commerce_admin.ui.activity.ProfileActivity;
 import com.example.e_commerce_admin.ui.activity.WishlistActivity;
+import com.example.e_commerce_admin.utils.Loader;
 
 public class MenuFragment extends Fragment {
 
-    View view;
-    TextView profile,orders,cart,wishlist,address,notification,policy,share,logout;
+    private View view;
+    private Loader loader;
+    private TextView profile,orders,cart,wishlist,address,notification,policy,share,logout;
 
     public MenuFragment() {
         // Required empty public constructor
@@ -33,15 +37,19 @@ public class MenuFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view=inflater.inflate(R.layout.fragment_menu, container, false);
-        profile=view.findViewById(R.id.p_profile);
-        orders=view.findViewById(R.id.orders);
-        cart=view.findViewById(R.id.cart);
-        wishlist=view.findViewById(R.id.wishlist);
-        address=view.findViewById(R.id.address);
-        notification=view.findViewById(R.id.notification);
-        policy=view.findViewById(R.id.policy);
-        share=view.findViewById(R.id.share);
-        logout=view.findViewById(R.id.logout);
+        ((HomeActivity)getActivity()).setCheckedNavigationItem(3);
+
+        init();
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loader.show();
+                Intent intent=new Intent(logout.getContext(),MainActivity.class);
+                logout.getContext().startActivity(intent);
+                loader.dismiss();
+            }
+        });
 
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,5 +91,20 @@ public class MenuFragment extends Fragment {
         });
 
         return view;
+    }
+
+    private void init() {
+
+        loader=new Loader(getContext());
+        profile=view.findViewById(R.id.p_profile);
+        orders=view.findViewById(R.id.orders);
+        cart=view.findViewById(R.id.cart);
+        wishlist=view.findViewById(R.id.wishlist);
+        address=view.findViewById(R.id.address);
+        notification=view.findViewById(R.id.notification);
+        policy=view.findViewById(R.id.policy);
+        share=view.findViewById(R.id.share);
+        logout=view.findViewById(R.id.logout);
+
     }
 }

@@ -20,9 +20,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.activity.ProductListActivity">
-
-        </activity>
         <activity android:name=".ui.activity.Address_EditActivity" />
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
@@ -37,7 +34,7 @@
         <activity android:name=".ui.activity.OrderDetailActivity" />
         <activity android:name=".ui.activity.OrdersActivity" />
         <activity android:name=".ui.activity.WishlistActivity" />
-        <activity android:name=".ui.activity.HomeActivity2">
+        <activity android:name=".ui.activity.HomeActivity">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

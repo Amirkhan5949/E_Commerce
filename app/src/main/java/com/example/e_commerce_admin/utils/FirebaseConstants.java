@@ -64,4 +64,9 @@ public class FirebaseConstants {
         public static final String image_format = "image_format";
     }
 
+    public static class WishList{
+        public static final String key="WishList";
+        public static final String user_id="user_id";
+        public static final String Product="product";
+    }
 }

@@ -1,7 +1,7 @@
 package com.example.e_commerce_admin.model;
 
 public class SuperCategory {
-    String id;
+    String super_category_id;
     String image;
     String name;
 
@@ -11,19 +11,19 @@ public class SuperCategory {
     @Override
     public String toString() {
         return "SuperCategory{" +
-                "id='" + id + '\'' +
+                "id='" + super_category_id + '\'' +
                 ", image='" + image + '\'' +
                 ", image_format='" + image_format + '\'' +
                 ", name='" + name + '\'' +
                 '}';
     }
 
-    public String getId() {
-        return id;
+    public String getSuper_category_id() {
+        return super_category_id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setSuper_category_id(String super_category_id) {
+        this.super_category_id = super_category_id;
     }
 
     public String getImage() {
@@ -53,7 +53,7 @@ public class SuperCategory {
     String image_format;
 
     public SuperCategory(String id, String image, String image_format, String name) {
-        this.id = id;
+        this.super_category_id = id;
         this.image = image;
         this.image_format = image_format;
         this.name = name;

@@ -19,6 +19,7 @@ import com.example.e_commerce_admin.model.Brand;
 import com.example.e_commerce_admin.model.Category;
 import com.example.e_commerce_admin.model.Product;
 import com.example.e_commerce_admin.model.SuperCategory;
+import com.example.e_commerce_admin.ui.activity.HomeActivity;
 import com.example.e_commerce_admin.ui.activity.WishlistActivity;
 import com.example.e_commerce_admin.ui.adapter.BrandAdapter;
 import com.example.e_commerce_admin.ui.adapter.CategoryAdapter;
@@ -59,7 +60,7 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for getContext() fragment
         view=inflater.inflate(R.layout.fragment_home, container, false);
-
+        ((HomeActivity)getActivity()).setCheckedNavigationItem(0);
 
 
         slider = view.findViewById(R.id.banner_slider1);
@@ -130,13 +131,6 @@ public class HomeFragment extends Fragment {
 
         productAdapter=new ProductAdapter(option2);
         p_recycler.setAdapter(productAdapter);
-
-
-
-
-
-
-
 
 
     }

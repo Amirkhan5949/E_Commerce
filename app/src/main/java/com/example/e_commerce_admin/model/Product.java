@@ -16,10 +16,20 @@ public class Product {
     String selling_price;
     String img;
 
-
-    Map<String,Images>  Image;
-
+    Map<String,Color> Color;
+    Map<String,Color> SelectedColor;
     Map<String,Size> Size;
+    Map<String,Images>  Image;
+    Map<String, ProductLists> SelectedProductLists;
+
+
+    public Map<String, ProductLists> getSelectedProductLists() {
+        return SelectedProductLists;
+    }
+
+    public void setSelectedProductLists(Map<String, ProductLists> selectedProductLists) {
+        SelectedProductLists = selectedProductLists;
+    }
 
     public Map<String, com.example.e_commerce_admin.model.Size> getSize() {
         return Size;
@@ -37,7 +47,6 @@ public class Product {
         Image = image;
     }
 
-    Map<String,Color> Color;
 
     public Map<String, com.example.e_commerce_admin.model.Color> getSelectedColor() {
         return SelectedColor;
@@ -47,7 +56,7 @@ public class Product {
         SelectedColor = selectedColor;
     }
 
-    Map<String,Color> SelectedColor;
+   ;
 
     public Product() {
     }

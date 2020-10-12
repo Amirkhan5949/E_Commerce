@@ -13,16 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.e_commerce_admin.R;
 import com.example.e_commerce_admin.model.Product;
-import com.example.e_commerce_admin.ui.activity.WishlistActivity;
-import com.example.e_commerce_admin.utils.util;
+import com.example.e_commerce_admin.ui.activity.ProductDetailActivity;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.squareup.picasso.Picasso;
 
-import java.util.List;
-
-public class ProductGridAdapter extends FirebaseRecyclerAdapter<Product,ProductGridAdapter.ProductViewholder> {
-
+public class ProductGridAdapter extends FirebaseRecyclerAdapter<Product, ProductGridAdapter.ProductViewholder> {
 
 
     public ProductGridAdapter(@NonNull FirebaseRecyclerOptions<Product> options) {
@@ -40,12 +36,20 @@ public class ProductGridAdapter extends FirebaseRecyclerAdapter<Product,ProductG
     }
 
 
-
     @Override
-    protected void onBindViewHolder(@NonNull ProductViewholder holder, int position, @NonNull Product model) {
+    protected void onBindViewHolder(@NonNull final ProductViewholder holder, int position, @NonNull Product model) {
+        final String id = getRef(position).getKey();
         holder.p_name.setText(model.getName());
         Picasso.get().load(model.getImg()).into(holder.p_image);
 
+        holder.p_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(holder.p_layout.getContext(), ProductDetailActivity.class);
+                intent.putExtra("id", id);
+                holder.p_layout.getContext().startActivity(intent);
+            }
+        });
 
     }
 
@@ -56,9 +60,9 @@ public class ProductGridAdapter extends FirebaseRecyclerAdapter<Product,ProductG
 
         public ProductViewholder(@NonNull View itemView) {
             super(itemView);
-            p_image=itemView.findViewById(R.id.p_img);
-            p_name=itemView.findViewById(R.id.p_name);
-            p_layout=itemView.findViewById(R.id.p_layout);
+            p_image = itemView.findViewById(R.id.p_img);
+            p_name = itemView.findViewById(R.id.p_name);
+            p_layout = itemView.findViewById(R.id.p_layout);
         }
     }
 }

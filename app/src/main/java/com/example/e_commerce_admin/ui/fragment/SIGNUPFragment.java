@@ -140,12 +140,6 @@ public class SIGNUPFragment extends Fragment {
                                 Log.i("dfsfsv", "onFailure: "+toString());
                             }
                         });
-
-
-
-
-
-
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override

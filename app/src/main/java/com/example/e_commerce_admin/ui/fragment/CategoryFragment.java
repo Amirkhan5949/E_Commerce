@@ -2,10 +2,13 @@ package com.example.e_commerce_admin.ui.fragment;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,20 +17,29 @@ import android.view.ViewGroup;
 import com.example.e_commerce_admin.R;
 import com.example.e_commerce_admin.model.GridSpacingItemDecoration;
 import com.example.e_commerce_admin.model.SuperCategory;
+import com.example.e_commerce_admin.ui.activity.HomeActivity;
 import com.example.e_commerce_admin.ui.adapter.Cat_Adapter;
+import com.example.e_commerce_admin.ui.adapter.SigningviewAdapter;
+import com.example.e_commerce_admin.ui.adapter.Super_Cat_viewAdapter;
 import com.example.e_commerce_admin.ui.adapter.Super_cat_Adapter;
 import com.example.e_commerce_admin.utils.FirebaseConstants;
 import com.example.e_commerce_admin.utils.util;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CategoryFragment extends Fragment {
     View view;
-    RecyclerView catrecycler;
-    private Cat_Adapter adapter;
+    ViewPager viewPager;
+    TabLayout tabLayout;
 
-    final DatabaseReference base = FirebaseDatabase.getInstance().getReference().child(FirebaseConstants.Category.key);
 
 
     public CategoryFragment() {
@@ -39,35 +51,38 @@ public class CategoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view=inflater.inflate(R.layout.fragment_category, container, false);
+        ((HomeActivity)getActivity()).setCheckedNavigationItem(2);
+        viewPager=view.findViewById(R.id.viewPager);
+        tabLayout=view.findViewById(R.id.tabLayout);
 
-         catrecycler=view.findViewById(R.id.cat_recycler);
 
+        FirebaseDatabase.getInstance().getReference()
+                .child(FirebaseConstants.SuperCategory.key)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        List<SuperCategory> superCategories=new ArrayList<>();
+                        for (DataSnapshot dataSnapshot:snapshot.getChildren()){
 
+                            SuperCategory value = dataSnapshot.getValue(SuperCategory.class);
+                            superCategories.add(value);
+                        }
 
-       catrecycler.setLayoutManager(new GridLayoutManager(getContext(),3));
-       catrecycler.addItemDecoration(new GridSpacingItemDecoration(3, util.dpToPx(getContext(),16),true));
+                        viewPager.setAdapter(new Super_Cat_viewAdapter(getChildFragmentManager(),superCategories));
+                        tabLayout.setupWithViewPager(viewPager);
 
-        FirebaseRecyclerOptions<SuperCategory> options =
-                new FirebaseRecyclerOptions.Builder<SuperCategory>()
-                        .setQuery(base, SuperCategory.class)
-                        .build();
-        adapter=new Cat_Adapter(options);
-        catrecycler.setAdapter(adapter);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
 
 
         return view;
     }
-    @Override
-    public void onStart() {
-        super.onStart();
-        adapter.startListening();
-    }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        adapter.stopListening();
-    }
 
 
 }

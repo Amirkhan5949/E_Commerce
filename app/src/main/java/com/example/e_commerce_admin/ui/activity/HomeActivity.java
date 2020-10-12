@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.util.Patterns;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
@@ -21,7 +23,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeActivity2 extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity {
 
     FrameLayout frameLayout;
     BottomNavigationView bottomNavigationView;
@@ -31,6 +33,8 @@ public class HomeActivity2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home2);
+
+
 
         frameLayout=findViewById(R.id.frame);
         bottomNavigationView=findViewById(R.id.bottom);
@@ -43,18 +47,18 @@ public class HomeActivity2 extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch(item.getItemId()){
                     case R.id.home:
-                        replace(new HomeFragment());
+                        replace(new HomeFragment(),"HomeFragment");
                         return true;
                     case R.id.cart:
-                        replace(new CartFragment());
+                        replace(new CartFragment(),"CartFragment");
                         return true;
 
                     case R.id.category:
-                        replace(new CategoryFragment());
+                        replace(new CategoryFragment(),"CategoryFragment");
                         return true;
 
                     case R.id.menu:
-                        replace(new MenuFragment());
+                        replace(new MenuFragment(),"MenuFragment");
                         return true;
 
                 }
@@ -64,12 +68,20 @@ public class HomeActivity2 extends AppCompatActivity {
 
     }
 
-    void replace(Fragment fragment){
-        FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
+    public void replace(Fragment fragment){
+        FragmentTransaction ft= getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.frame,fragment);
         ft.commit();
     }
 
+    public void replace(Fragment fragment,String tag){
+        FragmentTransaction ft= getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.frame,fragment);
+        ft.addToBackStack(tag);
+        ft.commit();
+    }
 
-
+    public void setCheckedNavigationItem(int i){
+        bottomNavigationView.getMenu().getItem(i).setChecked(true);
+    }
 }
