@@ -4,6 +4,25 @@ public class WishList {
     String title;
     String id;
     String product_id;
+    String img;
+
+    @Override
+    public String toString() {
+        return "WishList{" +
+                "title='" + title + '\'' +
+                ", id='" + id + '\'' +
+                ", product_id='" + product_id + '\'' +
+                ", img='" + img + '\'' +
+                '}';
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
 
     public WishList() {
     }
@@ -38,12 +57,4 @@ public class WishList {
         this.product_id = product_id;
     }
 
-    @Override
-    public String toString() {
-        return "WishList{" +
-                "title='" + title + '\'' +
-                ", id='" + id + '\'' +
-                ", product_id='" + product_id + '\'' +
-                '}';
-    }
 }

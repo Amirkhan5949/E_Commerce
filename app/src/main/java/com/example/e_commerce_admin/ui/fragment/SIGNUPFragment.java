@@ -119,6 +119,7 @@ public class SIGNUPFragment extends Fragment {
                         map.put("confirmpassword",conpaass.getText().toString());
                         map.put("email",email.getText().toString());
 
+
                         FirebaseDatabase.getInstance().getReference()
                                 .child("Admin")
                                 .child(FirebaseAuth.getInstance().getUid())

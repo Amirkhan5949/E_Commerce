@@ -150,9 +150,6 @@
                 </LinearLayout>
 
 
-
-
-
             </LinearLayout>
 
             <LinearLayout
@@ -177,7 +174,7 @@
                         android:textSize="16sp"
                         android:textColor="@color/black"
                         android:text="Aamir khan"
-                        android:id="@+id/user_name"/>
+                        android:id="@+id/tv_user_name"/>
 
                     <TextView
                         android:layout_marginHorizontal="16dp"
@@ -188,6 +185,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
                         android:textColor="@color/black"
+                        android:id="@+id/tv_add_type"
                         android:text="Work Address" />
 
 
@@ -201,7 +199,7 @@
                     android:textSize="16sp"
                     android:textColor="@color/black"
                     android:text="Range Road Shamshabad,mp,464111"
-                    android:id="@+id/user_add"/>
+                    android:id="@+id/tv_user_add"/>
 
                 <TextView
                     android:layout_marginHorizontal="16dp"
@@ -210,7 +208,7 @@
                     android:textSize="16sp"
                     android:textColor="@color/black"
                     android:text="9144155949"
-                    android:id="@+id/alladd_mob_no"/>
+                    android:id="@+id/tv_mob_no"/>
 
 
                 <Button
@@ -267,14 +265,14 @@
                         android:layout_height="wrap_content"
                         android:text="Price(7 items)"
                         android:textColor="@color/black"
-                        android:id="@+id/p_item"/>
+                        android:id="@+id/tv_id_item"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="$12345"
                         android:textColor="@color/black"
-                        android:id="@+id/rs"/>
+                        android:id="@+id/tv_sellingp"/>
 
                 </LinearLayout>
 
@@ -297,7 +295,7 @@
                         android:layout_height="wrap_content"
                         android:text="$0"
                         android:textColor="@color/colorDarkblue"
-                        android:id="@+id/rs_dis"/>
+                        android:id="@+id/tv_dis_rs"/>
 
                 </LinearLayout>
                 <LinearLayout
@@ -342,14 +340,14 @@
                         android:textSize="16sp"
                         android:textColor="@color/black"
                         android:fontFamily="@font/bold"
-                        android:text="Total Amount"/>
+                         android:text="Total Amount"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="$12345"
                         android:textColor="@color/black"
-                        android:id="@+id/total_amount"/>
+                        android:id="@+id/tv_total_amnt"/>
 
 
                 </LinearLayout>
@@ -382,7 +380,7 @@
                 android:text="$1,500"
                 android:textColor="@color/black"
                 android:fontFamily="@font/bold"
-                android:id="@+id/tv_rs"
+                android:id="@+id/tv_total_amnt_rs"
                 android:textSize="18sp"/>
 
             <TextView

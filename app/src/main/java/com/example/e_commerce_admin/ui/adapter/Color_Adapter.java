@@ -70,4 +70,8 @@ public class Color_Adapter extends RecyclerView.Adapter<Color_Adapter.Color_Adap
          ll_color=itemView.findViewById(R.id.ll_color);
      }
  }
+
+    public int getSelectedPosition() {
+        return selectedPosition;
+    }
 }

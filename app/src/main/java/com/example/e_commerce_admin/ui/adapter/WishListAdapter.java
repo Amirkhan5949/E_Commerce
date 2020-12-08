@@ -14,36 +14,28 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.e_commerce_admin.R;
 import com.example.e_commerce_admin.model.Product;
+import com.example.e_commerce_admin.model.WishList;
 import com.example.e_commerce_admin.ui.activity.ProductDetailActivity;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.squareup.picasso.Picasso;
 
-public class ProductGridAdapter extends FirebaseRecyclerAdapter<Product, ProductGridAdapter.ProductViewholder> {
+public class WishListAdapter extends FirebaseRecyclerAdapter<Product,WishListAdapter.WishListAdapter_View> {
 
-
-    public ProductGridAdapter(@NonNull FirebaseRecyclerOptions<Product> options) {
+    public WishListAdapter(@NonNull FirebaseRecyclerOptions<Product> options) {
         super(options);
     }
 
-    @NonNull
     @Override
-    public ProductViewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.product, parent, false);
-        return new ProductViewholder(view);
+    protected void onBindViewHolder(@NonNull final WishListAdapter_View holder, int position, @NonNull Product model) {
 
-
-    }
-
-
-    @Override
-    protected void onBindViewHolder(@NonNull final ProductViewholder holder, int position, @NonNull Product model) {
         final String id = getRef(position).getKey();
-        holder.p_name.setText(model.getName());
+        holder.p_name.setText(model.getId());
         Picasso.get().load(model.getImg()).into(holder.p_image);
 
-        Log.i("gfgfgf", "onBindViewHolder: "+model.toString());
+        Log.i("sfsfdffe", "onBindViewHolder: "+model.toString());
+
+        holder.icon_favourite.setVisibility(View.GONE);
 
         holder.p_layout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,16 +48,30 @@ public class ProductGridAdapter extends FirebaseRecyclerAdapter<Product, Product
 
     }
 
-    class ProductViewholder extends RecyclerView.ViewHolder {
-        ImageView p_image;
+    @NonNull
+    @Override
+    public WishListAdapter_View onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        View view = layoutInflater.inflate(R.layout.product, parent, false);
+        return new WishListAdapter_View(view);
+
+    }
+
+    public class WishListAdapter_View extends RecyclerView.ViewHolder {
+
+        ImageView p_image,icon_favourite;
         TextView p_name;
         LinearLayout p_layout;
 
-        public ProductViewholder(@NonNull View itemView) {
+        public WishListAdapter_View(@NonNull View itemView) {
             super(itemView);
+
             p_image = itemView.findViewById(R.id.p_img);
             p_name = itemView.findViewById(R.id.p_name);
             p_layout = itemView.findViewById(R.id.p_layout);
+            icon_favourite = itemView.findViewById(R.id.icon_favourite);
+
         }
     }
 }

@@ -168,5 +168,26 @@ public class Product {
         this.name = name;
     }
 
-
+    @Override
+    public String toString() {
+        return "Product{" +
+                "super_category='" + super_category + '\'' +
+                ", super_category_id='" + super_category_id + '\'' +
+                ", category='" + category + '\'' +
+                ", category_id='" + category_id + '\'' +
+                ", brand='" + brand + '\'' +
+                ", brand_id='" + brand_id + '\'' +
+                ", id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", details='" + details + '\'' +
+                ", mrp_price='" + mrp_price + '\'' +
+                ", selling_price='" + selling_price + '\'' +
+                ", img='" + img + '\'' +
+                ", Color=" + Color +
+                ", SelectedColor=" + SelectedColor +
+                ", Size=" + Size +
+                ", Image=" + Image +
+                ", SelectedProductLists=" + SelectedProductLists +
+                '}';
+    }
 }

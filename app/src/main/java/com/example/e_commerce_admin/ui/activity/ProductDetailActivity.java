@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,10 +23,12 @@ import com.example.e_commerce_admin.ui.adapter.Color_Adapter;
 import com.example.e_commerce_admin.ui.adapter.MainSliderAdapter;
 import com.example.e_commerce_admin.ui.adapter.ProductReview_Adapter;
 import com.example.e_commerce_admin.ui.adapter.Size_Adapter;
-import com.example.e_commerce_admin.utils.FirebaseConstants;
+ import com.example.e_commerce_admin.utils.FirebaseConstants;
 import com.example.e_commerce_admin.utils.Loader;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -51,15 +54,15 @@ public class ProductDetailActivity extends AppCompatActivity {
     private List<Color> selectedColor = new ArrayList<>();
     private List<Images> imagesList = new ArrayList<>();
     private Size_Adapter size_adapter;
-    private List<Size> selectedSize = new ArrayList<>();
+    private List<Size> sizeList = new ArrayList<>();
     boolean heart=true;
     private Loader loader;
 
     private Color_Adapter colorAdapter;
     private TextView title;
 
-    private Product product;
-    private String id;
+     private Product product;
+     private String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,26 +73,36 @@ public class ProductDetailActivity extends AppCompatActivity {
 
         setUpToolbar();
 
-        icon_favourite.setOnClickListener(new View.OnClickListener() {
+        initViews();
+
+
+        tv_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (heart){
-                    icon_favourite.setImageResource(R.drawable.favorite);
-                    heart = false;
+                if(tv_add.getText().equals("Add")){
+                    addToCart();
                 }
-                else{
-                    addToWishlist();
-                    icon_favourite.setImageResource(R.drawable.filledheart);
-                    heart = true;
+                else {
+                    removeTOCart();
                 }
             }
         });
 
+        if (FirebaseAuth.getInstance().getUid()!=null){
 
+            icon_favourite.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (heart){
+                        removeToWishList();
+                    }
+                    else{
+                        addToWishlist();
+                    }
+                }
+            });
 
-
-
-
+        }
 
         iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,7 +112,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         });
 
         rv_size.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        size_adapter = new Size_Adapter(getSize(), selectedSize);
+        size_adapter = new Size_Adapter(sizeList);
         rv_size.setAdapter(size_adapter);
 
         rv_color.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
@@ -118,16 +131,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                 product = snapshot.getValue(Product.class);
 
 
-                Map<String, Size> size = product.getSize();
-                if (size != null && size.size() > 0) {
-                    List<Size> sizes = new ArrayList<>();
-                    for (Map.Entry<String, Size> entry : size.entrySet()) {
-                        sizes.add(entry.getValue());
-                    }
-                    selectedSize.addAll(sizes);
-                    size_adapter.notifyDataSetChanged();
 
-                }
 
                 Map<String, Images> imagesMap = product.getImage();
                 Log.i("ettfbgfff", "onCreate: " + product.getImage().toString());
@@ -157,6 +161,17 @@ public class ProductDetailActivity extends AppCompatActivity {
                     colorAdapter.notifyDataSetChanged();
                 }
 
+
+                Map<String, Size> sizeMap = product.getSize();
+                if (sizeMap != null && sizeMap.size() > 0) {
+                    List<Size> sizes = new ArrayList<>();
+                    for (Map.Entry<String, Size> entry : sizeMap.entrySet()) {
+                        sizes.add(entry.getValue());
+                    }
+                    sizeList.addAll(sizes);
+                    size_adapter.notifyDataSetChanged();
+                }
+
                 tv_p_name.setText(product.getName());
                 tv_details.setText(product.getDetails());
                 tv_rs.setText(product.getSelling_price());
@@ -176,6 +191,79 @@ public class ProductDetailActivity extends AppCompatActivity {
         rv_review.setAdapter(new ProductReview_Adapter());
     }
 
+    private void initViews() {
+        if (FirebaseAuth.getInstance().getUid()!=null){
+            FirebaseDatabase.getInstance().getReference().child(FirebaseConstants.WishList.key)
+                    .child(FirebaseAuth.getInstance().getUid())
+                    .child(id)
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (snapshot.exists()){
+                                icon_favourite.setImageResource(R.drawable.filledheart);
+                                heart = true;
+                            }
+                            else {
+                                icon_favourite.setImageResource(R.drawable.favorite);
+                                heart = false;
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+        }
+        else {
+            Intent intent=new Intent(this,MainActivity.class);
+            startActivity(intent);
+        }
+
+        if (FirebaseAuth.getInstance().getUid()!=null){
+            FirebaseDatabase.getInstance().getReference().child(FirebaseConstants.Cart.key)
+                    .child(FirebaseAuth.getInstance().getUid())
+                    .child(id)
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (snapshot.exists()){
+                                tv_add.setText("Remove");
+                            }
+                            else {
+                                tv_add.setText("Add");
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+        }
+        else {
+            Intent intent=new Intent(this,MainActivity.class);
+            startActivity(intent);
+        }
+    }
+
+    private void removeToWishList() {
+        FirebaseDatabase.getInstance().getReference()
+                .child(FirebaseConstants.WishList.key)
+                .child(FirebaseAuth.getInstance().getUid())
+                .child(id)
+                .removeValue()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        heart = false;
+                        icon_favourite.setImageResource(R.drawable.favorite);
+                    }
+                });
+    }
+
     private void addToWishlist() {
         loader.show();
           Map<String,Object> map = new HashMap<>();
@@ -187,6 +275,8 @@ public class ProductDetailActivity extends AppCompatActivity {
               @Override
               public void onSuccess(Void aVoid) {
                   loader.dismiss();
+                  icon_favourite.setImageResource(R.drawable.filledheart);
+                  heart = true;
               }
           }).addOnFailureListener(new OnFailureListener() {
               @Override
@@ -246,26 +336,68 @@ public class ProductDetailActivity extends AppCompatActivity {
 
     }
 
-    private List<Size> getSize() {
-        List<Size> list = new ArrayList<>();
-        list.add(new Size("Small"));
-        list.add(new Size("Large"));
-        list.add(new Size("Medium"));
-        list.add(new Size("Extra Large"));
-        list.add(new Size("Double Extra Large"));
-        return list;
+    private void addToCart() {
+        loader.show();
+
+        if (colorAdapter.getSelectedPosition()==-1){
+            Toast.makeText(this, "Select Color...", Toast.LENGTH_SHORT).show();
+           loader.dismiss();
+            return;
+        }
+
+        else if (size_adapter.getSelectedPosition()==-1){
+            Toast.makeText(this, "Select Size...", Toast.LENGTH_SHORT).show();
+           loader.dismiss();
+            return;
+        }
+
+
+        Map<String,Object> map = new HashMap<>();
+        map.put(FirebaseConstants.Cart.Product,product);
+        map.put(FirebaseConstants.Cart.quantity,1);
+        map.put(FirebaseConstants.Cart.discount,0);
+         map.put(FirebaseConstants.Cart.Color,selectedColor.get(colorAdapter.getSelectedPosition()));
+        map.put(FirebaseConstants.Cart.size,sizeList.get(size_adapter.getSelectedPosition()));
+
+
+        FirebaseDatabase.getInstance().getReference().child(FirebaseConstants.Cart.key)
+                .child(FirebaseAuth.getInstance().getUid())
+                .child(id)
+                .updateChildren(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                loader.dismiss();
+                tv_add.setText("Remove");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                loader.dismiss();
+            }
+        });
+
+
+        Log.i("sgfyf", "addToCart: "+size_adapter.getSelectedPosition());
+        Log.i("sgfyf", "addToCart: "+sizeList.get(size_adapter.getSelectedPosition()).getTitle());
+
+
+    }
+    private void removeTOCart(){
+        loader.show();
+        FirebaseDatabase.getInstance().getReference().child(FirebaseConstants.Cart.key)
+                .child(FirebaseAuth.getInstance().getUid())
+                .child(id)
+                .removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                loader.dismiss();
+                tv_add.setText("Add");
+            }
+        });
+
     }
 
 
-    List<Color> getcolor() {
-        List<Color> list = new ArrayList<>();
-        list.add(new Color("#000000"));
-        list.add(new Color("#FF113F"));
-        list.add(new Color("#FFFFFF"));
-        list.add(new Color("#0019FE"));
-        list.add(new Color("#00DC1D"));
-        list.add(new Color("#FFC107"));
-        list.add(new Color("#000000"));
-        return list;
-    }
-}
+
+
+  }

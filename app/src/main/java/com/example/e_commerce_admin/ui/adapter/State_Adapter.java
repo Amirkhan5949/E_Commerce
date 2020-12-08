@@ -15,7 +15,7 @@ import java.util.List;
 
 public class State_Adapter extends RecyclerView.Adapter<State_Adapter.State_Adapter_View> {
 
-    List<State> list;
+    private List<State> list;
     ClickCallBack clickCallBack;
 
     public State_Adapter(List<State> list,ClickCallBack clickCallBack) {

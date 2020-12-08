@@ -66,7 +66,40 @@ public class FirebaseConstants {
 
     public static class WishList{
         public static final String key="WishList";
-        public static final String user_id="user_id";
-        public static final String Product="product";
     }
+
+    public static class Cart{
+        public static final String key="pp";
+        public static final String Product="Product";
+        public static final String Color ="Color";
+        public static final String size ="size";
+        public static final String quantity = "quantity";
+        public static final String discount ="discount";
+        public static final String finalPrice ="finalPrice";
+
+
+    }
+
+    public static class Address{
+        public static final String key="Address";
+        public static final String pincode="pincode";
+        public static final String address="address";
+        public static final String state="state";
+        public static final String city="city";
+        public static final String landmark="landmark";
+        public static final String name="name";
+        public static final String mob_no="mob_no";
+        public static final String address_type="address_type";
+        public static final String default_address_index="default_address_index";
+    }
+
+    public static class Profile{
+        public static final String key="Profile";
+        public static final String name="name";
+        public static final String email="email";
+        public static final String mobile_no="mobile_no";
+        public static final String dob="dob";
+
+    }
+
 }

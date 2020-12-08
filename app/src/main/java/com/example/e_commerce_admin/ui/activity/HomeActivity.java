@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
@@ -18,10 +19,13 @@ import com.example.e_commerce_admin.ui.fragment.CartFragment;
 import com.example.e_commerce_admin.ui.fragment.CategoryFragment;
 import com.example.e_commerce_admin.ui.fragment.HomeFragment;
 import com.example.e_commerce_admin.ui.fragment.MenuFragment;
+import com.example.e_commerce_admin.ui.fragment.ProductListFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.google.android.material.internal.ContextUtils.getActivity;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -29,6 +33,7 @@ public class HomeActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
 
 
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +43,7 @@ public class HomeActivity extends AppCompatActivity {
 
         frameLayout=findViewById(R.id.frame);
         bottomNavigationView=findViewById(R.id.bottom);
+
 
 
         replace(new HomeFragment());

@@ -21,7 +21,7 @@
             android:textColor="@color/black"
             android:fontFamily="@font/bold"
             android:textSize="16sp"
-            android:id="@+id/orderid"/>
+            android:id="@+id/tv_orderid"/>
 
         <TextView
 
@@ -40,7 +40,7 @@
             android:textColor="@color/black"
             android:fontFamily="@font/bold"
             android:textSize="16sp"
-            android:id="@+id/order_rs"/>
+            android:id="@+id/tv_order_rs"/>
 
     </LinearLayout>
 
@@ -51,6 +51,7 @@
         android:layout_height="wrap_content"
         android:text="Date:29-oct-2020 12:00 pm"
         android:fontFamily="@font/bold"
+        android:id="@+id/tv_date"
         android:textSize="16sp" />
 
     <View
@@ -69,7 +70,7 @@
             android:layout_width="140dp"
             android:layout_height="170dp"
             android:src="@drawable/woman"
-            android:id="@+id/image"/>
+            android:id="@+id/iv_image"/>
 
         <LinearLayout
             android:layout_marginLeft="10dp"
@@ -91,7 +92,7 @@
                     android:textColor="@color/colorBlack"
                     android:textSize="16sp"
                     android:maxLines="1"
-                    android:id="@+id/name"/>
+                    android:id="@+id/tv_name"/>
 
 
                 <TextView
@@ -102,7 +103,7 @@
                     android:textSize="14sp"
                     android:maxLines="1"
                     android:ellipsize="end"
-                    android:id="@+id/description"/>
+                    android:id="@+id/tv_description"/>
 
                 <LinearLayout
                     android:gravity="center_vertical"
@@ -117,7 +118,7 @@
                         android:textColor="@color/colorBlack"
                         android:textSize="14sp"
                         android:maxLines="1"
-                        android:id="@+id/color"/>
+                        android:id="@+id/tv_color"/>
 
                     <androidx.cardview.widget.CardView
                         android:layout_marginLeft="2dp"
@@ -142,7 +143,7 @@
                         android:textColor="@color/colorBlack"
                         android:textSize="14sp"
                         android:maxLines="1"
-                        android:id="@+id/size"/>
+                        android:id="@+id/tv_size"/>
 
                     <TextView
                         android:layout_marginLeft="10dp"
@@ -152,17 +153,13 @@
                         android:textColor="@color/colorBlack"
                         android:textSize="14sp"
                         android:maxLines="1"
-                        android:id="@+id/quantity"/>
+                        android:id="@+id/tv_quantity"/>
 
                     <ImageView
-                        android:id="@+id/expandqty"
+                        android:id="@+id/iv_expandqty"
                         android:layout_width="32dp"
                         android:layout_height="match_parent"
                         android:src="@drawable/expand" />
-
-
-
-
 
                 </LinearLayout>
 
@@ -182,7 +179,7 @@
                     android:textSize="14sp"
                     android:textStyle="bold"
                     android:textColor="@color/colorBlack"
-                    android:id="@+id/rupees"/>
+                    android:id="@+id/tv_sellingp"/>
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -196,7 +193,7 @@
                         android:text="$30.00"
                         android:textSize="14sp"
                         android:textColor="@color/colorBlack"
-                        android:id="@+id/crossrupees"
+                        android:id="@+id/tv_mrp"
                         tools:ignore="MissingConstraints" />
 
 
@@ -219,7 +216,7 @@
                     android:text="70%off"
                     android:textSize="14sp"
                     android:textColor="@color/colorDarkblue"
-                    android:id="@+id/off"
+                    android:id="@+id/tv_off"
                     tools:ignore="MissingConstraints" />
 
             </LinearLayout>

@@ -14,8 +14,8 @@ import com.example.e_commerce_admin.ui.adapter.Cart_Adapter;
 
 public class CartActivity extends AppCompatActivity {
 
-    RecyclerView rv_cart;
-    TextView tv_place_order;
+   private RecyclerView rv_cart;                                                                    
+   private TextView tv_place_order;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

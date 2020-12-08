@@ -1,11 +1,11 @@
 package com.example.e_commerce_admin.ui.activity;
 
+import android.os.Bundle;
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
-
-import android.os.Bundle;
-import android.util.Log;
 
 import com.example.e_commerce_admin.R;
 import com.example.e_commerce_admin.ui.adapter.SigningviewAdapter;
@@ -23,8 +23,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        tabLayout=findViewById( R.id.tabLayout);
-        viewPager=findViewById( R.id.viewPager);
+        tabLayout = findViewById(R.id.tabLayout);
+        viewPager = findViewById(R.id.viewPager);
 
 
         FirebaseDatabase.getInstance().getReference()
@@ -36,19 +36,19 @@ public class MainActivity extends AppCompatActivity {
                         Log.i("dfhbd", "onSuccess: ");
                     }
                 })
-        .addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.i("dfhbd", "addOnFailureListener0: "+e.toString());
-            }
-        });
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.i("dfhbd", "addOnFailureListener0: " + e.toString());
+                    }
+                });
 
 
         viewPager.setAdapter(new SigningviewAdapter(getSupportFragmentManager()));
         tabLayout.setupWithViewPager(viewPager);
     }
 
-    public void goToSignUp(){
-            viewPager.setCurrentItem(0);
+    public void goToSignUp() {
+        viewPager.setCurrentItem(0);
     }
 }

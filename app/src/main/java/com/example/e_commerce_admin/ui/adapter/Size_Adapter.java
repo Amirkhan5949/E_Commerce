@@ -21,10 +21,9 @@ public class Size_Adapter extends RecyclerView.Adapter<Size_Adapter.Size_Adapter
     int selectedPosition = -1;
 
     List<Size> size;
-    List<Size> selectedSize = new ArrayList<>();
 
-    public Size_Adapter(List<Size> size, List<Size> selectedSize) {
-        this.selectedSize = selectedSize;
+
+    public Size_Adapter(List<Size> size) {
         this.size = size;
     }
 
@@ -46,7 +45,6 @@ public class Size_Adapter extends RecyclerView.Adapter<Size_Adapter.Size_Adapter
         holder.tv_size.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 selectedPosition=position;
                 notifyDataSetChanged();
             }
@@ -69,4 +67,7 @@ public class Size_Adapter extends RecyclerView.Adapter<Size_Adapter.Size_Adapter
         }
     }
 
+    public int getSelectedPosition() {
+        return selectedPosition;
+    }
 }

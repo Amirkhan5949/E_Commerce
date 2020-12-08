@@ -1,20 +1,32 @@
 package com.example.e_commerce_admin.ui.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.example.e_commerce_admin.R;
+import com.example.e_commerce_admin.model.Address;
+import com.example.e_commerce_admin.model.Address;
 import com.example.e_commerce_admin.ui.adapter.All_Address_Adapter;
+import com.example.e_commerce_admin.ui.adapter.CategoryAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class AddressActivity extends AppCompatActivity {
 
-    RecyclerView alladress_recycler;
+   private RecyclerView alladress_recycler;
+   private All_Address_Adapter adapter;
 
     FloatingActionButton floating_action_button;
 
@@ -23,6 +35,7 @@ public class AddressActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_address);
 
+
         alladress_recycler=findViewById(R.id.alladress_recycler);
         floating_action_button=findViewById(R.id.floating_action_button);
 
@@ -30,13 +43,52 @@ public class AddressActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent  intent=new Intent(AddressActivity.this,Address_EditActivity.class);
+                intent.putExtra("ComeFrom","Float");
                 startActivity(intent);
             }
         });
 
 
-        alladress_recycler.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
-        alladress_recycler.setAdapter(new All_Address_Adapter());
+        FirebaseDatabase.getInstance().getReference().child("Admin")
+                .child(FirebaseAuth.getInstance().getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                        Log.i("sfdgyd", "onDataChange: "+snapshot.toString());
+
+                       String add_type= (snapshot.child("default_address_index").getValue(String.class));
+
+                        alladress_recycler.setLayoutManager(new LinearLayoutManager(alladress_recycler.getContext(),LinearLayoutManager.VERTICAL,false));
+
+                        FirebaseRecyclerOptions<Address> option =
+                                new FirebaseRecyclerOptions.Builder<Address>()
+                                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Address")
+                                                        .child(FirebaseAuth.getInstance().getUid()),
+                                                Address.class)
+                                        .build();
+
+                        adapter = new All_Address_Adapter(option,add_type==null?"":add_type);
+                        alladress_recycler.setAdapter(adapter);
+                        adapter.startListening();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        adapter.stopListening();
 
     }
+
 }

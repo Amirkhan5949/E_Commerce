@@ -109,108 +109,141 @@
             </LinearLayout>
 
             <LinearLayout
-                android:background="@color/white"
                 android:layout_marginVertical="10dp"
-                 android:layout_width="match_parent"
+                android:background="@color/white"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+                <TextView
+                    android:padding="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Price Details"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"/>
+
+                <View
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/dark_gray"/>
                 <LinearLayout
-                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginHorizontal="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-
                     <TextView
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="Shipping"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:fontFamily="@font/roboto"
-                        android:textColor="@color/gray"/>
+                        android:layout_weight="1"
+                        android:textSize="14sp"
+                        android:text="Price (2items)"
+                        android:id="@+id/tv_id_item"/>
 
                     <TextView
-                        android:id="@+id/rs_shipping"
+                        android:id="@+id/tv_totalrs"
                         android:layout_width="wrap_content"
-                        android:layout_height="37dp"
-                        android:fontFamily="@font/roboto"
-                        android:text="$16.99"
-                        android:textColor="@color/gray"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
+                        android:layout_height="match_parent"
+                        android:text="$1234"
+                        android:textSize="14sp" />
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginVertical="10dp"
+                    android:layout_marginHorizontal="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-
                     <TextView
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="Sub Toatal"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:fontFamily="@font/roboto"
-                        android:textColor="@color/gray"/>
+                        android:layout_weight="1"
+                        android:textSize="14sp"
+                        android:text="Discount"
+                        android:id="@+id/tv_discount"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="$6.29"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:fontFamily="@font/roboto"
-                        android:id="@+id/rs_subtotal"
-                        android:textColor="@color/gray"/>
-
+                        android:text="-$124"
+                        android:textSize="14sp"
+                        android:textColor="@color/blue"
+                        android:id="@+id/tv_dis_rs"/>
 
                 </LinearLayout>
 
-
                 <LinearLayout
-                    android:layout_marginHorizontal="20dp"
-
-                    android:layout_marginTop="10dp"
+                    android:layout_marginHorizontal="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
+                    <TextView
+                        android:textSize="14sp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Delivery Charges"
+                        android:id="@+id/tv_del_charge"/>
 
                     <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="FREE"
+                        android:textSize="14sp"
+                        android:textColor="@color/blue"
+                        android:id="@+id/tv_del_rs"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_marginVertical="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/dark_gray"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="Toatal"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
+                        android:text="Total Amount"
+                        android:textColor="@color/black"
                         android:fontFamily="@font/bold"
-                        android:textColor="@color/black"/>
+                        android:textSize="16sp"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="$146.99"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
+                        android:text="$12234"
+                        android:id="@+id/tv_total_amnt"
+                        android:textColor="@color/black"
                         android:fontFamily="@font/bold"
-                        android:id="@+id/rs_total"
-                        android:textColor="@color/colorBlack"/>
+                        android:textSize="16sp"/>
 
 
                 </LinearLayout>
+                <View
+                    android:layout_marginVertical="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/dark_gray"/>
+
 
 
             </LinearLayout>
+
+
 
             <LinearLayout
                 android:layout_marginBottom="10dp"
