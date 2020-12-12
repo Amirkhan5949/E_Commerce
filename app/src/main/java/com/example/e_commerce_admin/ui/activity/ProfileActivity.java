@@ -13,21 +13,30 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.cloudinary.android.MediaManager;
+import com.cloudinary.android.UploadRequest;
+import com.cloudinary.android.callback.ErrorInfo;
+import com.cloudinary.android.callback.UploadCallback;
 import com.example.e_commerce_admin.R;
 import com.example.e_commerce_admin.utils.FirebaseConstants;
+import com.example.e_commerce_admin.utils.ImagePickerHelper;
 import com.example.e_commerce_admin.utils.Loader;
 
+import com.example.e_commerce_admin.utils.PermissionHelper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.myhexaville.smartimagepicker.ImagePicker;
@@ -35,6 +44,7 @@ import com.myhexaville.smartimagepicker.OnImagePickedListener;
 import com.orhanobut.dialogplus.DialogPlus;
 import com.orhanobut.dialogplus.ViewHolder;
 
+import com.squareup.picasso.Picasso;
 import com.yalantis.ucrop.UCrop;
 
 import java.io.File;
@@ -44,12 +54,18 @@ import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static com.example.e_commerce_admin.utils.PermissionHelper.setUpPermission;
+import static pub.devrel.easypermissions.EasyPermissions.hasPermissions;
+
 public class ProfileActivity extends AppCompatActivity {
 
     ImageView iv_edit_name, iv_edit_add, iv_edit_profile;
     ImagePicker imagePicker;
-    TextView tv_name,tv_email,tv_mob_no,tv_dob;
+    TextView tv_name,tv_email,tv_mob_no,tv_dob,tv_no,tv_u_name,tv_address;
     CircleImageView imageView;
+    UploadRequest imageRequest;
+    private DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child(FirebaseConstants.Profile.key);
+
     private final int PERMISSION_ALL = 1234;
     Loader loader;
 
@@ -59,16 +75,32 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        init();
 
-        iv_edit_name = findViewById(R.id.iv_edit_name);
-        iv_edit_add = findViewById(R.id.iv_edit_add);
-        tv_name = findViewById(R.id.tv_name);
-        tv_email = findViewById(R.id.tv_email);
-        tv_dob = findViewById(R.id.tv_dob);
-        tv_mob_no = findViewById(R.id.tv_mob_no);
-        iv_edit_profile = findViewById(R.id.iv_edit_profile);
-        imageView=findViewById(R.id.iv_profile);
-        loader=new Loader(this);
+        FirebaseDatabase.getInstance().getReference().child("Admin")
+                .child(FirebaseAuth.getInstance().getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Picasso.get().load(snapshot.child("image").getValue(String.class)).into(imageView);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (setUpPermission(ProfileActivity.this))
+                    imagePicker.choosePicture(true /*show camera intents*/);
+            }
+        });
+
+        imagePicker = ImagePickerHelper.getInstance(this);
 
 
         FirebaseDatabase.getInstance().getReference().child("Admin")
@@ -87,6 +119,29 @@ public class ProfileActivity extends AppCompatActivity {
 
                     }
                 });
+
+        FirebaseDatabase.getInstance().getReference().child("Address")
+                .child(FirebaseAuth.getInstance().getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+
+                             tv_no.setText(dataSnapshot.child(FirebaseConstants.Profile.mobile).getValue(String.class));
+                            tv_u_name.setText(dataSnapshot.child(FirebaseConstants.Profile.name).getValue(String.class));
+                            tv_address.setText(dataSnapshot.child(FirebaseConstants.Profile.address).getValue(String.class));
+                             break;
+                        }
+                         }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
 
 
         final String[] PERMISSIONS = {
@@ -199,6 +254,111 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
+    private void init() {
+
+        iv_edit_name = findViewById(R.id.iv_edit_name);
+        tv_u_name = findViewById(R.id.tv_u_name);
+        tv_address = findViewById(R.id.tv_address);
+        tv_no = findViewById(R.id.tv_no);
+        iv_edit_add = findViewById(R.id.iv_edit_add);
+        tv_name = findViewById(R.id.tv_name);
+        tv_email = findViewById(R.id.tv_email);
+        tv_dob = findViewById(R.id.tv_dob);
+        tv_mob_no = findViewById(R.id.tv_mob_no);
+        iv_edit_profile = findViewById(R.id.iv_edit_profile);
+        imageView=findViewById(R.id.iv_profile);
+        loader=new Loader(this);
+
+    }
+
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissionsList, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissionsList, grantResults);
+        imagePicker.handlePermission(requestCode, grantResults);
+        if (PermissionHelper.handlePermission(requestCode, permissionsList, grantResults))
+            imagePicker.choosePicture(true /*show camera intents*/);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        imagePicker.handleActivityResult(resultCode, requestCode, data);
+        Uri uri = ImagePickerHelper.handleActivityResult(requestCode, resultCode, data);
+        if (uri != null) {
+            imageView.setImageURI(null);
+            imageView.setImageURI(uri);
+
+            imageRequest = MediaManager.get().upload(uri)
+                    .option("public_id", reference.getKey())
+                    .option("folder", "E-commerce_Admin/Profile/");
+
+            if(imageRequest!=null){
+                imageRequest.callback(new UploadCallback() {
+                    @Override
+                    public void onStart(String requestId) {
+                        // your code here
+                    }
+
+                    @Override
+                    public void onProgress(String requestId, long bytes, long totalBytes) {
+                        // example code starts here
+                        Double progress = (double) bytes / totalBytes;
+                        // post progress to app UI (e.g. progress bar, notification)
+                        // example code ends here
+                    }
+
+                    @Override
+                    public void onSuccess(String requestId, Map resultData) {
+                        // your code here
+                        loader.show();
+
+                        Log.i("gdggdg", "onSuccess: "+requestId.toString());
+                        Log.i("sfddgd", "onSuccess: "+resultData.toString());
+                        Map<String, Object> map = new HashMap<>();
+
+                        map.put(FirebaseConstants.SuperCategory.image, resultData.get("secure_url"));
+                        map.put(FirebaseConstants.SuperCategory.image_format, resultData.get("format"));
+
+                        FirebaseDatabase.getInstance().getReference().child("Admin")
+                                .child(FirebaseAuth.getInstance().getUid())
+                                .updateChildren(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                loader.dismiss();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                loader.dismiss();
+                            }
+                        });
+
+                    }
+                    @Override
+                    public void onError(String requestId, ErrorInfo error) {
+                        // your code here
+                        Log.i("fdgdff", "onError: "+error.getDescription());
+                        loader.dismiss();
+                    }
+                    @Override
+                    public void onReschedule(String requestId, ErrorInfo error) {
+                        // your code here
+                        Log.i("sdhfbdfed", "onSuccess: " + error.getDescription());
+                    }
+                })
+                        .dispatch();
+            }
+
+
+
+
+        }
+    }
+
+
+
     private Uri getTempUri(){
         String dri = Environment.getExternalStorageDirectory()+File.separator+"Temp";
         File dirFile = new File(dri);
@@ -213,62 +373,6 @@ public class ProfileActivity extends AppCompatActivity {
         return Uri.fromFile(tempFile);
     }
 
-
-
-
-    public static boolean hasPermissions(Context context, String... permissions) {
-        if (context != null && permissions != null) {
-            for (String permission : permissions) {
-                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String permissionsList[], int[] grantResults) {
-
-        super.onRequestPermissionsResult(requestCode, permissionsList, grantResults);
-        imagePicker.handlePermission(requestCode, grantResults);
-        switch (requestCode) {
-            case PERMISSION_ALL: {
-                if (grantResults.length > 0) {
-                    boolean flag = true;
-                    for (int i = 0; i < permissionsList.length; i++) {
-                        if (grantResults[i] == PackageManager.PERMISSION_DENIED) {
-                            flag = false;
-                        }
-                    }
-
-                    if (flag = true) {
-                        imagePicker.choosePicture(true /*show camera intents*/);
-
-                    }
-                    // Show permissionsDenied
-                }
-                return;
-            }
-        }
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        imagePicker.handleActivityResult(resultCode, requestCode, data);
-
-        if (resultCode == RESULT_OK && requestCode == UCrop.REQUEST_CROP) {
-            final Uri resultUri = UCrop.getOutput(data);
-            imageView.setImageURI(null);
-            imageView.setImageURI(resultUri);
-        } else if (resultCode == UCrop.RESULT_ERROR) {
-            final Throwable cropError = UCrop.getError(data);
-            Log.i("dsjknjsdkn", "onActivityResult: "+cropError.getMessage());
-        }
-        Log.i("nhnnhnghghn", "onActivityResult: done ");
-    }
 
 
  }

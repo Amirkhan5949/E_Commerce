@@ -113,8 +113,6 @@ public class CartFragment extends Fragment {
                         tv_totalrs.setText("₹"+mrpPrice+"");
                         tv_dis_rs.setText("₹"+discount+"");
 
-
-
                     }
 
                     @Override

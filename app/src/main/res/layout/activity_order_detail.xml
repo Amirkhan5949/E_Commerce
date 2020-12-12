@@ -76,6 +76,7 @@
                         android:text="Cash on delivery:"
                         android:textColor="@color/black"
                         android:fontFamily="@font/bold"
+                        android:id="@+id/tv_cod"
                         android:textSize="16sp" />
 
                     <TextView
@@ -86,7 +87,7 @@
                         android:textColor="@color/black"
                         android:fontFamily="@font/bold"
                         android:textSize="16sp"
-                        android:id="@+id/order_rs"/>
+                        android:id="@+id/tv_order_rs"/>
 
                 </LinearLayout>
 
@@ -114,7 +115,7 @@
                         android:layout_width="140dp"
                         android:layout_height="170dp"
                         android:src="@drawable/woman"
-                        android:id="@+id/image"/>
+                        android:id="@+id/iv_image"/>
 
                     <LinearLayout
                         android:layout_marginLeft="10dp"
@@ -136,7 +137,7 @@
                                 android:textColor="@color/colorBlack"
                                 android:textSize="18sp"
                                 android:maxLines="1"
-                                android:id="@+id/name"/>
+                                android:id="@+id/tv_name"/>
 
 
                             <TextView
@@ -147,7 +148,7 @@
                                 android:textSize="16sp"
                                 android:maxLines="1"
                                 android:ellipsize="end"
-                                android:id="@+id/description"/>
+                                android:id="@+id/tv_description"/>
 
                             <LinearLayout
                                 android:gravity="center_vertical"
@@ -187,7 +188,7 @@
                                     android:textColor="@color/colorBlack"
                                     android:textSize="14sp"
                                     android:maxLines="1"
-                                    android:id="@+id/size"/>
+                                    android:id="@+id/tv_size"/>
 
                                 <TextView
                                     android:layout_marginLeft="10dp"
@@ -197,10 +198,10 @@
                                     android:textColor="@color/colorBlack"
                                     android:textSize="14sp"
                                     android:maxLines="1"
-                                    android:id="@+id/quantity"/>
+                                    android:id="@+id/tv_quantity"/>
 
                                 <ImageView
-                                    android:id="@+id/expandqty"
+                                    android:id="@+id/iv_expandqty"
                                     android:layout_width="32dp"
                                     android:layout_height="match_parent"
                                     android:src="@drawable/expand" />
@@ -224,7 +225,7 @@
                                 android:textSize="16sp"
                                 android:textStyle="bold"
                                 android:textColor="@color/colorBlack"
-                                android:id="@+id/rupees"/>
+                                android:id="@+id/tv_sellingp"/>
 
 
                             <androidx.constraintlayout.widget.ConstraintLayout
@@ -238,7 +239,7 @@
                                     android:text="$30.00"
                                     android:textSize="16sp"
                                     android:textColor="@color/colorBlack"
-                                    android:id="@+id/crossrupees"
+                                    android:id="@+id/tv_mrp"
                                     tools:ignore="MissingConstraints" />
 
 
@@ -246,10 +247,10 @@
                                     android:background="#000000"
                                     android:layout_width="0dp"
                                     android:layout_height="1dp"
-                                    app:layout_constraintBottom_toBottomOf="@+id/crossrupees"
-                                    app:layout_constraintStart_toStartOf="@+id/crossrupees"
-                                    app:layout_constraintEnd_toEndOf="@+id/crossrupees"
-                                    app:layout_constraintTop_toTopOf="@+id/crossrupees"
+                                    app:layout_constraintBottom_toBottomOf="@+id/tv_mrp"
+                                    app:layout_constraintStart_toStartOf="@+id/tv_mrp"
+                                    app:layout_constraintEnd_toEndOf="@+id/tv_mrp"
+                                    app:layout_constraintTop_toTopOf="@+id/tv_mrp"
                                     tools:ignore="MissingConstraints" />
 
                             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -292,7 +293,7 @@
                         android:text="Help"
                         android:textColor="@color/colorDarkblue"
                         android:textSize="16sp"
-                        android:id="@+id/order_help"/>
+                        android:id="@+id/tv_help"/>
 
                     <View
                         android:layout_width="1dp"
@@ -308,7 +309,7 @@
                         android:text="Cancel"
                         android:textColor="@color/red"
                         android:textSize="16sp"
-                        android:id="@+id/order_cancel"/>
+                        android:id="@+id/tv_cancel"/>
 
 
                 </LinearLayout>
@@ -354,7 +355,7 @@
                     android:textSize="16sp"
                     android:textColor="@color/black"
                     android:text="Aamir khan"
-                    android:id="@+id/user_name"/>
+                    android:id="@+id/tv_user_name"/>
 
                 <TextView
                     android:layout_marginVertical="10dp"
@@ -364,7 +365,7 @@
                     android:textSize="16sp"
                     android:textColor="@color/black"
                     android:text="Range Road Shamshabad"
-                    android:id="@+id/user_add"/>
+                    android:id="@+id/tv_user_add"/>
 
                 <TextView
                     android:layout_marginVertical="10dp"
@@ -374,7 +375,7 @@
                     android:textSize="16sp"
                     android:textColor="@color/black"
                     android:text="9144155949"
-                    android:id="@+id/user_mobno"/>
+                    android:id="@+id/tv_user_mobno"/>
 
 
             </LinearLayout>
@@ -418,14 +419,14 @@
                         android:layout_height="wrap_content"
                         android:text="Price(7 items)"
                         android:textColor="@color/black"
-                        android:id="@+id/p_item"/>
+                        android:id="@+id/tv_p_item"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="$12345"
                         android:textColor="@color/black"
-                        android:id="@+id/rs"/>
+                        android:id="@+id/tv_amnt"/>
 
                 </LinearLayout>
 
@@ -448,7 +449,7 @@
                         android:layout_height="wrap_content"
                         android:text="$0"
                         android:textColor="@color/colorDarkblue"
-                        android:id="@+id/rs_dis"/>
+                        android:id="@+id/tv_rs_dis"/>
 
                 </LinearLayout>
                 <LinearLayout
@@ -501,7 +502,7 @@
                         android:layout_height="wrap_content"
                         android:text="$12345"
                         android:textColor="@color/black"
-                        android:id="@+id/total_amount"/>
+                        android:id="@+id/tv_total_amnt"/>
 
 
                 </LinearLayout>

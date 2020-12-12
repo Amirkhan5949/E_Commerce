@@ -213,14 +213,14 @@
                 android:text="$1,500"
                 android:textColor="@color/black"
                 android:fontFamily="@font/bold"
-                android:id="@+id/tv_rs"
+                android:id="@+id/tv_totl_rs"
                 android:textSize="16sp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="View price details"
-                android:id="@+id/tv_price"
+                android:id="@+id/tv_view_price"
                 android:textColor="@color/blue"
                 android:textSize="14sp"/>
 

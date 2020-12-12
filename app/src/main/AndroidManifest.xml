@@ -45,6 +45,10 @@
 
         </activity>
         <activity android:name=".ui.activity.MainActivity"></activity>
+        <meta-data
+            android:name="CLOUDINARY_URL"
+            android:value="cloudinary://719781547994928:Qb5Tzym30pOHoc2gcpdvPnd69GA@dants4vbg" />
+
     </application>
 
 </manifest>

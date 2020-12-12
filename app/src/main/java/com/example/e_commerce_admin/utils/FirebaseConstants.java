@@ -69,7 +69,7 @@ public class FirebaseConstants {
     }
 
     public static class Cart{
-        public static final String key="pp";
+        public static final String key="Cart";
         public static final String Product="Product";
         public static final String Color ="Color";
         public static final String size ="size";
@@ -98,7 +98,25 @@ public class FirebaseConstants {
         public static final String name="name";
         public static final String email="email";
         public static final String mobile_no="mobile_no";
+        public static final String mobile="mob_no";
+        public static final String address = "address";
         public static final String dob="dob";
+
+    }
+
+    public static class Order{
+        public static final String key="Order";
+        public static final String mrp_price="mrp_price";
+        public static final String selling_price="selling_price";
+        public static final String ordered_mrp_price="ordered_mrp_price";
+        public static final String ordered_selling_price="ordered_selling_price";
+        public static final String quantity="quantity";
+        public static final String payment_type="payment_type";
+        public static final String order_status="order_status";
+        public static final String Product="Product";
+        public static final String address="address";
+        public static final String time="time";
+        public static final String default_address="default_address";
 
     }
 

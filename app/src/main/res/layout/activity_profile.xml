@@ -226,6 +226,8 @@
             android:layout_height="wrap_content"
             android:text="Range Road Neasr Bus Stand Shamshabad"
             android:textSize="16sp"
+            android:id="@+id/tv_address"
+
             android:textColor="@color/black" />
 
         <LinearLayout
@@ -235,9 +237,10 @@
             android:orientation="horizontal">
 
             <TextView
+                android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Name    |   "
+                android:text="Name | "
                 android:textSize="16sp"
                 android:textColor="@color/black"/>
 
@@ -245,6 +248,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=" Aamir khan"
+                android:id="@+id/tv_u_name"
                 android:textSize="16sp"
                 android:textColor="@color/black"/>
 
@@ -260,17 +264,19 @@
             android:orientation="horizontal">
 
             <TextView
+                android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mobile no   |"
+                android:text="Mobile no |"
                 android:textSize="16sp"
                 android:textColor="@color/black"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="    9144155949"
+                android:text=" 9144155949"
                 android:textSize="16sp"
+                android:id="@+id/tv_no"
                 android:textColor="@color/black"/>
 
 

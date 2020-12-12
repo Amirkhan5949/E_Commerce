@@ -397,7 +397,4 @@ public class ProductDetailActivity extends AppCompatActivity {
 
     }
 
-
-
-
   }

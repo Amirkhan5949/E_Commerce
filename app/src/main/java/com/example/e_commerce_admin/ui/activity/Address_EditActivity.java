@@ -62,8 +62,6 @@ public class Address_EditActivity extends AppCompatActivity {
         rb2=findViewById(R.id.rb2);
 
 
-
-
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
