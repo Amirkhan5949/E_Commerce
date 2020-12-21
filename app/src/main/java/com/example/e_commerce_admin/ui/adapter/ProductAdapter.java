@@ -42,12 +42,20 @@ import java.util.Map;
 public class ProductAdapter extends FirebaseRecyclerAdapter<Product,ProductAdapter.ProductViewholder> {
 private boolean heart=true;
 private Loader loader;
-    Context context;
+private  Context context;
+private ClickCallBack clickCallBack;
 
-    public ProductAdapter(@NonNull FirebaseRecyclerOptions<Product> options,Context context) {
+    public ProductAdapter(@NonNull FirebaseRecyclerOptions<Product> options,Context context ,ClickCallBack clickCallBack) {
         super(options);
         this.context=context;
+        this.clickCallBack=clickCallBack;
         loader=new Loader(context);
+    }
+
+    @Override
+    public void onDataChanged() {
+        super.onDataChanged();
+       clickCallBack.load();
     }
 
     @NonNull
@@ -163,5 +171,8 @@ private Loader loader;
             icon_favourite=itemView.findViewById(R.id.icon_favourite);
 
         }
+    }
+    public interface ClickCallBack {
+        void load();
     }
 }

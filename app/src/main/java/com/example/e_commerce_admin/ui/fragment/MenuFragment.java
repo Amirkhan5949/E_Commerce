@@ -19,6 +19,7 @@ import com.example.e_commerce_admin.ui.activity.MainActivity;
 import com.example.e_commerce_admin.ui.activity.OrdersActivity;
 import com.example.e_commerce_admin.ui.activity.ProfileActivity;
 import com.example.e_commerce_admin.ui.activity.WishlistActivity;
+import com.example.e_commerce_admin.utils.FirebaseConstants;
 import com.example.e_commerce_admin.utils.Loader;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -52,13 +53,22 @@ public class MenuFragment extends Fragment {
 
         init();
 
-        FirebaseDatabase.getInstance().getReference().child("Admin")
+        FirebaseDatabase.getInstance().getReference().child(FirebaseConstants.User.key)
                 .child(FirebaseAuth.getInstance().getUid())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        tv_emial_id.setText(snapshot.child("email").getValue(String.class));
-                        tv_name.setText(snapshot.child("name").getValue(String.class));
+                        if (snapshot.child("email").getValue(String.class)!=null){
+                            tv_emial_id.setText(snapshot.child("email").getValue(String.class));
+                        }else {
+                            tv_emial_id.setText("xyz123@gmail.com");
+                        }
+                        if (snapshot.child("name").getValue(String.class)!=null) {
+                            tv_name.setText(snapshot.child("name").getValue(String.class));
+
+                        }else {
+                            tv_name.setText("abc");
+                        }
                         Picasso.get().load(snapshot.child("image").getValue(String.class)).into(iv_profile_image);
                     }
 

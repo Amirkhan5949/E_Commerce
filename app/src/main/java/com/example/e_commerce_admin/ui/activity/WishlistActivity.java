@@ -6,6 +6,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.example.e_commerce_admin.R;
 import com.example.e_commerce_admin.model.GridSpacingItemDecoration;
@@ -21,15 +24,24 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class WishlistActivity extends AppCompatActivity {
 
-    RecyclerView recycler_wishlist;
+    private RecyclerView recycler_wishlist;
     private WishListAdapter wishlistAdapter;
+    private ImageView iv_back;
+    private ProgressBar progress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wishlist);
 
-        recycler_wishlist=findViewById(R.id.recycler_wishlist);
+       init();
+
+        iv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         recycler_wishlist.setLayoutManager(new GridLayoutManager(this,2));
         recycler_wishlist.addItemDecoration(new GridSpacingItemDecoration(2, util.dpToPx(recycler_wishlist.getContext(),0),true));
@@ -42,7 +54,7 @@ public class WishlistActivity extends AppCompatActivity {
                                     .child(FirebaseAuth.getInstance().getUid()), Product.class)
                             .build();
 
-            wishlistAdapter=new WishListAdapter(option2);
+            wishlistAdapter=new WishListAdapter(option2,progress);
             recycler_wishlist.setAdapter(wishlistAdapter);
 
         }
@@ -51,6 +63,12 @@ public class WishlistActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
+    }
+
+    private void init() {
+        recycler_wishlist=findViewById(R.id.recycler_wishlist);
+        iv_back=findViewById(R.id.iv_back);
+       progress=findViewById(R.id.progress);
     }
 
     @Override

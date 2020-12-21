@@ -1,10 +1,14 @@
 package com.example.e_commerce_admin.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -18,8 +22,10 @@ import com.example.e_commerce_admin.model.Category;
 import com.example.e_commerce_admin.model.Product;
 import com.example.e_commerce_admin.model.SuperCategory;
 import com.example.e_commerce_admin.ui.activity.HomeActivity;
+import com.example.e_commerce_admin.ui.activity.SubCategoryActivity;
 import com.example.e_commerce_admin.ui.adapter.BrandAdapter;
 import com.example.e_commerce_admin.ui.adapter.CategoryAdapter;
+import com.example.e_commerce_admin.ui.adapter.MainSliderAdapter;
 import com.example.e_commerce_admin.ui.adapter.ProductAdapter;
 import com.example.e_commerce_admin.utils.FirebaseConstants;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -41,8 +47,13 @@ public class HomeFragment extends Fragment {
     private BrandAdapter brandAdapter;
     private CategoryAdapter adapter;
     private Slider slider;
+    private TextView tv_viewall;
+    private LinearLayout ll_main;
     private ProductAdapter productAdapter;
+    private ProgressBar progress;
     private ProductAdapter recomdedAdapter;
+    private int TOTAL_API_CALL = 5 , CURRENT_API_CALL;
+
 
     public HomeFragment() {
         // Required empty public constructor
@@ -63,14 +74,24 @@ public class HomeFragment extends Fragment {
         init();
         getBanner();
 
+        tv_viewall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), SubCategoryActivity.class));
+            }
+        });
+
         return view;
     }
 
     private void init() {
         rv_Category = view.findViewById(R.id.rv_Category);
+        tv_viewall = view.findViewById(R.id.tv_viewall);
+        ll_main = view.findViewById(R.id.ll_main);
         p_recycler = view.findViewById(R.id.p_recycler);
         brand_recycler = view.findViewById(R.id.brandrecycler);
         recomded_recycler = view.findViewById(R.id.recommanded_recycler);
+        progress = view.findViewById(R.id.progress);
 
 
         FirebaseRecyclerOptions<Product> option =
@@ -81,7 +102,12 @@ public class HomeFragment extends Fragment {
                                 .child(FirebaseConstants.ProductRecommendedList.Product), Product.class)
                         .build();
 
-        recomdedAdapter = new ProductAdapter(option, getContext());
+        recomdedAdapter = new ProductAdapter(option, getContext(), new ProductAdapter.ClickCallBack() {
+            @Override
+            public void load() {
+                showUi();
+            }
+        });
         recomded_recycler.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         recomded_recycler.setAdapter(recomdedAdapter);
 
@@ -97,7 +123,12 @@ public class HomeFragment extends Fragment {
                         .setQuery(FirebaseDatabase.getInstance().getReference().child(FirebaseConstants.Brand.key), Brand.class)
                         .build();
 
-        brandAdapter = new BrandAdapter(opt);
+        brandAdapter = new BrandAdapter(opt, new BrandAdapter.ClickCallBack() {
+            @Override
+            public void load() {
+                showUi();
+            }
+        });
         brand_recycler.setAdapter(brandAdapter);
 
 
@@ -107,7 +138,12 @@ public class HomeFragment extends Fragment {
                         .setQuery(base, SuperCategory.class)
                         .build();
 
-        adapter = new CategoryAdapter(options);
+        adapter = new CategoryAdapter(options, new CategoryAdapter.ClickCallBack() {
+            @Override
+            public void load() {
+                showUi();
+            }
+        });
         rv_Category.setAdapter(adapter);
 
 
@@ -120,20 +156,17 @@ public class HomeFragment extends Fragment {
                                 .child(FirebaseConstants.ProductRecommendedList.Product), Product.class)
                         .build();
 
-        productAdapter = new ProductAdapter(option2, getContext());
+        productAdapter = new ProductAdapter(option2, getContext(), new ProductAdapter.ClickCallBack() {
+            @Override
+            public void load() {
+                showUi();
+            }
+        });
         p_recycler.setAdapter(productAdapter);
 
 
     }
 
-    private List<Category> getCategory() {
-        List<Category> list = new ArrayList<>();
-        list.add(new Category("Man", R.drawable.man));
-        list.add(new Category("Woman", R.drawable.woman));
-        list.add(new Category("Boy", R.drawable.boy));
-        list.add(new Category("Girl", R.drawable.girl));
-        return list;
-    }
 
 
     @Override
@@ -166,16 +199,23 @@ public class HomeFragment extends Fragment {
                         for (DataSnapshot dataSnapshot : snapshot.getChildren())
                             list.add(dataSnapshot.getValue(Banner.class));
                         Log.i("rrgrgf", "onDataChange: " + list.toString());
-//                        slider.setAdapter(new MainSliderAdapter(list));
-//                        slider.setInterval(4000);
+                        slider.setAdapter(new MainSliderAdapter(list));
+                        slider.setInterval(4000);
+                        showUi();
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-
+                        showUi();
                     }
                 });
 
     }
-
+    private void showUi() {
+        CURRENT_API_CALL++;
+        if(CURRENT_API_CALL==TOTAL_API_CALL){
+            ll_main.setVisibility(View.VISIBLE);
+            progress.setVisibility(View.GONE);
+        }
+    }
 }

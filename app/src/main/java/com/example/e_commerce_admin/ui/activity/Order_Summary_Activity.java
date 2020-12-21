@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -32,6 +34,9 @@ public class Order_Summary_Activity extends AppCompatActivity {
 
     private RecyclerView rv_order_summary;
     private CartAdapter cartAdapter;
+    private ProgressBar progress;
+    private LinearLayout ll_main;
+    private int TOTAL_API_CALL = 3 , CURRENT_API_CALL;
 
     private Order_Summary_Adapter adapter;
     private TextView tv_id_item, tv_sellingp, tv_discount, tv_dis_rs,
@@ -50,7 +55,15 @@ public class Order_Summary_Activity extends AppCompatActivity {
         init();
         cartnapshot();
 
-        FirebaseDatabase.getInstance().getReference().child("Admin")
+
+        btn_change_Add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Order_Summary_Activity.this,AddressActivity.class));
+            }
+        });
+
+        FirebaseDatabase.getInstance().getReference().child(FirebaseConstants.User.key)
                 .child(FirebaseAuth.getInstance().getUid())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -65,7 +78,7 @@ public class Order_Summary_Activity extends AppCompatActivity {
                                             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                                                 for (DataSnapshot dataSnapshot1 : snapshot.getChildren()){
-
+                                                    showUi();
                                                     if (snapshot.getChildrenCount()!=0){
 
                                                         tv_user_name.setText(dataSnapshot1.child(FirebaseConstants.Address.name).getValue(String.class));
@@ -86,7 +99,7 @@ public class Order_Summary_Activity extends AppCompatActivity {
 
                                             @Override
                                             public void onCancelled(@NonNull DatabaseError error) {
-
+                                                showUi();
                                             }
                                         });
                             }
@@ -97,6 +110,7 @@ public class Order_Summary_Activity extends AppCompatActivity {
                                         .addListenerForSingleValueEvent(new ValueEventListener() {
                                             @Override
                                             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                showUi();
                                                 for (DataSnapshot dataSnapshot1 : snapshot.getChildren()){
 
                                                     tv_user_name.setText(dataSnapshot1.child(FirebaseConstants.Address.name).getValue(String.class));
@@ -109,7 +123,7 @@ public class Order_Summary_Activity extends AppCompatActivity {
 
                                             @Override
                                             public void onCancelled(@NonNull DatabaseError error) {
-
+                                                showUi();
                                             }
                                         });
                             }
@@ -119,7 +133,7 @@ public class Order_Summary_Activity extends AppCompatActivity {
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-
+                        showUi();
                     }
                 });
 
@@ -167,7 +181,7 @@ public class Order_Summary_Activity extends AppCompatActivity {
                 int c = esctqty * Integer.parseInt(model.getDiscount());
 
                 discount = c;
-//                tv_discount.setText( c +discount+"");
+ //                tv_discount.setText( c +discount+"");
 //                Log.i("dsfsf", "click: "+(esctqty*Integer.parseInt(model.getDiscount())+discount));
 //                Log.i("dsfsf", "click: "+(discount));
 
@@ -177,12 +191,18 @@ public class Order_Summary_Activity extends AppCompatActivity {
                 tv_id_item.setText("Items " + Order_Summary_Activity.this.qty + "");
 
                 tv_sellingp.setText(b + mrpPrice + "");
-                Log.i("vfgfhfg", "click: " + mrpPrice);
-                mrpPrice = b + mrpPrice;
-                Log.i("vfgfhfg", "click: " + mrpPrice);
-                Log.i("vfgfhfg", "click: " + esctqty);
-                Log.i("vfgfhfg", "click: " + esctqty * Integer.parseInt(model.getProduct().getMrp_price()));
-                Log.i("vfgfhfg", "click: " + mrpPrice);
+                 mrpPrice = b + mrpPrice;
+
+             }
+
+            @Override
+            public void remove(Cart model, String id) {
+
+            }
+
+            @Override
+            public void load() {
+                showUi();
             }
         });
         rv_order_summary.setAdapter(cartAdapter);
@@ -198,6 +218,8 @@ public class Order_Summary_Activity extends AppCompatActivity {
 
     private void init() {
         tv_id_item = findViewById(R.id.tv_id_item);
+        ll_main = findViewById(R.id.ll_main);
+        progress = findViewById(R.id.progress);
         tv_sellingp = findViewById(R.id.tv_sellingp);
         tv_discount = findViewById(R.id.tv_discount);
         tv_dis_rs = findViewById(R.id.tv_dis_rs);
@@ -219,7 +241,7 @@ public class Order_Summary_Activity extends AppCompatActivity {
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-
+                        showUi();
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
 
                             Product Product = dataSnapshot.child(FirebaseConstants.Cart.Product).getValue(Product.class);
@@ -247,7 +269,7 @@ public class Order_Summary_Activity extends AppCompatActivity {
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-
+                        showUi();
                     }
                 });
 
@@ -281,6 +303,15 @@ public class Order_Summary_Activity extends AppCompatActivity {
         list.add("12");
 
     }
+
+    private void showUi() {
+        CURRENT_API_CALL++;
+        if(CURRENT_API_CALL==TOTAL_API_CALL){
+            ll_main.setVisibility(View.VISIBLE);
+            progress.setVisibility(View.GONE);
+        }
+    }
+
 
 }
 

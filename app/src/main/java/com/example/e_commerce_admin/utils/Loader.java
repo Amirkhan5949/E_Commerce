@@ -25,6 +25,7 @@ public class Loader {
     }
 
     public void dismiss(){
+        if(dialog.isShowing())
         dialog.dismiss();
     }
 }

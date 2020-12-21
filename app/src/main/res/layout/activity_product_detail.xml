@@ -69,11 +69,27 @@
                             android:text="Product Detail"
                             android:textSize="24sp"/>
                         <ImageView
+                            android:layout_marginHorizontal="10dp"
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:src="@drawable/favorite"
                             android:id="@+id/icon_favourite"
                             app:tint="@color/white" />
+
+
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_marginRight="10dp"
+                                android:src="@drawable/cartpng"
+                                android:layout_marginHorizontal="20dp"
+                                android:id="@+id/iv_cart"
+
+                                 app:tint="@color/white" />
+
+
+
 
 
                     </LinearLayout>

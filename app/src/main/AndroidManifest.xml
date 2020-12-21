@@ -20,6 +20,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".ui.activity.OverCatActivity"></activity>
+        <activity android:name=".ui.activity.SubCategoryActivity" />
         <activity android:name=".ui.activity.Address_EditActivity" />
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
@@ -30,25 +32,22 @@
         <activity android:name=".ui.activity.ProfileActivity" />
         <activity android:name=".ui.activity.CartActivity" />
         <activity android:name=".ui.activity.ProductDetailActivity" />
-        <activity android:name=".ui.activity.AddressActivity"></activity>
+        <activity android:name=".ui.activity.AddressActivity" />
         <activity android:name=".ui.activity.OrderDetailActivity" />
         <activity android:name=".ui.activity.OrdersActivity" />
         <activity android:name=".ui.activity.WishlistActivity" />
         <activity android:name=".ui.activity.HomeActivity">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-
         </activity>
-        <activity android:name=".ui.activity.MainActivity"></activity>
+        <activity android:name=".ui.activity.MainActivity" />
+
         <meta-data
             android:name="CLOUDINARY_URL"
             android:value="cloudinary://719781547994928:Qb5Tzym30pOHoc2gcpdvPnd69GA@dants4vbg" />
-
     </application>
 
 </manifest>

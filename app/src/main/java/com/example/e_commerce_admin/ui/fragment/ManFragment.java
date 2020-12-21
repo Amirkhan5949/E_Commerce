@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.example.e_commerce_admin.R;
 import com.example.e_commerce_admin.model.GridSpacingItemDecoration;
@@ -28,10 +29,10 @@ import com.google.firebase.database.ValueEventListener;
 
 public class ManFragment extends Fragment {
 
-    View view;
-    RecyclerView catrecycler;
+    private View view;
+    private RecyclerView catrecycler;
     private Cat_Adapter adapter;
-
+    private ProgressBar progress;
     final DatabaseReference base = FirebaseDatabase.getInstance().getReference().child(FirebaseConstants.Category.key);
     private String id;
 
@@ -63,7 +64,8 @@ public class ManFragment extends Fragment {
             Log.i("fsfsfs", "onCreateView: " + id);
         }
 
-        catrecycler=view.findViewById(R.id.cat_recycler);
+       init();
+
 
 
         catrecycler.setLayoutManager(new GridLayoutManager(getContext(),3));
@@ -73,11 +75,12 @@ public class ManFragment extends Fragment {
                 new FirebaseRecyclerOptions.Builder<SuperCategory>()
                         .setQuery(base.orderByChild(FirebaseConstants.Category.super_id).equalTo(id), SuperCategory.class)
                         .build();
-           adapter=new Cat_Adapter(options, new Cat_Adapter.ClickCallBack() {
+           adapter=new Cat_Adapter(options, progress, new Cat_Adapter.ClickCallBack() {
                @Override
                public void click(int i, String id) {
-                   ((HomeActivity)getActivity()).replace(ProductListFragment.newInstance(id),"ProductListFragment");
+//                   ((HomeActivity)getActivity()).replace(ProductListFragment.newInstance(id),"ProductListFragment");
                }
+
 
            });
         catrecycler.setAdapter(adapter);
@@ -96,6 +99,11 @@ public class ManFragment extends Fragment {
                     }
                 });
         return view;
+    }
+
+    private void init() {
+        catrecycler=view.findViewById(R.id.cat_recycler);
+        progress=view.findViewById(R.id.progress);
     }
 
     @Override

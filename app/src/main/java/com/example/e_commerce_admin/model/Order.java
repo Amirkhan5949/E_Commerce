@@ -5,6 +5,7 @@ public class Order{
     String ordered_mrp_price;
     String ordered_selling_price;
     String payment_type;
+    int quantity;
 
     @Override
     public String toString() {
@@ -22,15 +23,15 @@ public class Order{
         Product = product;
     }
 
-    public int getTime() {
+    public long getTime() {
         return time;
     }
 
-    public void setTime(int time) {
+    public void setTime(long time) {
         this.time = time;
     }
 
-    int time;
+    long time;
 
 
     public Order(com.example.e_commerce_admin.model.Product product, String ordered_mrp_price, String ordered_selling_price, String payment_type, int quantity) {
@@ -84,5 +85,5 @@ public class Order{
     public Order() {
     }
 
-    int quantity;
+
 }

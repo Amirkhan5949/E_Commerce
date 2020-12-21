@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.example.e_commerce_admin.R;
 import com.example.e_commerce_admin.ui.activity.MainActivity;
+import com.example.e_commerce_admin.utils.FirebaseConstants;
 import com.example.e_commerce_admin.utils.Loader;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -121,7 +122,7 @@ public class SIGNUPFragment extends Fragment {
 
 
                         FirebaseDatabase.getInstance().getReference()
-                                .child("Admin")
+                                .child(FirebaseConstants.User.key)
                                 .child(FirebaseAuth.getInstance().getUid())
                                 .setValue(map)
                                 .addOnCompleteListener(new OnCompleteListener() {
@@ -139,8 +140,8 @@ public class SIGNUPFragment extends Fragment {
                                 Toast.makeText(getContext(), "Failed :"+e.getMessage(), Toast.LENGTH_SHORT).show();
                                 Log.i("dfsfsv", "onFailure: "+e.getMessage());
                                 Log.i("dfsfsv", "onFailure: "+toString());
-                            }
-                        });
+                    }
+                });
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override

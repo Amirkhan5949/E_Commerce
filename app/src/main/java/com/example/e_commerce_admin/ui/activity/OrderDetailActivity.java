@@ -16,9 +16,12 @@ import android.widget.TextView;
 import com.cloudinary.android.MediaManager;
 import com.cloudinary.android.UploadRequest;
 import com.example.e_commerce_admin.R;
+import com.example.e_commerce_admin.model.Address;
 import com.example.e_commerce_admin.model.Color;
 import com.example.e_commerce_admin.model.Product;
+import com.example.e_commerce_admin.model.TimeLineModel;
 import com.example.e_commerce_admin.ui.adapter.Color_Adapter;
+import com.example.e_commerce_admin.ui.adapter.TimeLineAdapter;
 import com.example.e_commerce_admin.utils.FirebaseConstants;
 import com.example.e_commerce_admin.utils.ImagePickerHelper;
 import com.example.e_commerce_admin.utils.PermissionHelper;
@@ -40,7 +43,10 @@ import static com.example.e_commerce_admin.utils.PermissionHelper.setUpPermissio
 public class OrderDetailActivity extends AppCompatActivity {
 
     private Product product;
+    private Address address;
     private ImagePicker imagePicker;
+    private RecyclerView rv_shipping;
+    private List<TimeLineModel> list=new ArrayList();
 
 
 
@@ -58,7 +64,9 @@ public class OrderDetailActivity extends AppCompatActivity {
         init();
 
 
+        rv_shipping.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
 
+        rv_shipping.setAdapter(new TimeLineAdapter(list));
 
         String order_id=getIntent().getStringExtra("order_id");
 
@@ -68,19 +76,28 @@ public class OrderDetailActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
 
+
+                        address=snapshot.child(FirebaseConstants.Order.Address).getValue(Address.class);
                             product=snapshot.child(FirebaseConstants.Order.Product).getValue(Product.class);
-                            Log.i("" +
-                                    "", "onDataChange: "+product.toString());
 
                             tv_name.setText(product.getName());
+                        tv_order_rs.setText(product.getSelling_price());
                             tv_sellingp.setText(product.getSelling_price());
                             tv_mrp.setText(product.getMrp_price());
                             tv_amnt.setText(product.getSelling_price());
-                            tv_user_add.setText(snapshot.child(FirebaseConstants.Order.address).getValue(String.class));
+                        tv_cod.setText(snapshot.child(FirebaseConstants.Order.payment_type).getValue(String.class));
+                            tv_user_add.setText(address.getAddress()+","+address.getLandmark()+","+address.getCity()+","+address.getState()+","+address.getPincode());
                             tv_description.setText(product.getDetails());
                             int qtt = Integer.parseInt(snapshot.child(FirebaseConstants.Order.quantity).getValue() + "");
 
-                            Log.i("dsdfsf", "onDataChange: "+product.getImg());
+                        tv_p_item.setText("Items :"+qtt);
+                        tv_total_amnt.setText(product.getSelling_price());
+                            String status=snapshot.child(FirebaseConstants.Order.order_status).getValue(String.class);
+
+                        adddata(status);
+
+
+                        Log.i("dsdfsf", "onDataChange: "+product.getImg());
                             Log.i("dsdfsf", "onDataChange: "+product.getDetails());
 //                            tv_quantity.setText(qtt);
                             Picasso.get().load(product.getImg()).into(iv_image);
@@ -96,6 +113,7 @@ public class OrderDetailActivity extends AppCompatActivity {
 
     private void init() {
         iv_back=findViewById(R.id.iv_back);
+        rv_shipping=findViewById(R.id.rv_shipping);
         iv_image=findViewById(R.id.iv_image);
         iv_expandqty=findViewById(R.id.iv_expandqty);
         tv_cod=findViewById(R.id.tv_cod);
@@ -116,6 +134,48 @@ public class OrderDetailActivity extends AppCompatActivity {
         tv_rs_dis=findViewById(R.id.tv_rs_dis);
         tv_total_amnt=findViewById(R.id.tv_total_amnt);
         colorview=findViewById(R.id.colorview);
+
+    }
+
+
+
+    private void adddata(String status){
+
+        switch (status){
+            case "Confirm":
+                list.add(new TimeLineModel("Confirm","",1));
+                list.add(new TimeLineModel("Packed","",0));
+                list.add(new TimeLineModel("Shipped","",0));
+                list.add(new TimeLineModel("Delivered","",0));
+                break;
+
+            case "Packed":
+                list.add(new TimeLineModel("Confirm","",1));
+                list.add(new TimeLineModel("Packed","",1));
+                list.add(new TimeLineModel("Shipped","",0));
+                list.add(new TimeLineModel("Delivered","",0));
+                break;
+
+            case "Shipped":
+                list.add(new TimeLineModel("Confirm","",1));
+                list.add(new TimeLineModel("Packed","",1));
+                list.add(new TimeLineModel("Shipped","",1));
+                list.add(new TimeLineModel("Delivered","",0));
+                break;
+
+            case "Delivered":
+                list.add(new TimeLineModel("Confirm","",1));
+                list.add(new TimeLineModel("Packed","",1));
+                list.add(new TimeLineModel("Shipped","",1));
+                list.add(new TimeLineModel("Delivered","",1));
+                break;
+
+            case "Cancel":
+                list.add(new TimeLineModel("Confirm","",1));
+                list.add(new TimeLineModel("Cancel","",-1));
+                break;
+        }
+
 
     }
 

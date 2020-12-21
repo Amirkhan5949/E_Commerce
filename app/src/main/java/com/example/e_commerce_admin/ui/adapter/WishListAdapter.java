@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -22,8 +23,16 @@ import com.squareup.picasso.Picasso;
 
 public class WishListAdapter extends FirebaseRecyclerAdapter<Product,WishListAdapter.WishListAdapter_View> {
 
-    public WishListAdapter(@NonNull FirebaseRecyclerOptions<Product> options) {
+   private ProgressBar  progressBar;
+    public WishListAdapter(@NonNull FirebaseRecyclerOptions<Product> options, ProgressBar progress) {
         super(options);
+         progressBar=progress;
+    }
+
+    @Override
+    public void onDataChanged() {
+        super.onDataChanged();
+        progressBar.setVisibility(View.GONE);
     }
 
     @Override
@@ -45,6 +54,8 @@ public class WishListAdapter extends FirebaseRecyclerAdapter<Product,WishListAda
                 holder.p_layout.getContext().startActivity(intent);
             }
         });
+
+
 
     }
 

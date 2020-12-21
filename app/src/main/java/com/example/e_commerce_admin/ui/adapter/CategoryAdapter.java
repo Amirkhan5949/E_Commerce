@@ -1,6 +1,7 @@
 package com.example.e_commerce_admin.ui.adapter;
 
-import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,28 +12,31 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.airbnb.lottie.utils.Utils;
 import com.example.e_commerce_admin.R;
-import com.example.e_commerce_admin.model.Category;
 import com.example.e_commerce_admin.model.SuperCategory;
+import com.example.e_commerce_admin.ui.activity.OverCatActivity;
 import com.example.e_commerce_admin.utils.util;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.squareup.picasso.Picasso;
 
-import java.util.List;
-
 public class CategoryAdapter extends FirebaseRecyclerAdapter<SuperCategory,CategoryAdapter.CategoryViewholder> {
-
-
+    private ClickCallBack callBack;
     /**
      * Initialize a {@link RecyclerView.Adapter} that listens to a Firebase query. See
      * {@link FirebaseRecyclerOptions} for configuration options.
      *
      * @param opt
      */
-    public CategoryAdapter(@NonNull FirebaseRecyclerOptions<SuperCategory> opt) {
+    public CategoryAdapter(@NonNull FirebaseRecyclerOptions<SuperCategory> opt,ClickCallBack clickCallBack) {
         super(opt);
+        callBack=clickCallBack;
+    }
+
+    @Override
+    public void onDataChanged() {
+        super.onDataChanged();
+        callBack.load();
     }
 
     @NonNull
@@ -54,7 +58,11 @@ public class CategoryAdapter extends FirebaseRecyclerAdapter<SuperCategory,Categ
         holder.ll_main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                SuperCategory pos= getItem(position);
+                Log.i("esdwdwd", "onClick: "+getItem(position));
+                Intent intent=new Intent(holder.ll_main.getContext(), OverCatActivity.class);
+//                intent.putExtra("position",position);
+                holder.ll_main.getContext().startActivity(intent);
             }
         });
 
@@ -74,5 +82,8 @@ public class CategoryAdapter extends FirebaseRecyclerAdapter<SuperCategory,Categ
             tv_Main = itemView.findViewById(R.id.tv_Main);
             iv_Main = itemView.findViewById(R.id.iv_Main);
         }
+    }
+    public interface ClickCallBack{
+        void load();
     }
 }

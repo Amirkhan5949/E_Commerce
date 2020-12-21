@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     android:background="@color/dark_gray"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -10,6 +10,7 @@
     tools:context=".ui.activity.Order_Summary_Activity">
 
     <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:paddingHorizontal="20dp"
         android:background="@color/colorDarkblue"
         android:layout_width="match_parent"
@@ -28,386 +29,413 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Order Summary"
-            android:textSize="20dp"
+            android:textSize="18sp"
             android:textColor="@color/white"
             android:fontFamily="@font/simple"/>
 
 
     </androidx.appcompat.widget.Toolbar>
 
-    <androidx.core.widget.NestedScrollView
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/ll_main"
+        android:layout_below="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <androidx.core.widget.NestedScrollView
+            android:layout_below="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
             <LinearLayout
-                android:background="@color/white"
-                android:padding="10dp"
-                android:layout_marginVertical="10dp"
-                 android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:layout_height="wrap_content">
-
-                <LinearLayout
-                    android:paddingHorizontal="20dp"
-                    android:layout_marginHorizontal="16dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/tv_Add"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:gravity="center_horizontal"
-                        android:text="1"
-                        android:textColor="@color/white"
-                        android:textSize="16sp"
-                        android:background="@drawable/bg_blue_circle"/>
-
-                    <View
-                        android:layout_gravity="center_vertical"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="1dp"
-                        android:background="@color/black"/>
-
-                    <TextView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:gravity="center_horizontal"
-                        android:text="2"
-                        android:textColor="@color/white"
-                        android:textSize="16sp"
-                        android:background="@drawable/bg_blue_circle"/>
-
-                    <View
-                        android:layout_gravity="center_vertical"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="1dp"
-                        android:background="@color/black"/>
-
-                    <TextView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:gravity="center_horizontal"
-                        android:text="3"
-                        android:textColor="@color/white"
-                        android:textSize="16sp"
-                        android:background="@drawable/bg_blue_circle"/>
-
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:paddingRight="20dp"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="24dp"
-                        android:gravity="center_horizontal"
-                        android:text="Address"
-                        android:textColor="@color/gray"
-                        android:textSize="16sp"
-                        />
-
-
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="24dp"
-                        android:gravity="center_horizontal"
-                        android:text="Order Summary"
-                        android:textColor="@color/gray"
-                        android:textSize="16sp"
-                        />
-
-
-                    <TextView
-                        android:paddingLeft="20dp"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="24dp"
-                        android:gravity="center_horizontal"
-                        android:text="Payment"
-                        android:textColor="@color/gray"
-                        android:textSize="16sp"
-                        />
-
-
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:background="@color/white"
-                android:layout_marginBottom="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_marginTop="10dp"
-                    android:layout_marginHorizontal="16dp"
+                    android:background="@color/white"
+                    android:padding="10dp"
+                    android:layout_marginVertical="10dp"
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:paddingHorizontal="20dp"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_Add"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:gravity="center_horizontal"
+                            android:text="1"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            android:background="@drawable/bg_blue_circle"/>
+
+                        <View
+                            android:layout_gravity="center_vertical"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="1dp"
+                            android:background="@color/black"/>
+
+                        <TextView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:gravity="center_horizontal"
+                            android:text="2"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            android:background="@drawable/bg_blue_circle"/>
+
+                        <View
+                            android:layout_gravity="center_vertical"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="1dp"
+                            android:background="@color/black"/>
+
+                        <TextView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:gravity="center_horizontal"
+                            android:text="3"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            android:background="@drawable/bg_blue_circle"/>
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:paddingRight="20dp"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="24dp"
+                            android:gravity="center_horizontal"
+                            android:text="Address"
+                            android:textColor="@color/gray"
+                            android:textSize="16sp"
+                            />
+
+
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="24dp"
+                            android:gravity="center_horizontal"
+                            android:text="Order Summary"
+                            android:textColor="@color/gray"
+                            android:textSize="16sp"
+                            />
+
+
+                        <TextView
+                            android:paddingLeft="20dp"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="24dp"
+                            android:gravity="center_horizontal"
+                            android:text="Payment"
+                            android:textColor="@color/gray"
+                            android:textSize="16sp"
+                            />
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:background="@color/white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
 
-
-                    <TextView
-                        android:layout_gravity="center_horizontal"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_marginTop="10dp"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:textColor="@color/black"
-                        android:text="Aamir khan"
-                        android:id="@+id/tv_user_name"/>
+                        android:orientation="horizontal">
+
+
+                        <TextView
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:textColor="@color/black"
+                            android:text="Aamir khan"
+                            android:id="@+id/tv_user_name"/>
+
+                        <TextView
+                            android:layout_marginHorizontal="16dp"
+                            android:paddingHorizontal="10dp"
+                            android:layout_gravity="center_horizontal"
+                            android:background="@color/dark_gray"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:textColor="@color/black"
+                            android:id="@+id/tv_add_type"
+                            android:text="Work Address" />
+
+
+                    </LinearLayout>
 
                     <TextView
                         android:layout_marginHorizontal="16dp"
-                        android:paddingHorizontal="10dp"
-                        android:layout_gravity="center_horizontal"
-                        android:background="@color/dark_gray"
-                        android:layout_width="wrap_content"
+                        android:layout_marginVertical="5dp"
+                        android:layout_width="200dp"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         android:textColor="@color/black"
-                        android:id="@+id/tv_add_type"
-                        android:text="Work Address" />
-
-
-                </LinearLayout>
-
-                <TextView
-                    android:layout_marginHorizontal="16dp"
-                    android:layout_marginVertical="10dp"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textColor="@color/black"
-                    android:text="Range Road Shamshabad,mp,464111"
-                    android:id="@+id/tv_user_add"/>
-
-                <TextView
-                    android:layout_marginHorizontal="16dp"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textColor="@color/black"
-                    android:text="9144155949"
-                    android:id="@+id/tv_mob_no"/>
-
-
-                <Button
-                    android:id="@+id/btn_change_Add"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Change or Add Address"
-                    android:textColor="@color/white"
-                    android:background="@color/colorDarkblue"
-                    android:textSize="16sp"
-                    android:layout_margin="20dp"/>
-
-
-
-            </LinearLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/rv_order_summary"/>
-
-
-            <LinearLayout
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginBottom="10dp"
-                android:background="@color/white">
-
-                <TextView
-                    android:layout_marginVertical="10dp"
-                    android:layout_marginHorizontal="16dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/bold"
-                    android:text="Price  Detail"/>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/dark_gray"/>
-
-                <LinearLayout
-                     android:layout_marginHorizontal="16dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                        android:text="Range Road Shamshabad,mp,464111"
+                        android:id="@+id/tv_user_add"/>
 
                     <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_width="200dp"
                         android:layout_height="wrap_content"
-                        android:text="Price(7 items)"
+                        android:textSize="14sp"
                         android:textColor="@color/black"
-                        android:id="@+id/tv_id_item"/>
+                        android:text="9144155949"
+                        android:id="@+id/tv_mob_no"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
+
+                    <Button
+                        android:id="@+id/btn_change_Add"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="$12345"
-                        android:textColor="@color/black"
-                        android:id="@+id/tv_sellingp"/>
+                        android:text="Change or Add Address"
+                        android:textColor="@color/white"
+                        android:background="@color/colorDarkblue"
+                        android:textSize="14sp"
+                        android:layout_margin="16dp"/>
+
+
 
                 </LinearLayout>
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/rv_order_summary"/>
+
+
                 <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
                     android:layout_marginVertical="10dp"
-                    android:layout_marginHorizontal="16dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:background="@color/white">
 
                     <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:text="Discount"
-                        android:textColor="@color/black" />
-
-                    <TextView
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginHorizontal="16dp"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="$0"
-                        android:textColor="@color/colorDarkblue"
-                        android:id="@+id/tv_dis_rs"/>
-
-                </LinearLayout>
-                <LinearLayout
-                     android:layout_marginHorizontal="16dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:text="Delivery fee"
-                        android:textColor="@color/black" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Free"
-                        android:textColor="@color/colorDarkblue"
-                        android:id="@+id/rs_del"/>
-
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/dark_gray"/>
-
-                <LinearLayout
-                    android:layout_marginVertical="10dp"
-                    android:layout_marginHorizontal="16dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
                         android:textColor="@color/black"
                         android:fontFamily="@font/bold"
-                         android:text="Total Amount"/>
+                        android:text="Price  Detail"/>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/dark_gray"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="$12345"
-                        android:textColor="@color/black"
-                        android:id="@+id/tv_total_amnt"/>
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:textSize="14sp"
+                            android:layout_height="wrap_content"
+                            android:text="Price(7 items)"
+                            android:textColor="@color/black"
+                            android:id="@+id/tv_id_item"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="$12345"
+                            android:textSize="14sp"
+                            android:textColor="@color/black"
+                            android:id="@+id/tv_sellingp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_marginVertical="5dp"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:text="Discount"
+                            android:textSize="14sp"
+                            android:textColor="@color/black" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="$0"
+                            android:textSize="14sp"
+                            android:textColor="@color/colorDarkblue"
+                            android:id="@+id/tv_dis_rs"/>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:text="Delivery fee"
+                            android:textSize="14sp"
+                            android:textColor="@color/black" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Free"
+                            android:textSize="14sp"
+                            android:textColor="@color/colorDarkblue"
+                            android:id="@+id/rs_del"/>
+
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/dark_gray"/>
+
+                    <LinearLayout
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/bold"
+                            android:text="Total Amount"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="$12345"
+                            android:textSize="14sp"
+                            android:textColor="@color/black"
+                            android:id="@+id/tv_total_amnt"/>
+
+
+                    </LinearLayout>
 
 
                 </LinearLayout>
 
 
+
             </LinearLayout>
-
-
-
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
-
-    <LinearLayout
-        android:background="@color/white"
-        android:padding="10dp"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        </androidx.core.widget.NestedScrollView>
 
         <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:background="@color/white"
+            android:padding="10dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$1,500"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/bold"
+                    android:id="@+id/tv_total_amnt_rs"
+                    android:textSize="18sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="View price details"
+                    android:id="@+id/tv_price"
+                    android:textColor="@color/colorDarkblue"
+                    android:textSize="14sp"/>
+
+            </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="$1,500"
-                android:textColor="@color/black"
-                android:fontFamily="@font/bold"
-                android:id="@+id/tv_total_amnt_rs"
-                android:textSize="18sp"/>
+                android:text="Continue"
+                android:id="@+id/tv_continue"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:paddingVertical="5dp"
+                android:paddingHorizontal="30dp"
+                android:background="@color/colorDarkblue"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="View price details"
-                android:id="@+id/tv_price"
-                android:textColor="@color/colorDarkblue"
-                android:textSize="14sp"/>
 
         </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Continue"
-            android:id="@+id/tv_continue"
-            android:textColor="@color/white"
-            android:textSize="24sp"
-            android:paddingVertical="5dp"
-            android:paddingHorizontal="30dp"
-            android:background="@color/colorDarkblue"/>
-
-
     </LinearLayout>
 
+    <ProgressBar
+        android:indeterminateTint="@color/colorPrimary"
+        android:layout_centerInParent="true"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/progress"/>
 
 
 
-</LinearLayout>
+
+
+
+</RelativeLayout>

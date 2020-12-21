@@ -7,12 +7,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.e_commerce_admin.model.SuperCategory;
-import com.example.e_commerce_admin.ui.fragment.BoyFragment;
-import com.example.e_commerce_admin.ui.fragment.GirlFragment;
 import com.example.e_commerce_admin.ui.fragment.ManFragment;
-import com.example.e_commerce_admin.ui.fragment.SIGNINFragment;
-import com.example.e_commerce_admin.ui.fragment.SIGNUPFragment;
-import com.example.e_commerce_admin.ui.fragment.WomanFragment;
 
 import java.util.List;
 

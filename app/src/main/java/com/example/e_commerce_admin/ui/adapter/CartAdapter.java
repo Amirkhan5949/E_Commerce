@@ -22,9 +22,14 @@ import com.example.e_commerce_admin.utils.util;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.orhanobut.dialogplus.DialogPlus;
 import com.orhanobut.dialogplus.ViewHolder;
 import com.squareup.picasso.Picasso;
@@ -37,9 +42,10 @@ public class CartAdapter extends FirebaseRecyclerAdapter<Cart,CartAdapter.Review
 
     private List<String>list;
    private Loader loader;
-   ClickCallBack clickCallBack;
+   private ClickCallBack clickCallBack;
 
-    Context context;
+
+   private Context context;
 
     public CartAdapter(@NonNull FirebaseRecyclerOptions<Cart> options, List<String> list, Context context, ClickCallBack clickCallBack) {
         super(options);
@@ -47,6 +53,12 @@ public class CartAdapter extends FirebaseRecyclerAdapter<Cart,CartAdapter.Review
         this.clickCallBack=clickCallBack;
         loader=new Loader(context);
         this.list=list;
+    }
+
+    @Override
+    public void onDataChanged() {
+        super.onDataChanged();
+        clickCallBack.load();
     }
 
     @NonNull
@@ -102,8 +114,6 @@ public class CartAdapter extends FirebaseRecyclerAdapter<Cart,CartAdapter.Review
                         });
 
 
-
-
                         dialog.dismiss();
                     }
                 }));
@@ -113,36 +123,100 @@ public class CartAdapter extends FirebaseRecyclerAdapter<Cart,CartAdapter.Review
             }
         });
 
+        FirebaseDatabase.getInstance().getReference().child(FirebaseConstants.WishList.key)
+                .child(FirebaseAuth.getInstance().getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                        if(snapshot.exists()){
+                            if (snapshot.hasChild(getRef(position).getKey())) {
+                                holder.r_wishlist.setText("Remove from wishlist");
+                            }
+                            else {
+                                holder.r_wishlist.setText("Add to wishlist");
+                            }
+                        }
+
+
+                        holder.r_wishlist.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                if (holder.r_wishlist.getText().equals("Add to wishlist")) {
+
+                                    loader.show();
+                                    Map<String,Object> map = new HashMap<>();
+                                    map.put(id,model.getProduct());
+
+                                    FirebaseDatabase.getInstance().getReference().child(FirebaseConstants.WishList.key)
+                                            .child(FirebaseAuth.getInstance().getUid())
+                                            .updateChildren(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            loader.dismiss();
+                                            holder.r_wishlist.setText("Remove from wishlist");
+
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            loader.dismiss();
+                                        }
+                                    });
+
+
+                                }
+                                else {
+
+                                    loader.show();
+                                    FirebaseDatabase.getInstance().getReference()
+                                            .child(FirebaseConstants.WishList.key)
+                                            .child(FirebaseAuth.getInstance().getUid())
+                                            .child(id)
+                                            .removeValue()
+                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+
+                                                    loader.dismiss();
+                                                    holder.r_wishlist.setText("Add to wishlist");
+
+                                                }
+                                            });
+
+                                }
+                            }
+                        });
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
+
+
 
         holder.tv_remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loader.show();
-                FirebaseDatabase.getInstance().getReference()
-                        .child(FirebaseConstants.Cart.key)
-                        .child(FirebaseAuth.getInstance().getUid())
-                        .child(id)
-                        .removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        loader.dismiss();
-                    }
-                });
+
+                clickCallBack.remove(model,id);
+
             }
         });
 
 
-        Log.i("sgfdgdxc", "onBindViewHolder: "+model.toString());
-        Log.i("sgfdgdxc", "onBindViewHolder: "+model.getColor().getColor().toString());
-        Log.i("sgfdgdxc", "onBindViewHolder: "+model.getQuantity());
-        Log.i("sgfdgdxc", "onBindViewHolder: "+model.getDiscount());
         Picasso.get().load(model.getProduct().getImg()).into(holder.iv_image);
         holder.tv_name.setText(model.getProduct().getName());
         holder.tv_description.setText(model.getProduct().getDetails());
         holder.tv_quantity.setText(model.getQuantity()+"");
         holder.tv_size.setText(model.getSize().getTitle()+"");
-        holder.tv_sellingp.setText("₹"+Integer.parseInt(model.getProduct().getSelling_price())*(model.getQuantity())+"");
-        holder.tv_cost.setText("₹"+Integer.parseInt(model.getProduct().getMrp_price())*(model.getQuantity())+"");
+        holder.tv_sellingp.setText("₹"+Integer.parseInt(model.getProduct().getSelling_price())+"");
+        holder.tv_cost.setText("₹"+Integer.parseInt(model.getProduct().getMrp_price())+"");
 
         holder.colorview.setBackgroundColor(android.graphics.Color.parseColor(model.getColor().getColor()+""));
     }
@@ -173,5 +247,9 @@ public class CartAdapter extends FirebaseRecyclerAdapter<Cart,CartAdapter.Review
     public interface ClickCallBack{
 
         void click( String newQty, Cart model);
+
+        void remove( Cart model,String id);
+
+        void load();
     }
 }

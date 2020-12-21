@@ -13,19 +13,38 @@ import ss.com.bannerslider.adapters.SliderAdapter;
 import ss.com.bannerslider.viewholder.ImageSlideViewHolder;
 
 public class MainSliderAdapter extends SliderAdapter {
-    List<Images>list;
+    List<Banner>list;
+    List<Images> images;
 
-    public MainSliderAdapter(List<Images>list) {
+    public MainSliderAdapter(List<Images> images,String s) {
+        this.images = images;
+    }
+
+    public MainSliderAdapter(List<Banner>list) {
         this.list=list;
-     }
+    }
+
+
 
     @Override
     public int getItemCount() {
-        return list.size();
+        if (list!=null){
+            return list.size();
+        }else {
+            return images.size();
+        }
+
     }
 
     @Override
     public void onBindImageSlide(int position, ImageSlideViewHolder viewHolder) {
-        viewHolder.bindImageSlide(list.get(position).getImg());
+        if (list != null) {
+            viewHolder.bindImageSlide(list.get(position).getImage());
+        }
+        else {
+            viewHolder.bindImageSlide(images.get(position).getImg());
+        }
+
+
     }
 }

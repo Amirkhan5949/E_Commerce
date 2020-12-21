@@ -9,12 +9,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.example.e_commerce_admin.R;
 import com.example.e_commerce_admin.model.Address;
 import com.example.e_commerce_admin.model.Address;
 import com.example.e_commerce_admin.ui.adapter.All_Address_Adapter;
 import com.example.e_commerce_admin.ui.adapter.CategoryAdapter;
+import com.example.e_commerce_admin.utils.FirebaseConstants;
+import com.example.e_commerce_admin.utils.Loader;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,10 +29,13 @@ import com.google.firebase.database.ValueEventListener;
 
 public class AddressActivity extends AppCompatActivity {
 
+   private ProgressBar progress;
    private RecyclerView alladress_recycler;
    private All_Address_Adapter adapter;
+   private ImageView iv_back;
 
-    FloatingActionButton floating_action_button;
+   private Loader  loader;
+   private FloatingActionButton floating_action_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,20 +43,28 @@ public class AddressActivity extends AppCompatActivity {
         setContentView(R.layout.activity_address);
 
 
-        alladress_recycler=findViewById(R.id.alladress_recycler);
-        floating_action_button=findViewById(R.id.floating_action_button);
+       init();
+
+        loader=new Loader(this);
+        iv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         floating_action_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent  intent=new Intent(AddressActivity.this,Address_EditActivity.class);
                 intent.putExtra("ComeFrom","Float");
+                intent.putExtra("type","float");
                 startActivity(intent);
             }
         });
 
 
-        FirebaseDatabase.getInstance().getReference().child("Admin")
+        FirebaseDatabase.getInstance().getReference().child(FirebaseConstants.User.key)
                 .child(FirebaseAuth.getInstance().getUid())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -68,7 +83,7 @@ public class AddressActivity extends AppCompatActivity {
                                                 Address.class)
                                         .build();
 
-                        adapter = new All_Address_Adapter(option,add_type==null?"":add_type);
+                        adapter = new All_Address_Adapter(option,add_type==null?"":add_type,progress);
                         alladress_recycler.setAdapter(adapter);
                         adapter.startListening();
                     }
@@ -79,6 +94,15 @@ public class AddressActivity extends AppCompatActivity {
                     }
                 });
     }
+
+    private void init() {
+        alladress_recycler=findViewById(R.id.alladress_recycler);
+        iv_back=findViewById(R.id.iv_back);
+        floating_action_button=findViewById(R.id.floating_action_button);
+
+        progress = findViewById(R.id.progress);
+    }
+
     @Override
     public void onStart() {
         super.onStart();

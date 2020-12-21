@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.SubCategoryActivity">
+
+    <LinearLayout
+        android:id="@+id/ll_main"
+        android:padding="10dp"
+        android:background="@color/colorDarkblue"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_marginHorizontal="20dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/back"
+            android:id="@+id/iv_back"
+            app:tint="@color/white" />
+
+        <TextView
+            android:gravity="center"
+            android:layout_marginRight="52dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Sub Category"
+            android:textSize="18sp"
+            android:textColor="@color/white"/>
+
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+         android:layout_below="@+id/ll_main"
+         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rv_subcat"/>
+
+    <ProgressBar
+        android:layout_centerInParent="true"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/progress"
+        android:indeterminateTint="@color/colorPrimary"
+        />
+
+</RelativeLayout>

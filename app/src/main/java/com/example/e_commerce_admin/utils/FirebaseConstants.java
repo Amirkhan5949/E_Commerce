@@ -114,9 +114,27 @@ public class FirebaseConstants {
         public static final String payment_type="payment_type";
         public static final String order_status="order_status";
         public static final String Product="Product";
-        public static final String address="address";
+        public static final String Address="address";
+        public static final String user_id="user_id";
         public static final String time="time";
-        public static final String default_address="default_address";
+
+
+
+
+    }
+
+    public static class User{
+        public static final String key="Users";
+        public static final String Username="Username";
+        public static final String confirmpassword="confirmpassword";
+        public static final String dob="dob";
+        public static final String email="email";
+        public static final String image="image";
+        public static final String image_format="image_format";
+        public static final String mobile_no="mobile_no";
+        public static final String name="name";
+        public static final String password="password";
+
 
     }
 

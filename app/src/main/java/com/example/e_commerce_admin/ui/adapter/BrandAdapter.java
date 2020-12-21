@@ -17,14 +17,16 @@ import com.squareup.picasso.Picasso;
 
 public class BrandAdapter extends FirebaseRecyclerAdapter<Brand,BrandAdapter.BrandAdapterView> {
 
+    private ClickCallBack clickCallBack;
     /**
      * Initialize a {@link RecyclerView.Adapter} that listens to a Firebase query. See
      * {@link FirebaseRecyclerOptions} for configuration options.
      *
      * @param options
      */
-    public BrandAdapter(@NonNull FirebaseRecyclerOptions<Brand> options) {
+    public BrandAdapter(@NonNull FirebaseRecyclerOptions<Brand> options,ClickCallBack  clickCallBack) {
         super(options);
+       this.clickCallBack=clickCallBack;
     }
 
     @NonNull
@@ -35,7 +37,11 @@ public class BrandAdapter extends FirebaseRecyclerAdapter<Brand,BrandAdapter.Bra
         return new BrandAdapterView(view);
     }
 
-
+    @Override
+    public void onDataChanged() {
+        super.onDataChanged();
+        clickCallBack.load();
+    }
 
     @Override
     protected void onBindViewHolder(@NonNull BrandAdapterView holder, int position, @NonNull Brand model) {
@@ -55,5 +61,8 @@ public class BrandAdapter extends FirebaseRecyclerAdapter<Brand,BrandAdapter.Bra
             tv_brandname=itemView.findViewById(R.id.tv_brandname);
             tv_product=itemView.findViewById(R.id.tv_productquant);
         }
+    }
+    public interface ClickCallBack{
+        void load();
     }
 }

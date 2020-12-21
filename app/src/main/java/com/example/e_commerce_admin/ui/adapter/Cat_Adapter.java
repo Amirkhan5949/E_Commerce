@@ -1,10 +1,12 @@
 package com.example.e_commerce_admin.ui.adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.e_commerce_admin.R;
 import com.example.e_commerce_admin.model.SuperCategory;
 import com.example.e_commerce_admin.ui.activity.MainActivity;
+import com.example.e_commerce_admin.ui.activity.SubCategoryActivity;
 import com.example.e_commerce_admin.ui.fragment.ManFragment;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -20,12 +23,20 @@ import com.squareup.picasso.Picasso;
 
 public class Cat_Adapter extends FirebaseRecyclerAdapter<SuperCategory,Cat_Adapter.Cat_Adapter_View> {
 
-   ClickCallBack clickCallBack;
+  private ClickCallBack clickCallBack;
+   private ProgressBar bar;
 
 
-    public Cat_Adapter(@NonNull FirebaseRecyclerOptions<SuperCategory> options, ClickCallBack clickCallBack) {
+    public Cat_Adapter(@NonNull FirebaseRecyclerOptions<SuperCategory> options, ProgressBar progress, ClickCallBack clickCallBack) {
         super(options);
         this.clickCallBack = clickCallBack;
+        bar=progress;
+    }
+
+    @Override
+    public void onDataChanged() {
+        super.onDataChanged();
+        bar.setVisibility(View.GONE);
 
     }
 
@@ -48,6 +59,7 @@ public class Cat_Adapter extends FirebaseRecyclerAdapter<SuperCategory,Cat_Adapt
             @Override
             public void onClick(View view) {
                 clickCallBack.click(position,id);
+
              }
         });
 
@@ -69,7 +81,6 @@ public class Cat_Adapter extends FirebaseRecyclerAdapter<SuperCategory,Cat_Adapt
 
     public interface ClickCallBack{
         void click(int i,String id);
-
-    }
+     }
 
 }

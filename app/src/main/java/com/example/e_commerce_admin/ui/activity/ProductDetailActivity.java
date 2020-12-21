@@ -23,7 +23,8 @@ import com.example.e_commerce_admin.ui.adapter.Color_Adapter;
 import com.example.e_commerce_admin.ui.adapter.MainSliderAdapter;
 import com.example.e_commerce_admin.ui.adapter.ProductReview_Adapter;
 import com.example.e_commerce_admin.ui.adapter.Size_Adapter;
- import com.example.e_commerce_admin.utils.FirebaseConstants;
+import com.example.e_commerce_admin.ui.fragment.CartFragment;
+import com.example.e_commerce_admin.utils.FirebaseConstants;
 import com.example.e_commerce_admin.utils.Loader;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -48,7 +49,7 @@ public class ProductDetailActivity extends AppCompatActivity {
 
     private Slider banner_slider;
     private RecyclerView rv_color, rv_size;
-    private ImageView iv_back,icon_favourite;
+    private ImageView iv_back,icon_favourite,iv_cart;
     private RecyclerView rv_review;
     private TextView tv_p_name, tv_details, tv_rs, tv_add;
     private List<Color> selectedColor = new ArrayList<>();
@@ -75,6 +76,14 @@ public class ProductDetailActivity extends AppCompatActivity {
 
         initViews();
 
+
+        iv_cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent  intent=new Intent(ProductDetailActivity.this,CartActivity.class);
+                startActivity(intent);
+            }
+        });
 
         tv_add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,7 +155,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                     Log.i("sfsfsf", "onDataChange: " + imagesList.toString());
                     Log.i("dsdsfs", "onCreate: " + images.toString());
 
-                    banner_slider.setAdapter(new MainSliderAdapter(images));
+                    banner_slider.setAdapter(new MainSliderAdapter(images,""));
                     banner_slider.setInterval(4000);
                 }
 
@@ -325,6 +334,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         banner_slider = findViewById(R.id.banner_slider);
 
         rv_color = findViewById(R.id.rv_color);
+        iv_cart = findViewById(R.id.iv_cart);
         icon_favourite = findViewById(R.id.icon_favourite);
         iv_back = findViewById(R.id.iv_back);
         rv_size = findViewById(R.id.rv_size);
