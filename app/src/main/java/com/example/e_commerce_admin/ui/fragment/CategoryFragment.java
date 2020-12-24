@@ -43,7 +43,7 @@ public class CategoryFragment extends Fragment {
         CategoryFragment f = new CategoryFragment();
         Bundle args = new Bundle();
         args.putString("id", id);
-        args.putString("position", String.valueOf((position)));
+        args.putInt("position", position);
         args.putString("type", type);
         f.setArguments(args);
         return f;
@@ -62,11 +62,12 @@ public class CategoryFragment extends Fragment {
         if (args != null) {
             id = args.getString("id");
             type = args.getString("type");
-            position= Integer.parseInt(args.getString("position"));
+            position= args.getInt("position");
+            Log.i("esdwdwd", "frag: "+position);
 
          }
 
-        viewPager.setCurrentItem(position);
+
         Log.i("dgrrted", "onCreateView: "+position);
         if (type.equals("Fromadapter")){
             toolbar.setVisibility(View.GONE);
@@ -89,6 +90,7 @@ public class CategoryFragment extends Fragment {
 
                         viewPager.setAdapter(new Super_Cat_viewAdapter(getChildFragmentManager(),superCategories));
                         tabLayout.setupWithViewPager(viewPager);
+                        viewPager.setCurrentItem(position);
 
                     }
 

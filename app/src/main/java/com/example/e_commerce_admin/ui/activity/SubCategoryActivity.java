@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -50,6 +51,7 @@ public class SubCategoryActivity extends AppCompatActivity {
                         .build();
         adapter=new HomeSuperCategoryAdapter(options,progress);
         rv_subcat.setAdapter(adapter);
+
 
 
     }

@@ -299,6 +299,8 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:background="@color/white"
                     android:layout_marginLeft="20dp"
+                    android:layoutAnimation="@anim/item_layout"
+
                     android:layout_marginVertical="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

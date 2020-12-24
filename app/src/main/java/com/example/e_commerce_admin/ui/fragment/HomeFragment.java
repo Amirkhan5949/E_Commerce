@@ -2,6 +2,7 @@ package com.example.e_commerce_admin.ui.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -77,6 +78,7 @@ public class HomeFragment extends Fragment {
         tv_viewall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                p_recycler.startLayoutAnimation();
                 startActivity(new Intent(getContext(), SubCategoryActivity.class));
             }
         });
@@ -216,6 +218,12 @@ public class HomeFragment extends Fragment {
         if(CURRENT_API_CALL==TOTAL_API_CALL){
             ll_main.setVisibility(View.VISIBLE);
             progress.setVisibility(View.GONE);
+//            new Handler().postDelayed(() -> {
+//                p_recycler.startLayoutAnimation();
+//                 recomded_recycler.startLayoutAnimation();
+//                rv_Category .startLayoutAnimation();
+//                brand_recycler.startLayoutAnimation();
+//            },500);
         }
     }
 }

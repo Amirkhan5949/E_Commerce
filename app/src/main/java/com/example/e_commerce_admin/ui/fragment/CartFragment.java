@@ -1,8 +1,11 @@
 package com.example.e_commerce_admin.ui.fragment;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +23,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.e_commerce_admin.R;
 import com.example.e_commerce_admin.model.Cart;
 import com.example.e_commerce_admin.model.Product;
+import com.example.e_commerce_admin.ui.activity.DemoActivity;
 import com.example.e_commerce_admin.ui.activity.HomeActivity;
+import com.example.e_commerce_admin.ui.activity.MainActivity;
 import com.example.e_commerce_admin.ui.activity.Order_Summary_Activity;
 import com.example.e_commerce_admin.ui.adapter.CartAdapter;
 import com.example.e_commerce_admin.utils.FirebaseConstants;
@@ -180,6 +185,7 @@ public class CartFragment extends Fragment {
         });
         review_recycler.setAdapter(cartAdapter);
 
+
     }
 
     private void showUi() {
@@ -250,6 +256,8 @@ public class CartFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent=new Intent(getContext(), Order_Summary_Activity.class);
                 startActivity(intent);
+
+
             }
         });
 

@@ -6,6 +6,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
@@ -24,10 +26,18 @@ public class OverCatActivity extends AppCompatActivity {
 
         init();
 
+        iv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
         int position= getIntent().getIntExtra("position",-1);
         String id= getIntent().getStringExtra("id");
         String type="Fromadapter";
 
+        Log.i("esdwdwd", "act: "+position);
         replace(CategoryFragment.newInstance(id,type,position));
 
 

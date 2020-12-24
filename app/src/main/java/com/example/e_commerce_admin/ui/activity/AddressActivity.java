@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -86,6 +87,8 @@ public class AddressActivity extends AppCompatActivity {
                         adapter = new All_Address_Adapter(option,add_type==null?"":add_type,progress);
                         alladress_recycler.setAdapter(adapter);
                         adapter.startListening();
+
+
                     }
 
                     @Override
@@ -114,5 +117,8 @@ public class AddressActivity extends AppCompatActivity {
         adapter.stopListening();
 
     }
+
+
+
 
 }

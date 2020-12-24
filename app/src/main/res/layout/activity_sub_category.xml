@@ -40,6 +40,8 @@
          android:layout_below="@+id/ll_main"
          android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layoutAnimation="@anim/item_layout"
+
         android:id="@+id/rv_subcat"/>
 
     <ProgressBar

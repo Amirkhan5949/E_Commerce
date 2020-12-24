@@ -1,101 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    android:background="@color/white"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_marginVertical="10dp"
+    android:layout_marginTop="10dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:id="@+id/ll_radio"
-        android:layout_marginTop="16dp"
-         android:layout_marginHorizontal="16dp"
+    <androidx.cardview.widget.CardView
+        android:layout_margin="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        app:cardCornerRadius="10dp">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:id="@+id/ll_radio"
+                android:layout_marginTop="16dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
 
-        <TextView
-            android:layout_gravity="center_horizontal"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:text="Aamir khan"
-            android:id="@+id/user_name"/>
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:text="Aamir khan"
+                    android:id="@+id/user_name"/>
 
-        <TextView
-            android:paddingHorizontal="10dp"
-            android:layout_gravity="center_horizontal"
-            android:background="@color/dark_gray"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:text="Work Address"
-            android:id="@+id/tv_addtype"/>
+                <TextView
+                    android:paddingHorizontal="10dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@color/dark_gray"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:text="Work Address"
+                    android:id="@+id/tv_addtype"/>
 
-        <RadioButton
-            android:layout_width="32dp"
-            android:layout_height="24dp"
-            android:id="@+id/rb"/>
+                <RadioButton
+                    android:layout_width="32dp"
+                    android:layout_height="24dp"
+                    android:id="@+id/rb"/>
 
-    </LinearLayout>
+            </LinearLayout>
 
 
-    <LinearLayout
-        android:gravity="center"
-        android:layout_marginHorizontal="16dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+            <LinearLayout
+                android:gravity="center"
+                android:layout_marginHorizontal="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-        <TextView
-            android:layout_marginVertical="10dp"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:text="Range Road Shamshabad,mp,464111"
-            android:id="@+id/user_add"/>
+                <TextView
+                    android:layout_marginVertical="10dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:text="Range Road Shamshabad,mp,464111"
+                    android:id="@+id/user_add"/>
 
-        <ImageView
-            android:layout_marginLeft="16dp"
-             android:src="@drawable/ic_baseline_edit_24"
-            android:layout_width="32dp"
-            android:layout_height="24dp"
-            android:id="@+id/iv_edit"/>
+                <ImageView
+                    android:layout_marginLeft="16dp"
+                    android:src="@drawable/ic_baseline_edit_24"
+                    android:layout_width="32dp"
+                    android:layout_height="24dp"
+                    android:id="@+id/iv_edit"/>
 
-    </LinearLayout>
+            </LinearLayout>
 
-    <LinearLayout
-         android:layout_marginHorizontal="16dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+            <LinearLayout
+                android:layout_marginBottom="16dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:text="9144155949"
-            android:id="@+id/alladd_mob_no"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:text="9144155949"
+                    android:id="@+id/alladd_mob_no"/>
 
-        <ImageView
-            app:tint="@color/black"
-            android:layout_marginLeft="16dp"
-            android:layout_gravity="center_horizontal"
-            android:src="@drawable/delete"
-            android:layout_width="32dp"
-            android:layout_height="24dp"
-            android:id="@+id/iv_delete"/>
+                <ImageView
+                    app:tint="@color/black"
+                    android:layout_marginLeft="16dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/delete"
+                    android:layout_width="32dp"
+                    android:layout_height="24dp"
+                    android:id="@+id/iv_delete"/>
 
-    </LinearLayout>
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
 </LinearLayout>

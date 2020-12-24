@@ -71,6 +71,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
+                android:layoutAnimation="@anim/item_layout"
                 android:layout_height="wrap_content"
                 android:id="@+id/cat_recycler"/>
 

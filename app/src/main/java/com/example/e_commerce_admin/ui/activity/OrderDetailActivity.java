@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -67,6 +68,8 @@ public class OrderDetailActivity extends AppCompatActivity {
         rv_shipping.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
 
         rv_shipping.setAdapter(new TimeLineAdapter(list));
+
+
 
         String order_id=getIntent().getStringExtra("order_id");
 

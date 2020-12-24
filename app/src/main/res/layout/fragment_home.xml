@@ -111,7 +111,7 @@
             </androidx.cardview.widget.CardView>
 
             <LinearLayout
-                android:visibility="gone"
+               android:visibility="gone"
                 android:layout_below="@+id/card"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -162,6 +162,7 @@
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:layout_marginHorizontal="8dp"
+                        android:layoutAnimation="@anim/item_layout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/rv_Category"/>
@@ -223,6 +224,7 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layoutAnimation="@anim/item_layout"
                             android:id="@+id/p_recycler"/>
                     </LinearLayout>
 
@@ -256,14 +258,14 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_marginHorizontal="8dp"
-                            android:gravity="center_horizontal"
-                            android:layout_marginBottom="12dp"
-                            android:layout_height="match_parent">
+                            android:layout_marginRight="16dp"
+                             android:layout_height="match_parent">
 
                             <androidx.recyclerview.widget.RecyclerView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
+                                android:layout_width="match_parent"
+                                android:layoutAnimation="@anim/item_layout"
+
+                                android:layout_height="wrap_content"
                                 android:id="@+id/brandrecycler"/>
 
                         </LinearLayout>
@@ -327,6 +329,8 @@
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:layout_width="wrap_content"
+                            android:layoutAnimation="@anim/item_layout"
+
                             android:layout_height="wrap_content"
                             android:id="@+id/recommanded_recycler"/>
                     </LinearLayout>

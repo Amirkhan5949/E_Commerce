@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.e_commerce_admin.R;
 import com.example.e_commerce_admin.model.SuperCategory;
 import com.example.e_commerce_admin.ui.activity.MainActivity;
+import com.example.e_commerce_admin.ui.activity.ProductListActivity;
 import com.example.e_commerce_admin.ui.activity.SubCategoryActivity;
 import com.example.e_commerce_admin.ui.fragment.ManFragment;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -59,7 +60,9 @@ public class Cat_Adapter extends FirebaseRecyclerAdapter<SuperCategory,Cat_Adapt
             @Override
             public void onClick(View view) {
                 clickCallBack.click(position,id);
-
+                Intent  intent=new Intent(holder.ll_main.getContext(), ProductListActivity.class);
+                intent.putExtra("supercatid",getRef(position).getKey());
+                holder.ll_main.getContext().startActivity(intent);
              }
         });
 

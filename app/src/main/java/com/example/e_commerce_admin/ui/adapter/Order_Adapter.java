@@ -80,7 +80,7 @@ public class Order_Adapter extends FirebaseRecyclerAdapter<Order, Order_Adapter.
         holder.tv_orderid.setText(getRef(position).getKey()+"");
 
         holder.tv_off.setText(util.discount(Integer.parseInt(model.getOrdered_mrp_price())
-                ,Integer.parseInt(model.getOrdered_selling_price()))+"%"+"");
+                ,Integer.parseInt(model.getOrdered_selling_price()))+"%"+" off");
          Log.i("fsffsds", "onBindViewHolder: "+model.getQuantity());
 
 

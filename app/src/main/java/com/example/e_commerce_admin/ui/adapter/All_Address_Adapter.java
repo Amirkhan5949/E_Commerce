@@ -36,13 +36,6 @@ public class All_Address_Adapter extends FirebaseRecyclerAdapter<Address, All_Ad
     private Gson gson = new Gson();
     private ProgressBar progressBar;
 
-    /**
-     * Initialize a {@link RecyclerView.Adapter} that listens to a Firebase query. See
-     * {@link FirebaseRecyclerOptions} for configuration options.
-     *  @param options
-     * @param add_type
-     * @param progress
-     */
     public All_Address_Adapter(@NonNull FirebaseRecyclerOptions<Address> options, String add_type, ProgressBar progress) {
         super(options);
         selectedPosition = add_type;
@@ -69,7 +62,7 @@ public class All_Address_Adapter extends FirebaseRecyclerAdapter<Address, All_Ad
 
         final String id = getRef(position).getKey();
 
-        holder.user_name.setText(model.getName());
+         holder.user_name.setText(model.getName());
         holder.alladd_mob_no.setText(model.getMob_no());
         holder.tv_addtype.setText(model.getAddress_type());
         holder.user_add.setText(model.getAddress());

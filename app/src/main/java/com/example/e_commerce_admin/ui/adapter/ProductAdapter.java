@@ -75,6 +75,11 @@ private ClickCallBack clickCallBack;
             final String id=getRef(position).getKey();
 
             holder.p_name.setText(model.getName());
+            holder.tv_pdatail.setText(model.getDetails());
+            holder.tv_mrp.setText("₹"+model.getMrp_price());
+            holder.tv_sellingp.setText("₹"+model.getSelling_price());
+            holder.tv_off.setText(util.discount(Integer.parseInt(model.getMrp_price())
+                    ,Integer.parseInt(model.getSelling_price()))+"%"+" off");
             Picasso.get().load(model.getImg()).into(holder.p_image);
 
             holder.p_layout.setOnClickListener(new View.OnClickListener() {
@@ -159,7 +164,7 @@ private ClickCallBack clickCallBack;
 
     class ProductViewholder extends RecyclerView.ViewHolder {
         ImageView p_image,icon_favourite;
-        TextView p_name;
+        TextView p_name,tv_off,tv_mrp,tv_sellingp,tv_pdatail;
         LinearLayout p_layout;
 
 
@@ -167,8 +172,12 @@ private ClickCallBack clickCallBack;
             super(itemView);
             p_image=itemView.findViewById(R.id.p_img);
             p_name=itemView.findViewById(R.id.p_name);
+            tv_off=itemView.findViewById(R.id.tv_off);
+            tv_mrp=itemView.findViewById(R.id.tv_mrp);
+            tv_sellingp=itemView.findViewById(R.id.tv_sellingp);
             p_layout=itemView.findViewById(R.id.p_layout);
             icon_favourite=itemView.findViewById(R.id.icon_favourite);
+            tv_pdatail=itemView.findViewById(R.id.tv_pdatail);
 
         }
     }

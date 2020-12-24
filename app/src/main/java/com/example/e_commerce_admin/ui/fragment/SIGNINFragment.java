@@ -25,7 +25,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class SIGNINFragment extends Fragment {
+public class  SIGNINFragment extends Fragment {
 
     EditText username,password;
     Button signin,fblogin;

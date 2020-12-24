@@ -58,10 +58,10 @@ public class CategoryAdapter extends FirebaseRecyclerAdapter<SuperCategory,Categ
         holder.ll_main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SuperCategory pos= getItem(position);
-                Log.i("esdwdwd", "onClick: "+getItem(position));
+
+                Log.i("esdwdwd", "onClick: "+ position);
                 Intent intent=new Intent(holder.ll_main.getContext(), OverCatActivity.class);
-//                intent.putExtra("position",position);
+                intent.putExtra("position",position);
                 holder.ll_main.getContext().startActivity(intent);
             }
         });

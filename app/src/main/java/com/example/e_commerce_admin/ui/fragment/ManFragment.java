@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -84,6 +85,7 @@ public class ManFragment extends Fragment {
 
            });
         catrecycler.setAdapter(adapter);
+
 
 
         base.orderByChild(FirebaseConstants.Category.super_id).equalTo(id)

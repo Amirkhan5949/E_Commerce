@@ -1,9 +1,11 @@
 package com.example.e_commerce_admin.ui.adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,9 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.e_commerce_admin.R;
 import com.example.e_commerce_admin.model.Brand;
+import com.example.e_commerce_admin.ui.activity.BrandActivity;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.squareup.picasso.Picasso;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class BrandAdapter extends FirebaseRecyclerAdapter<Brand,BrandAdapter.BrandAdapterView> {
 
@@ -49,17 +54,28 @@ public class BrandAdapter extends FirebaseRecyclerAdapter<Brand,BrandAdapter.Bra
         Picasso.get().load(model.getImage()).into(holder.iv_brand);
         holder.tv_brandname.setText(model.getName());
 
+        holder.ll_main.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(holder.ll_main.getContext(), BrandActivity.class);
+                intent.putExtra("brandid",position);
+                holder.ll_main.getContext().startActivity(intent);
+            }
+        });
 
     }
 
     class BrandAdapterView extends RecyclerView.ViewHolder {
-    ImageView iv_brand;
-    TextView tv_brandname,tv_product;
+   private CircleImageView iv_brand;
+    private TextView tv_brandname;
+    private LinearLayout ll_main;
+
         public BrandAdapterView(@NonNull View itemView) {
             super(itemView);
             iv_brand=itemView.findViewById(R.id.iv_brand);
             tv_brandname=itemView.findViewById(R.id.tv_brandname);
-            tv_product=itemView.findViewById(R.id.tv_productquant);
+            ll_main=itemView.findViewById(R.id.ll_main);
+
         }
     }
     public interface ClickCallBack{

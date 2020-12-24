@@ -1,8 +1,11 @@
 package com.example.e_commerce_admin.ui.activity;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
+import android.util.Pair;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -19,6 +22,7 @@ import com.example.e_commerce_admin.model.Cart;
 import com.example.e_commerce_admin.model.Product;
 import com.example.e_commerce_admin.ui.adapter.CartAdapter;
 import com.example.e_commerce_admin.ui.adapter.Order_Summary_Adapter;
+import com.example.e_commerce_admin.ui.fragment.CartFragment;
 import com.example.e_commerce_admin.utils.FirebaseConstants;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -146,6 +150,16 @@ public class Order_Summary_Activity extends AppCompatActivity {
 
                 Intent intent = new Intent(tv_continue.getContext(), PaymentActivity.class);
                 startActivity(intent);
+
+
+                Intent intent1 = new Intent(getApplicationContext(),
+                        PaymentActivity.class);
+                Pair[] pairs = new Pair[1];
+                pairs[0] = new Pair<View, String>(view.findViewById(R.id.tv_continue), "transition_login");
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP)
+                {  ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(Order_Summary_Activity.this, pairs);
+                    startActivity(intent, options.toBundle()); }
+                else { startActivity(intent1); }
             }
         });
 
@@ -170,18 +184,14 @@ public class Order_Summary_Activity extends AppCompatActivity {
 
                 Order_Summary_Activity.this.qty = Order_Summary_Activity.this.qty + esctqty;
                 int a = esctqty * Integer.parseInt(model.getProduct().getSelling_price()) + finalPrice;
-                Log.i("dgfgfg", "click: " + a);
-                Log.i("dgfgfg", "click: " + finalPrice);
-                Log.i("dgfgfg", "click: " + esctqty * Integer.parseInt(model.getProduct().getSelling_price()));
-                Log.i("dgfgfg", "click: " + model.getProduct().getSelling_price());
-                finalPrice = a;
+                  finalPrice = a;
                 tv_total_amnt.setText(a + "");
                 tv_total_amnt_rs.setText(a + "");
 
                 int c = esctqty * Integer.parseInt(model.getDiscount());
 
                 discount = c;
- //                tv_discount.setText( c +discount+"");
+  //                tv_discount.setText( c +discount+"");
 //                Log.i("dsfsf", "click: "+(esctqty*Integer.parseInt(model.getDiscount())+discount));
 //                Log.i("dsfsf", "click: "+(discount));
 
@@ -309,6 +319,8 @@ public class Order_Summary_Activity extends AppCompatActivity {
         if(CURRENT_API_CALL==TOTAL_API_CALL){
             ll_main.setVisibility(View.VISIBLE);
             progress.setVisibility(View.GONE);
+
+
         }
     }
 

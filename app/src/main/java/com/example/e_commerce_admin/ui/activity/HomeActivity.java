@@ -48,7 +48,7 @@ public class HomeActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.category:
-                        replace(  CategoryFragment.newInstance("","direct", Integer.parseInt ("position")),"CategoryFragment");
+                        replace(  CategoryFragment.newInstance("","direct", 0),"CategoryFragment");
                         return true;
 
                     case R.id.menu:

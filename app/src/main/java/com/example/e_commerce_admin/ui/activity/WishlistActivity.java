@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -56,6 +57,7 @@ public class WishlistActivity extends AppCompatActivity {
 
             wishlistAdapter=new WishListAdapter(option2,progress);
             recycler_wishlist.setAdapter(wishlistAdapter);
+
 
         }
         else {
