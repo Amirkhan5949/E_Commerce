@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,6 +52,7 @@ public class PaymentActivity extends AppCompatActivity {
     private View progress;
     private TextView tv_continue;
     private LinearLayout ll_Main;
+    private ImageView iv_back;
     private List<Cart> list = new ArrayList<>();
 
     @Override
@@ -58,12 +60,16 @@ public class PaymentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
 
-        tv_continue=findViewById(R.id.tv_continue);
-        progress=findViewById(R.id.progress);
-        ll_Main=findViewById(R.id.ll_Main);
+       init();
 
-        progress.setVisibility(View.VISIBLE);
-        ll_Main.setVisibility(View.GONE);
+
+        iv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
 
 
 
@@ -98,6 +104,16 @@ public class PaymentActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void init() {
+        tv_continue=findViewById(R.id.tv_continue);
+        progress=findViewById(R.id.progress);
+        ll_Main=findViewById(R.id.ll_Main);
+        iv_back=findViewById(R.id.iv_back);
+
+        progress.setVisibility(View.VISIBLE);
+        ll_Main.setVisibility(View.GONE);
     }
 
     private void order(Address address) {

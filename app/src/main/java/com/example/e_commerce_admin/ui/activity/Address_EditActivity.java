@@ -76,7 +76,7 @@ public class Address_EditActivity extends AppCompatActivity {
             id = getIntent().getStringExtra("id");
             address = gson.fromJson(getIntent().getStringExtra("Address"), Address.class);
 
-            et_pincode.setText(address.getPincode());
+                et_pincode.setText(address.getPincode());
             et_address.setText(address.getAddress());
             et_city.setText(address.getCity());
             et_landmark.setText(address.getLandmark());

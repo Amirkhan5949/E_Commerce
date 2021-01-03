@@ -62,7 +62,7 @@ public class All_Address_Adapter extends FirebaseRecyclerAdapter<Address, All_Ad
 
         final String id = getRef(position).getKey();
 
-         holder.user_name.setText(model.getName());
+        holder.user_name.setText(model.getName());
         holder.alladd_mob_no.setText(model.getMob_no());
         holder.tv_addtype.setText(model.getAddress_type());
         holder.user_add.setText(model.getAddress());
@@ -71,9 +71,9 @@ public class All_Address_Adapter extends FirebaseRecyclerAdapter<Address, All_Ad
         holder.iv_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(holder.iv_edit.getContext(), Address_EditActivity.class);
-                intent.putExtra("type","edit");
-                intent.putExtra("id",id);
+                Intent intent = new Intent(holder.iv_edit.getContext(), Address_EditActivity.class);
+                intent.putExtra("type", "edit");
+                intent.putExtra("id", id);
                 intent.putExtra("Address", gson.toJson(model));
                 holder.iv_edit.getContext().startActivity(intent);
             }
@@ -90,12 +90,12 @@ public class All_Address_Adapter extends FirebaseRecyclerAdapter<Address, All_Ad
                         .removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        Log.i("fsfdfd", "onComplete: "+task.isSuccessful());
+                        Log.i("fsfdfd", "onComplete: " + task.isSuccessful());
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.i("fsfdfd", "onFailure: "+e.getMessage());
+                        Log.i("fsfdfd", "onFailure: " + e.getMessage());
                     }
                 });
             }
@@ -131,10 +131,10 @@ public class All_Address_Adapter extends FirebaseRecyclerAdapter<Address, All_Ad
 
 
     class Order_Detail_Adapter_View extends RecyclerView.ViewHolder {
-        RadioButton rb;
-        LinearLayout ll_radio;
-        ImageView iv_edit, iv_delete;
-        TextView user_name, user_add, alladd_mob_no, tv_addtype;
+        private RadioButton rb;
+        private LinearLayout ll_radio;
+        private ImageView iv_edit, iv_delete;
+        private TextView user_name, user_add, alladd_mob_no, tv_addtype;
 
         public Order_Detail_Adapter_View(@NonNull View itemView) {
             super(itemView);

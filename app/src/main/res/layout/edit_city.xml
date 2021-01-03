@@ -16,7 +16,7 @@
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="State list"
+            android:text="City list"
             android:textSize="24sp"
             android:textColor="@color/black"
             android:fontFamily="@font/simple"/>

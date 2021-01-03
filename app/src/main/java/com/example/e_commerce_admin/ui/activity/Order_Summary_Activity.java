@@ -8,6 +8,7 @@ import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -39,6 +40,7 @@ public class Order_Summary_Activity extends AppCompatActivity {
     private RecyclerView rv_order_summary;
     private CartAdapter cartAdapter;
     private ProgressBar progress;
+    private ImageView iv_back;
     private LinearLayout ll_main;
     private int TOTAL_API_CALL = 3 , CURRENT_API_CALL;
 
@@ -59,6 +61,12 @@ public class Order_Summary_Activity extends AppCompatActivity {
         init();
         cartnapshot();
 
+        iv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         btn_change_Add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -228,6 +236,7 @@ public class Order_Summary_Activity extends AppCompatActivity {
 
     private void init() {
         tv_id_item = findViewById(R.id.tv_id_item);
+        iv_back = findViewById(R.id.iv_back);
         ll_main = findViewById(R.id.ll_main);
         progress = findViewById(R.id.progress);
         tv_sellingp = findViewById(R.id.tv_sellingp);
