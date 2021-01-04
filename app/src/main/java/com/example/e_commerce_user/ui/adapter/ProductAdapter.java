@@ -148,11 +148,7 @@ private ClickCallBack clickCallBack;
                         });
 
             }
-            else {
-                Intent intent=new Intent(holder.icon_favourite.getContext(), MainActivity.class);
-                holder.icon_favourite.getContext().startActivity(intent);
-            }
-        }
+         }
     }
 
 
