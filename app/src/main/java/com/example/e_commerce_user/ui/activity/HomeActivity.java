@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
@@ -15,6 +16,7 @@ import com.example.e_commerce_user.ui.fragment.CategoryFragment;
 import com.example.e_commerce_user.ui.fragment.HomeFragment;
 import com.example.e_commerce_user.ui.fragment.MenuFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -44,7 +46,12 @@ public class HomeActivity extends AppCompatActivity {
                         replace(new HomeFragment(),"HomeFragment");
                         return true;
                     case R.id.cart:
-                        replace( CartFragment.newInstance("FromFregment"),"CartFragment");
+                        if (FirebaseAuth.getInstance().getUid()!=null){
+                            replace( CartFragment.newInstance("FromFregment"),"CartFragment");
+                        }
+                        else {
+                            startActivity(new Intent(HomeActivity.this,MainActivity.class));
+                        }
                         return true;
 
                     case R.id.category:

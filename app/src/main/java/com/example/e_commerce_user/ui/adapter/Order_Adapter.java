@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.e_commerce_user.R;
+import com.example.e_commerce_user.model.Cart;
 import com.example.e_commerce_user.model.Order;
 import com.example.e_commerce_user.ui.activity.OrderDetailActivity;
 import com.example.e_commerce_user.utils.FirebaseConstants;
@@ -44,11 +45,13 @@ public class Order_Adapter extends FirebaseRecyclerAdapter<Order, Order_Adapter.
 
    private Loader loader;
   private  ProgressBar progressBar ;
+  private ClickCallBack clickCallBack;
 
-    public Order_Adapter(@NonNull FirebaseRecyclerOptions<Order> options, Context context, ProgressBar progress) {
+    public Order_Adapter(@NonNull FirebaseRecyclerOptions<Order> options, Context context, ProgressBar progress, ClickCallBack clickCallBack) {
         super(options);
         progressBar=progress;
         this.loader = new Loader(context);
+        this.clickCallBack=clickCallBack;
     }
 
     @NonNull
@@ -63,6 +66,7 @@ public class Order_Adapter extends FirebaseRecyclerAdapter<Order, Order_Adapter.
     public void onDataChanged() {
         super.onDataChanged();
         progressBar.setVisibility(View.GONE);
+        clickCallBack.click(getItemCount());
     }
 
     @Override
@@ -335,5 +339,10 @@ public class Order_Adapter extends FirebaseRecyclerAdapter<Order, Order_Adapter.
             iv_expandqty = itemView.findViewById(R.id.iv_expandqty);
             iv_image = itemView.findViewById(R.id.iv_image);
         }
+    }
+
+    public interface ClickCallBack{
+
+        void click(int count);
     }
 }

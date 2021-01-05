@@ -224,10 +224,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                     });
 
         }
-        else {
-            Intent intent=new Intent(this,MainActivity.class);
-            startActivity(intent);
-        }
+
 
         if (FirebaseAuth.getInstance().getUid()!=null){
             FirebaseDatabase.getInstance().getReference().child(FirebaseConstants.Cart.key)
@@ -251,11 +248,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                     });
 
         }
-        else {
-            Intent intent=new Intent(this,MainActivity.class);
-            startActivity(intent);
-        }
-    }
+     }
 
     private void removeToWishList() {
         FirebaseDatabase.getInstance().getReference()

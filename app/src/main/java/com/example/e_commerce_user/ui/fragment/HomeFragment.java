@@ -21,6 +21,7 @@ import com.example.e_commerce_user.model.Brand;
 import com.example.e_commerce_user.model.Product;
 import com.example.e_commerce_user.model.SuperCategory;
 import com.example.e_commerce_user.ui.activity.HomeActivity;
+import com.example.e_commerce_user.ui.activity.SearchActivity;
 import com.example.e_commerce_user.ui.activity.SubCategoryActivity;
 import com.example.e_commerce_user.ui.adapter.BrandAdapter;
 import com.example.e_commerce_user.ui.adapter.CategoryAdapter;
@@ -47,7 +48,7 @@ public class HomeFragment extends Fragment {
     private CategoryAdapter adapter;
     private Slider slider;
     private TextView tv_viewall;
-    private LinearLayout ll_main;
+    private LinearLayout ll_main,ll_search;
     private ProductAdapter productAdapter;
     private ProgressBar progress;
     private ProductAdapter recomdedAdapter;
@@ -73,6 +74,14 @@ public class HomeFragment extends Fragment {
         init();
         getBanner();
 
+        ll_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), SearchActivity.class));
+
+            }
+        });
+
         tv_viewall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -92,6 +101,7 @@ public class HomeFragment extends Fragment {
         brand_recycler = view.findViewById(R.id.brandrecycler);
         recomded_recycler = view.findViewById(R.id.recommanded_recycler);
         progress = view.findViewById(R.id.progress);
+        ll_search = view.findViewById(R.id.ll_search);
 
 
         FirebaseRecyclerOptions<Product> option =

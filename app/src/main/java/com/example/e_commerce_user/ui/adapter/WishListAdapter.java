@@ -13,9 +13,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.utils.Utils;
 import com.example.e_commerce_user.R;
 import com.example.e_commerce_user.model.Product;
 import com.example.e_commerce_user.ui.activity.ProductDetailActivity;
+import com.example.e_commerce_user.utils.util;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.squareup.picasso.Picasso;
@@ -38,7 +40,13 @@ public class WishListAdapter extends FirebaseRecyclerAdapter<Product,WishListAda
     protected void onBindViewHolder(@NonNull final WishListAdapter_View holder, int position, @NonNull Product model) {
 
         final String id = getRef(position).getKey();
-        holder.p_name.setText(model.getId());
+        holder.p_name.setText(model.getName());
+        holder.tv_mrp.setText(model.getMrp_price());
+        holder.tv_pdatail.setText(model.getDetails());
+        holder.tv_sellingp.setText(model.getSelling_price());
+
+        holder.tv_off.setText(util.discount(Integer.parseInt(model.getMrp_price())
+                ,Integer.parseInt(model.getSelling_price()))+"%"+" off");
         Picasso.get().load(model.getImg()).into(holder.p_image);
 
         Log.i("sfsfdffe", "onBindViewHolder: "+model.toString());
@@ -71,7 +79,7 @@ public class WishListAdapter extends FirebaseRecyclerAdapter<Product,WishListAda
     public class WishListAdapter_View extends RecyclerView.ViewHolder {
 
         ImageView p_image,icon_favourite;
-        TextView p_name;
+        TextView p_name,tv_sellingp,tv_mrp,tv_off,tv_pdatail;
         LinearLayout p_layout;
 
         public WishListAdapter_View(@NonNull View itemView) {
@@ -81,6 +89,10 @@ public class WishListAdapter extends FirebaseRecyclerAdapter<Product,WishListAda
             p_name = itemView.findViewById(R.id.p_name);
             p_layout = itemView.findViewById(R.id.p_layout);
             icon_favourite = itemView.findViewById(R.id.icon_favourite);
+            tv_off = itemView.findViewById(R.id.tv_off);
+            tv_sellingp = itemView.findViewById(R.id.tv_sellingp);
+            tv_mrp = itemView.findViewById(R.id.tv_mrp);
+            tv_pdatail = itemView.findViewById(R.id.tv_pdatail);
 
         }
     }

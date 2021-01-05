@@ -39,6 +39,17 @@
         android:id="@+id/progress"
         android:layout_centerInParent="true"/>
 
+    <TextView
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sorry No Data Found"
+        android:textSize="20sp"
+        android:textColor="@color/green"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:id="@+id/tv_data"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:layoutAnimation="@anim/item_layout"
 
