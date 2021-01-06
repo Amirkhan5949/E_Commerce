@@ -20,7 +20,9 @@ import com.example.e_commerce_user.model.Banner;
 import com.example.e_commerce_user.model.Brand;
 import com.example.e_commerce_user.model.Product;
 import com.example.e_commerce_user.model.SuperCategory;
+import com.example.e_commerce_user.ui.activity.CartActivity;
 import com.example.e_commerce_user.ui.activity.HomeActivity;
+import com.example.e_commerce_user.ui.activity.MainActivity;
 import com.example.e_commerce_user.ui.activity.SearchActivity;
 import com.example.e_commerce_user.ui.activity.SubCategoryActivity;
 import com.example.e_commerce_user.ui.adapter.BrandAdapter;
@@ -29,6 +31,7 @@ import com.example.e_commerce_user.ui.adapter.MainSliderAdapter;
 import com.example.e_commerce_user.ui.adapter.ProductAdapter;
 import com.example.e_commerce_user.utils.FirebaseConstants;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -48,7 +51,7 @@ public class HomeFragment extends Fragment {
     private CategoryAdapter adapter;
     private Slider slider;
     private TextView tv_viewall;
-    private LinearLayout ll_main,ll_search;
+    private LinearLayout ll_main,ll_search,ll_Cart;
     private ProductAdapter productAdapter;
     private ProgressBar progress;
     private ProductAdapter recomdedAdapter;
@@ -85,13 +88,13 @@ public class HomeFragment extends Fragment {
         tv_viewall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                p_recycler.startLayoutAnimation();
                 startActivity(new Intent(getContext(), SubCategoryActivity.class));
             }
         });
 
         return view;
     }
+
 
     private void init() {
         rv_Category = view.findViewById(R.id.rv_Category);
@@ -102,7 +105,17 @@ public class HomeFragment extends Fragment {
         recomded_recycler = view.findViewById(R.id.recommanded_recycler);
         progress = view.findViewById(R.id.progress);
         ll_search = view.findViewById(R.id.ll_search);
+        ll_Cart = view.findViewById(R.id.ll_Cart);
 
+
+        ll_Cart.setOnClickListener(view1 -> {
+            if (FirebaseAuth.getInstance().getUid() != null) {
+                Intent intent = new Intent(getActivity(), CartActivity.class);
+                startActivity(intent);
+            } else {
+                startActivity(new Intent(getContext(), MainActivity.class));
+            }
+        });
 
         FirebaseRecyclerOptions<Product> option =
                 new FirebaseRecyclerOptions.Builder<Product>()
@@ -177,26 +190,6 @@ public class HomeFragment extends Fragment {
 
     }
 
-
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        adapter.startListening();
-        productAdapter.startListening();
-        brandAdapter.startListening();
-        recomdedAdapter.startListening();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        adapter.stopListening();
-        brandAdapter.stopListening();
-        productAdapter.stopListening();
-        recomdedAdapter.stopListening();
-    }
-
     private void getBanner() {
 
         FirebaseDatabase.getInstance().getReference()
@@ -221,17 +214,40 @@ public class HomeFragment extends Fragment {
                 });
 
     }
+
     private void showUi() {
         CURRENT_API_CALL++;
         if(CURRENT_API_CALL==TOTAL_API_CALL){
             ll_main.setVisibility(View.VISIBLE);
             progress.setVisibility(View.GONE);
-//            new Handler().postDelayed(() -> {
-//                p_recycler.startLayoutAnimation();
-//                 recomded_recycler.startLayoutAnimation();
-//                rv_Category .startLayoutAnimation();
-//                brand_recycler.startLayoutAnimation();
-//            },500);
         }
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        adapter.startListening();
+        productAdapter.startListening();
+        brandAdapter.startListening();
+        recomdedAdapter.startListening();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        adapter.stopListening();
+        brandAdapter.stopListening();
+        productAdapter.stopListening();
+        recomdedAdapter.stopListening();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        TOTAL_API_CALL = 4;
+        CURRENT_API_CALL = 0;
+        progress.setVisibility(View.VISIBLE);
+        ll_main.setVisibility(View.GONE);
+    }
+
 }
