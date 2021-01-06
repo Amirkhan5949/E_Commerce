@@ -11,7 +11,6 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        android:visibility="gone"
         android:background="@color/colorDarkblue"
         android:layout_width="match_parent"
         android:layout_height="56dp">
@@ -29,8 +28,11 @@
     <com.google.android.material.tabs.TabLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabIndicatorColor="@color/colorBlack"
+        app:tabBackground="@color/colorDarkblue"
+        app:tabTextColor="@color/white"
+        app:tabIndicatorColor="@color/white"
         app:tabIndicatorHeight="2dp"
+        app:tabMode="scrollable"
         app:tabIndicatorFullWidth="false"
         android:id="@+id/tabLayout"/>
 

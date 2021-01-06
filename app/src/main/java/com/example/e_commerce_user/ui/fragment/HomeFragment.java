@@ -20,6 +20,8 @@ import com.example.e_commerce_user.model.Banner;
 import com.example.e_commerce_user.model.Brand;
 import com.example.e_commerce_user.model.Product;
 import com.example.e_commerce_user.model.SuperCategory;
+import com.example.e_commerce_user.ui.activity.AllProductListActivity;
+import com.example.e_commerce_user.ui.activity.BrandActivity;
 import com.example.e_commerce_user.ui.activity.CartActivity;
 import com.example.e_commerce_user.ui.activity.HomeActivity;
 import com.example.e_commerce_user.ui.activity.MainActivity;
@@ -50,7 +52,7 @@ public class HomeFragment extends Fragment {
     private BrandAdapter brandAdapter;
     private CategoryAdapter adapter;
     private Slider slider;
-    private TextView tv_viewall;
+    private TextView tv_viewall,tv_newviewall,brand_viewall,recommand_viewall;
     private LinearLayout ll_main,ll_search,ll_Cart;
     private ProductAdapter productAdapter;
     private ProgressBar progress;
@@ -92,19 +94,43 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        brand_viewall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), BrandActivity.class));
+
+            }
+        });
+        tv_newviewall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), AllProductListActivity.class));
+            }
+        });
+
+        recommand_viewall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), AllProductListActivity.class));
+            }
+        });
+
         return view;
     }
 
 
     private void init() {
         rv_Category = view.findViewById(R.id.rv_Category);
+        recommand_viewall = view.findViewById(R.id.recommand_viewall);
         tv_viewall = view.findViewById(R.id.tv_viewall);
+        brand_viewall = view.findViewById(R.id.brand_viewall);
         ll_main = view.findViewById(R.id.ll_main);
         p_recycler = view.findViewById(R.id.p_recycler);
         brand_recycler = view.findViewById(R.id.brandrecycler);
         recomded_recycler = view.findViewById(R.id.recommanded_recycler);
         progress = view.findViewById(R.id.progress);
         ll_search = view.findViewById(R.id.ll_search);
+        tv_newviewall = view.findViewById(R.id.tv_newviewall);
         ll_Cart = view.findViewById(R.id.ll_Cart);
 
 

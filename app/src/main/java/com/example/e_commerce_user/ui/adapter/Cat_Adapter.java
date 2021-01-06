@@ -34,6 +34,8 @@ public class Cat_Adapter extends FirebaseRecyclerAdapter<SuperCategory,Cat_Adapt
     @Override
     public void onDataChanged() {
         super.onDataChanged();
+         clickCallBack.load(getItemCount());
+
         bar.setVisibility(View.GONE);
 
     }
@@ -80,7 +82,9 @@ public class Cat_Adapter extends FirebaseRecyclerAdapter<SuperCategory,Cat_Adapt
     }
 
     public interface ClickCallBack{
-        void click(int i,String id);
-     }
+        void click(int i,String id );
+        void load(int count);
+      }
+
 
 }

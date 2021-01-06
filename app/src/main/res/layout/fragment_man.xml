@@ -90,6 +90,17 @@
         android:layout_height="50dp"
         android:id="@+id/progress"/>
 
+    <TextView
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sorry No Data Found"
+        android:textSize="20sp"
+        android:textColor="@color/colorDarkblue"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:id="@+id/tv_data"/>
+
 
 
 </RelativeLayout>

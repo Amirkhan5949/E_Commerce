@@ -20,7 +20,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.activity.SearchActivity"></activity>
+        <activity android:name=".ui.activity.AllProductListActivity"></activity>
+        <activity android:name=".ui.activity.SearchActivity" />
         <activity android:name=".ui.activity.DemoActivity" />
         <activity android:name=".ui.activity.LequidActivity" />
         <activity android:name=".ui.activity.BrandActivity" />

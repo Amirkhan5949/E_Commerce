@@ -211,7 +211,7 @@
                             android:text="View All"
                             android:background="@drawable/buttonbackground"
                             android:textColor="#ffffff"
-                            android:id="@+id/b_viewall"/>
+                            android:id="@+id/tv_newviewall"/>
 
                     </LinearLayout>
 

@@ -46,18 +46,6 @@ public class SearchActivity extends AppCompatActivity {
         rv_productlist.addItemDecoration(new GridSpacingItemDecoration(2, util.dpToPx(rv_productlist.getContext(),0),true));
 
 
-//        Query query = FirebaseDatabase.getInstance().getReference()
-//                .child(FirebaseConstants.Product.key)
-//                .orderByChild(FirebaseConstants.Product.category_id)
-//                .equalTo(supercatid);
-//
-//        FirebaseRecyclerOptions<Product> option =
-//                new FirebaseRecyclerOptions.Builder<Product>()
-//                        .setQuery(query, Product.class)
-//                        .build();
-//
-//        adapter=new WishListAdapter(option,progressBar);
-//        rv_productlist.setAdapter(adapter);
 
         DatabaseReference query = FirebaseDatabase.getInstance().getReference()
                 .child(FirebaseConstants.Product.key);

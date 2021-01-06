@@ -25,6 +25,7 @@ import com.example.e_commerce_user.ui.adapter.ProductReview_Adapter;
 import com.example.e_commerce_user.ui.adapter.Size_Adapter;
 import com.example.e_commerce_user.utils.FirebaseConstants;
 import com.example.e_commerce_user.utils.Loader;
+import com.example.e_commerce_user.utils.util;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -50,7 +51,7 @@ public class ProductDetailActivity extends AppCompatActivity {
     private RecyclerView rv_color, rv_size;
     private ImageView iv_back,icon_favourite,iv_cart;
     private RecyclerView rv_review;
-    private TextView tv_p_name, tv_details, tv_rs, tv_add;
+    private TextView tv_p_name, tv_details, tv_rs, tv_add,tv_brand,tv_off,tv_mrp,tv_sellingp;
     private List<Color> selectedColor = new ArrayList<>();
     private List<Images> imagesList = new ArrayList<>();
     private Size_Adapter size_adapter;
@@ -182,6 +183,11 @@ public class ProductDetailActivity extends AppCompatActivity {
 
                 tv_p_name.setText(product.getName());
                 tv_details.setText(product.getDetails());
+                tv_sellingp.setText("₹"+product.getSelling_price());
+                tv_mrp.setText("₹"+product.getMrp_price());
+                tv_brand.setText(product.getBrand());
+                tv_off.setText(util.discount(Integer.parseInt(product.getMrp_price())
+                        ,Integer.parseInt(product.getSelling_price()))+"%"+" off");
                 tv_rs.setText(product.getSelling_price());
 
                 Log.i("defdgdgrt", "onDataChange: " + snapshot.toString());
@@ -326,6 +332,10 @@ public class ProductDetailActivity extends AppCompatActivity {
         banner_slider = findViewById(R.id.banner_slider);
 
         rv_color = findViewById(R.id.rv_color);
+        tv_brand = findViewById(R.id.tv_brand);
+        tv_off = findViewById(R.id.tv_off);
+        tv_mrp = findViewById(R.id.tv_mrp);
+        tv_sellingp = findViewById(R.id.tv_sellingp);
         iv_cart = findViewById(R.id.iv_cart);
         icon_favourite = findViewById(R.id.icon_favourite);
         iv_back = findViewById(R.id.iv_back);

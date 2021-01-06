@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.example.e_commerce_user.R;
 import com.example.e_commerce_user.model.GridSpacingItemDecoration;
@@ -30,6 +31,7 @@ public class ManFragment extends Fragment {
 
     private View view;
     private RecyclerView catrecycler;
+    private TextView tv_data;
     private Cat_Adapter adapter;
     private ProgressBar progress;
     final DatabaseReference base = FirebaseDatabase.getInstance().getReference().child(FirebaseConstants.Category.key);
@@ -80,6 +82,14 @@ public class ManFragment extends Fragment {
 //                   ((HomeActivity)getActivity()).replace(ProductListFragment.newInstance(id),"ProductListFragment");
                }
 
+               @Override
+               public void load(int count) {
+                   if (count==0){
+                       tv_data.setVisibility(View.VISIBLE);
+
+                   }
+               }
+
 
            });
         catrecycler.setAdapter(adapter);
@@ -104,6 +114,7 @@ public class ManFragment extends Fragment {
     private void init() {
         catrecycler=view.findViewById(R.id.cat_recycler);
         progress=view.findViewById(R.id.progress);
+        tv_data=view.findViewById(R.id.tv_data);
     }
 
     @Override

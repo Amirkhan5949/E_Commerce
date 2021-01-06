@@ -36,8 +36,11 @@
         android:layout_below="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabIndicatorColor="@color/colorBlack"
+        app:tabIndicatorColor="@color/white"
+        app:tabBackground="@color/colorDarkblue"
+        app:tabTextColor="@color/white"
         app:tabIndicatorHeight="2dp"
+        app:tabMode="scrollable"
         app:tabIndicatorFullWidth="false"
         android:id="@+id/tabLayout"/>
 
