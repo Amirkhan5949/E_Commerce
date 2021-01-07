@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -68,6 +70,8 @@ public class ProductDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_product_detail);
 
         init();
@@ -181,6 +185,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                     size_adapter.notifyDataSetChanged();
                 }
 
+                title.setText(product.getName());
                 tv_p_name.setText(product.getName());
                 tv_details.setText(product.getDetails());
                 tv_sellingp.setText("₹"+product.getSelling_price());
@@ -336,9 +341,9 @@ public class ProductDetailActivity extends AppCompatActivity {
         tv_off = findViewById(R.id.tv_off);
         tv_mrp = findViewById(R.id.tv_mrp);
         tv_sellingp = findViewById(R.id.tv_sellingp);
-        iv_cart = findViewById(R.id.iv_cart);
+        iv_cart = findViewById(R.id.iv_Cart);
         icon_favourite = findViewById(R.id.icon_favourite);
-        iv_back = findViewById(R.id.iv_back);
+        iv_back = findViewById(R.id.iv_Back);
         rv_size = findViewById(R.id.rv_size);
         tv_add = findViewById(R.id.tv_add);
         tv_p_name = findViewById(R.id.tv_p_name);

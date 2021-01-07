@@ -37,7 +37,8 @@
         <activity android:name=".ui.activity.Order_Summary_Activity" />
         <activity android:name=".ui.activity.ProfileActivity" />
         <activity android:name=".ui.activity.CartActivity" />
-        <activity android:name=".ui.activity.ProductDetailActivity" />
+        <activity android:name=".ui.activity.ProductDetailActivity"
+            android:theme="@style/AppThemeLight" />
         <activity android:name=".ui.activity.AddressActivity" />
         <activity android:name=".ui.activity.OrderDetailActivity" />
         <activity android:name=".ui.activity.OrdersActivity" />
