@@ -342,7 +342,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         tv_mrp = findViewById(R.id.tv_mrp);
         tv_sellingp = findViewById(R.id.tv_sellingp);
         iv_cart = findViewById(R.id.iv_Cart);
-        icon_favourite = findViewById(R.id.icon_favourite);
+        icon_favourite = findViewById(R.id.iv_Wishlist);
         iv_back = findViewById(R.id.iv_Back);
         rv_size = findViewById(R.id.rv_size);
         tv_add = findViewById(R.id.tv_add);

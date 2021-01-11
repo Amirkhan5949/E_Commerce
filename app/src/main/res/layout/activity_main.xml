@@ -19,10 +19,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <TextView
+                android:fontFamily="@font/anti_corona"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="E_Commerce_Admin."
+                android:text="@string/app_name"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:textColor="#000000"

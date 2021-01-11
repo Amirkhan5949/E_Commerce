@@ -325,8 +325,6 @@ public class Order_Summary_Activity extends AppCompatActivity {
         if(CURRENT_API_CALL==TOTAL_API_CALL){
             ll_main.setVisibility(View.VISIBLE);
             progress.setVisibility(View.GONE);
-
-
         }
     }
 
