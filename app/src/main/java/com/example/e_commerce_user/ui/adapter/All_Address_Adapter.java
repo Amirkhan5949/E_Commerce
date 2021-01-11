@@ -65,7 +65,8 @@ public class All_Address_Adapter extends FirebaseRecyclerAdapter<Address, All_Ad
         holder.user_name.setText(model.getName());
         holder.alladd_mob_no.setText(model.getMob_no());
         holder.tv_addtype.setText(model.getAddress_type());
-        holder.user_add.setText(model.getAddress());
+        holder.user_add.setText(model.getAddress()+","+model.getLandmark()+","+model.getCity()
+                +","+model.getState()+","+model.getPincode());
         holder.rb.setChecked(selectedPosition.equals(id));
 
         holder.iv_edit.setOnClickListener(new View.OnClickListener() {

@@ -66,10 +66,6 @@ public class OrdersActivity extends AppCompatActivity {
             order_recycler.setAdapter(adapter);
 
 
-
-
-
-
     }
 
     private void init() {

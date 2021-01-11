@@ -54,7 +54,9 @@ public class SearchActivity extends AppCompatActivity {
                         .setQuery(query, Product.class)
                         .build();
 
-        adapter=new WishListAdapter(options,progressBar);
+        adapter=new WishListAdapter(options,progressBar,count -> {
+
+        });
         rv_productlist.setAdapter(adapter);
 
         iv_search.setOnClickListener(new View.OnClickListener() {
@@ -74,7 +76,9 @@ public class SearchActivity extends AppCompatActivity {
                                     .setQuery(query, Product.class)
                                     .build();
 
-                    adapter=new WishListAdapter(options,progressBar);
+                    adapter=new WishListAdapter(options,progressBar, count ->{
+
+                    });
                     rv_productlist.setAdapter(adapter);
                     adapter.startListening();
 

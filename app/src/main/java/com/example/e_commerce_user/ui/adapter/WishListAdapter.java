@@ -25,15 +25,18 @@ import com.squareup.picasso.Picasso;
 public class WishListAdapter extends FirebaseRecyclerAdapter<Product,WishListAdapter.WishListAdapter_View> {
 
    private ProgressBar  progressBar;
-    public WishListAdapter(@NonNull FirebaseRecyclerOptions<Product> options, ProgressBar progress) {
+    private  ClickCallBack clickCallBack;
+    public WishListAdapter(@NonNull FirebaseRecyclerOptions<Product> options, ProgressBar progress,ClickCallBack clickCallBack) {
         super(options);
          progressBar=progress;
+        this.clickCallBack=clickCallBack;
     }
 
     @Override
     public void onDataChanged() {
         super.onDataChanged();
         progressBar.setVisibility(View.GONE);
+        clickCallBack.click(getItemCount());
     }
 
     @Override
@@ -41,9 +44,9 @@ public class WishListAdapter extends FirebaseRecyclerAdapter<Product,WishListAda
 
         final String id = getRef(position).getKey();
         holder.p_name.setText(model.getName());
-        holder.tv_mrp.setText(model.getMrp_price());
+        holder.tv_mrp.setText("₹"+model.getMrp_price());
         holder.tv_pdatail.setText(model.getDetails());
-        holder.tv_sellingp.setText(model.getSelling_price());
+        holder.tv_sellingp.setText("₹"+model.getSelling_price());
 
         holder.tv_off.setText(util.discount(Integer.parseInt(model.getMrp_price())
                 ,Integer.parseInt(model.getSelling_price()))+"%"+" off");
@@ -95,5 +98,8 @@ public class WishListAdapter extends FirebaseRecyclerAdapter<Product,WishListAda
             tv_pdatail = itemView.findViewById(R.id.tv_pdatail);
 
         }
+    }
+    public interface ClickCallBack{
+        void click(int count);
     }
 }

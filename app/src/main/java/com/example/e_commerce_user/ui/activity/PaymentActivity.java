@@ -56,8 +56,7 @@ public class PaymentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
 
-       init();
-
+        init();
 
         iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,10 +64,6 @@ public class PaymentActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-
-
-
 
         FirebaseDatabase.getInstance().getReference().child(FirebaseConstants.Cart.key)
                 .child(FirebaseAuth.getInstance().getUid())

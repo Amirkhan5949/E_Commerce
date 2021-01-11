@@ -3,6 +3,7 @@ package com.example.e_commerce_user.ui.activity;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 import android.widget.Button;
@@ -56,87 +57,151 @@ public class Order_Summary_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_order__summary_);
 
         init();
+        setListener();
+
         cartnapshot();
+        getAddress();
+        setCartAdapter();
 
-        iv_back.setOnClickListener(new View.OnClickListener() {
+    }
+
+    private void setCartAdapter() {
+        rv_order_summary.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        FirebaseRecyclerOptions<Cart> option2 =
+                new FirebaseRecyclerOptions.Builder<Cart>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference()
+                                .child(FirebaseConstants.Cart.key)
+                                .child(FirebaseAuth.getInstance().getUid()), Cart.class)
+                        .build();
+
+        cartAdapter = new CartAdapter(option2, list, this, new CartAdapter.ClickCallBack() {
             @Override
-            public void onClick(View view) {
-                finish();
+            public void click(String newQty, Cart model) {
+
+                int updtqty = Integer.parseInt(newQty);
+                int qty = (model.getQuantity());
+
+
+                int esctqty = updtqty - qty;
+
+                Order_Summary_Activity.this.qty = Order_Summary_Activity.this.qty + esctqty;
+                int a = esctqty * Integer.parseInt(model.getProduct().getSelling_price()) + finalPrice;
+                finalPrice = a;
+                tv_total_amnt.setText(a + "");
+                tv_total_amnt_rs.setText(a + "");
+
+                int c = esctqty * Integer.parseInt(model.getDiscount());
+                discount = c;
+
+                int b = esctqty * Integer.parseInt(model.getProduct().getMrp_price());
+
+
+                tv_id_item.setText("Items " + Order_Summary_Activity.this.qty + "");
+
+                tv_sellingp.setText(b + mrpPrice + "");
+                mrpPrice = b + mrpPrice;
+
+            }
+
+            @Override
+            public void remove(Cart model, String id) {
+
+            }
+
+            @Override
+            public void load() {
+                showUi();
             }
         });
+        rv_order_summary.setAdapter(cartAdapter);
 
-        btn_change_Add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Order_Summary_Activity.this,AddressActivity.class));
-            }
-        });
+    }
 
+    private void getAddress() {
         FirebaseDatabase.getInstance().getReference().child(FirebaseConstants.User.key)
                 .child(FirebaseAuth.getInstance().getUid())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for (final DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                         String id=  dataSnapshot.child("default_address_index").getValue(String.class);
-                            if (id==null){
-                                FirebaseDatabase.getInstance().getReference().child("Address")
-                                        .child(FirebaseAuth.getInstance().getUid())
-                                        .addListenerForSingleValueEvent(new ValueEventListener() {
-                                            @Override
-                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        String id=  snapshot.child("default_address_index").getValue(String.class);
+                        if (id==null){
+                            Log.i("sdbcjsdbc", "onDataChange: 1");
+                            FirebaseDatabase.getInstance().getReference().child("Address")
+                                    .child(FirebaseAuth.getInstance().getUid())
+                                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
 
+                                            if (snapshot.getChildrenCount()!=0){
                                                 for (DataSnapshot dataSnapshot1 : snapshot.getChildren()){
-                                                    showUi();
-                                                    if (snapshot.getChildrenCount()!=0){
+                                                    tv_user_name.setText(dataSnapshot1.child(FirebaseConstants.Address.name).getValue(String.class));
+                                                    tv_add_type.setText(dataSnapshot1.child(FirebaseConstants.Address.address_type).getValue().toString());
+                                                    String s = dataSnapshot1.child(FirebaseConstants.Address.address).getValue(String.class)+", "+
+                                                            dataSnapshot1.child(FirebaseConstants.Address.landmark).getValue(String.class)+", "+
+                                                            dataSnapshot1.child(FirebaseConstants.Address.city).getValue(String.class)+", "+
+                                                            dataSnapshot1.child(FirebaseConstants.Address.state).getValue(String.class)+", "+
+                                                            dataSnapshot1.child(FirebaseConstants.Address.pincode).getValue(String.class);
+                                                    tv_user_add.setText(s);
+                                                    tv_mob_no.setText(dataSnapshot1.child(FirebaseConstants.Address.mob_no).getValue().toString());
+                                                    break;
+                                                }
+                                                showUi();
+                                            }
+                                            else {
+                                                Intent intent=new Intent(Order_Summary_Activity.this,Address_EditActivity.class);
+                                                intent.putExtra("ComeFrom","OrderSummary");
+                                                intent.putExtra("type","float");
+                                                startActivity(intent);
+                                                finish();
+                                            }
 
+
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+                                            showUi();
+                                            Log.i("sdbcjsdbc", "onDataChange: 1111"+error.getMessage());
+                                        }
+                                    });
+                        }
+                        else {
+                            Log.i("sdbcjsdbc", "onDataChange: 1");
+                            FirebaseDatabase.getInstance().getReference().child("Address")
+                                    .child(FirebaseAuth.getInstance().getUid())
+                                    .child(id)
+                                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            Log.i("sdbcjsdbc", "onDataChange: 2");
+                                            if (snapshot.exists()) {
+                                                showUi();
+                                                if(snapshot.getChildrenCount()==0){
+                                                    Intent intent = new Intent(Order_Summary_Activity.this,AddressActivity.class);
+                                                    startActivity(intent);
+                                                }
+                                                else {
+                                                    for (DataSnapshot dataSnapshot1 : snapshot.getChildren()){
                                                         tv_user_name.setText(dataSnapshot1.child(FirebaseConstants.Address.name).getValue(String.class));
                                                         tv_add_type.setText(dataSnapshot1.child(FirebaseConstants.Address.address_type).getValue().toString());
                                                         tv_user_add.setText(dataSnapshot1.child(FirebaseConstants.Address.address).getValue(String.class));
                                                         tv_mob_no.setText(dataSnapshot1.child(FirebaseConstants.Address.mob_no).getValue().toString());
-
-                                                        break;
-                                                    }
-                                                    else {
-                                                        Intent intent=new Intent(Order_Summary_Activity.this,Address_EditActivity.class);
-                                                        intent.putExtra("ComeFrom","OrderSummary");
-                                                        startActivity(intent);
                                                     }
                                                 }
 
                                             }
-
-                                            @Override
-                                            public void onCancelled(@NonNull DatabaseError error) {
-                                                showUi();
+                                            else {
+                                                Intent intent = new Intent(Order_Summary_Activity.this,AddressActivity.class);
+                                                startActivity(intent);
                                             }
-                                        });
-                            }
-                            else {
-                                FirebaseDatabase.getInstance().getReference().child("Address")
-                                        .child(FirebaseAuth.getInstance().getUid())
-                                        .child(id)
-                                        .addListenerForSingleValueEvent(new ValueEventListener() {
-                                            @Override
-                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                showUi();
-                                                for (DataSnapshot dataSnapshot1 : snapshot.getChildren()){
+                                        }
 
-                                                    tv_user_name.setText(dataSnapshot1.child(FirebaseConstants.Address.name).getValue(String.class));
-                                                    tv_add_type.setText(dataSnapshot1.child(FirebaseConstants.Address.address_type).getValue().toString());
-                                                    tv_user_add.setText(dataSnapshot1.child(FirebaseConstants.Address.address).getValue(String.class));
-                                                    tv_mob_no.setText(dataSnapshot1.child(FirebaseConstants.Address.mob_no).getValue().toString());
-
-                                                }
-                                            }
-
-                                            @Override
-                                            public void onCancelled(@NonNull DatabaseError error) {
-                                                showUi();
-                                            }
-                                        });
-                            }
-
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+                                            showUi();
+                                        }
+                                    });
                         }
                     }
 
@@ -146,8 +211,10 @@ public class Order_Summary_Activity extends AppCompatActivity {
                     }
                 });
 
-        rv_order_summary = findViewById(R.id.rv_order_summary);
-        tv_continue = findViewById(R.id.tv_continue);
+
+    }
+
+    private void setListener() {
 
         tv_continue.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -168,61 +235,19 @@ public class Order_Summary_Activity extends AppCompatActivity {
             }
         });
 
-        rv_order_summary.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-
-        FirebaseRecyclerOptions<Cart> option2 =
-                new FirebaseRecyclerOptions.Builder<Cart>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference()
-                                .child(FirebaseConstants.Cart.key)
-                                .child(FirebaseAuth.getInstance().getUid()), Cart.class)
-                        .build();
-
-        cartAdapter = new CartAdapter(option2, list, this, new CartAdapter.ClickCallBack() {
+        iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void click(String newQty, Cart model) {
-
-                int updtqty = Integer.parseInt(newQty);
-                int qty = (model.getQuantity());
-
-
-                int esctqty = updtqty - qty;
-
-                Order_Summary_Activity.this.qty = Order_Summary_Activity.this.qty + esctqty;
-                int a = esctqty * Integer.parseInt(model.getProduct().getSelling_price()) + finalPrice;
-                  finalPrice = a;
-                tv_total_amnt.setText(a + "");
-                tv_total_amnt_rs.setText(a + "");
-
-                int c = esctqty * Integer.parseInt(model.getDiscount());
-
-                discount = c;
-  //                tv_discount.setText( c +discount+"");
-//                Log.i("dsfsf", "click: "+(esctqty*Integer.parseInt(model.getDiscount())+discount));
-//                Log.i("dsfsf", "click: "+(discount));
-
-                int b = esctqty * Integer.parseInt(model.getProduct().getMrp_price());
-
-
-                tv_id_item.setText("Items " + Order_Summary_Activity.this.qty + "");
-
-                tv_sellingp.setText(b + mrpPrice + "");
-                 mrpPrice = b + mrpPrice;
-
-             }
-
-            @Override
-            public void remove(Cart model, String id) {
-
-            }
-
-            @Override
-            public void load() {
-                showUi();
+            public void onClick(View view) {
+                finish();
             }
         });
-        rv_order_summary.setAdapter(cartAdapter);
 
-
+        btn_change_Add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Order_Summary_Activity.this,AddressActivity.class));
+            }
+        });
     }
 
     @Override
@@ -232,6 +257,8 @@ public class Order_Summary_Activity extends AppCompatActivity {
     }
 
     private void init() {
+        rv_order_summary = findViewById(R.id.rv_order_summary);
+        tv_continue = findViewById(R.id.tv_continue);
         tv_id_item = findViewById(R.id.tv_id_item);
         iv_back = findViewById(R.id.iv_back);
         ll_main = findViewById(R.id.ll_main);
@@ -322,6 +349,10 @@ public class Order_Summary_Activity extends AppCompatActivity {
 
     private void showUi() {
         CURRENT_API_CALL++;
+
+        Log.i("SDGHFCGHSD", "showUi: "+CURRENT_API_CALL);
+        Log.i("SDGHFCGHSD", "showUi: "+TOTAL_API_CALL);
+
         if(CURRENT_API_CALL==TOTAL_API_CALL){
             ll_main.setVisibility(View.VISIBLE);
             progress.setVisibility(View.GONE);

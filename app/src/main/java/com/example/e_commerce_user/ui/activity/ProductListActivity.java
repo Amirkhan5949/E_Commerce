@@ -64,7 +64,9 @@ public class ProductListActivity extends AppCompatActivity {
                         .setQuery(query, Product.class)
                         .build();
 
-        adapter=new WishListAdapter(option,progress);
+        adapter=new WishListAdapter(option,progress,count -> {
+
+        });
         rv_productlist.setAdapter(adapter);
 
 

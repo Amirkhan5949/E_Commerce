@@ -114,8 +114,4 @@ public class AddressActivity extends AppCompatActivity {
         adapter.stopListening();
 
     }
-
-
-
-
 }

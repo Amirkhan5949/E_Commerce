@@ -2,9 +2,12 @@ package com.example.e_commerce_user.ui.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -33,6 +36,8 @@ public class MenuFragment extends Fragment {
 
     private View view;
     private Loader loader;
+    private LinearLayout ll_main;
+    private ProgressBar progress;
     private CircleImageView iv_profile_image;
     private TextView profile, orders, cart, wishlist, address,
             notification, policy, share, logout, tv_name, tv_emial_id;
@@ -58,18 +63,23 @@ public class MenuFragment extends Fragment {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             if (snapshot.child("email").getValue(String.class) != null) {
+                                ll_main.setVisibility(View.VISIBLE);
+                                progress.setVisibility(View.GONE);
+                                Log.i("ffdsffc", "onDataChange: "+snapshot.toString());
                                 tv_emial_id.setText(snapshot.child("email").getValue(String.class));
                             } else {
                                 tv_emial_id.setText("xyz123@gmail.com");
                             }
-                            if (snapshot.child("name").getValue(String.class) != null) {
-                                tv_name.setText(snapshot.child("name").getValue(String.class));
+                            if (snapshot.child("Username").getValue(String.class) != null) {
+                                tv_name.setText(snapshot.child("Username").getValue(String.class));
 
                             } else {
-                                tv_name.setText("abc");
+                                tv_name.setText("xyz");
                             }
-                            Picasso.get().load(snapshot.child("image").getValue(String.class)).into(iv_profile_image);
+                            Picasso.get().load(snapshot.child("image").getValue(String.class))
+                                    .placeholder(R.drawable.userpic).into(iv_profile_image);
                         }
+
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
@@ -176,6 +186,8 @@ public class MenuFragment extends Fragment {
     private void init() {
 
         iv_profile_image = view.findViewById(R.id.iv_profile_image);
+        ll_main = view.findViewById(R.id.ll_main);
+        progress = view.findViewById(R.id.progress);
         tv_name = view.findViewById(R.id.tv_name);
         tv_emial_id = view.findViewById(R.id.tv_emial_id);
         loader = new Loader(getContext());

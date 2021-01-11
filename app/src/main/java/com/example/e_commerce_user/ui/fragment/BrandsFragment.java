@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -25,6 +26,8 @@ public class BrandsFragment extends Fragment {
     private ProgressBar progress;
     private WishListAdapter adapter;
     private String id, brandid;
+    private TextView tv_data;
+
 
     public BrandsFragment() {
         // Required empty public constructor
@@ -63,13 +66,21 @@ public class BrandsFragment extends Fragment {
                                 .equalTo(brandid), Product.class)
                         .build();
 
-        adapter = new WishListAdapter(option, progress);
+        adapter = new WishListAdapter(option, progress, new WishListAdapter.ClickCallBack() {
+            @Override
+            public void click(int count) {
+                if (count==0){
+                    tv_data.setVisibility(View.VISIBLE);
+                }
+            }
+        });
         rv_brands.setAdapter(adapter);
         return view;
     }
 
     private void init() {
         rv_brands = view.findViewById(R.id.rv_brands);
+        tv_data = view.findViewById(R.id.tv_data);
         progress = view.findViewById(R.id.progress);
     }
 

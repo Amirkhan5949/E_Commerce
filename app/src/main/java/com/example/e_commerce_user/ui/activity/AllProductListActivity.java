@@ -45,7 +45,9 @@ public class AllProductListActivity extends AppCompatActivity {
                         .setQuery(query, Product.class)
                         .build();
 
-        adapter=new WishListAdapter(options,progressBar);
+        adapter=new WishListAdapter(options,progressBar,count -> {
+
+        });
         rv_productlist.setAdapter(adapter);
 
         iv_back.setOnClickListener(new View.OnClickListener() {

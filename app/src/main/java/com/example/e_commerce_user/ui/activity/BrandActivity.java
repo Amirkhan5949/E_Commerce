@@ -8,6 +8,8 @@ import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.example.e_commerce_user.R;
 import com.example.e_commerce_user.model.Brand;
@@ -28,7 +30,7 @@ public class BrandActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private TabLayout tabLayout;
     private int position;
-    private ImageView iv_back;
+     private ImageView iv_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +78,7 @@ public class BrandActivity extends AppCompatActivity {
 
     private void init() {
         viewPager= findViewById(R.id.viewPager);
+
         tabLayout= findViewById(R.id.tabLayout);
         iv_back= findViewById(R.id.iv_back);
         toolbar= findViewById(R.id.toolbar);

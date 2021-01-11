@@ -54,7 +54,9 @@ public class WishlistActivity extends AppCompatActivity {
                                     .child(FirebaseAuth.getInstance().getUid()), Product.class)
                             .build();
 
-            wishlistAdapter=new WishListAdapter(option2,progress);
+            wishlistAdapter=new WishListAdapter(option2,progress,count -> {
+
+            });
             recycler_wishlist.setAdapter(wishlistAdapter);
 
 

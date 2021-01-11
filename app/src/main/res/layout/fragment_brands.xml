@@ -11,6 +11,21 @@
         android:layout_height="match_parent"
         android:id="@+id/rv_brands"/>
 
+
+    <TextView
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sorry No Data Found"
+        android:textSize="20sp"
+        android:textColor="@color/colorDarkblue"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:id="@+id/tv_data"/>
+
+
+
+
     <ProgressBar
         android:indeterminateTint="@color/colorPrimary"
         android:layout_centerInParent="true"

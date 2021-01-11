@@ -16,10 +16,14 @@ public class BrandListAdapter extends FragmentPagerAdapter {
     private List<Brand> brands;
 
 
+
+
     public BrandListAdapter(@NonNull FragmentManager fm, List<Brand> brands) {
         super(fm);
         this.brands=brands;
+
      }
+
 
     public BrandListAdapter(@NonNull FragmentManager fm, int behavior) {
         super(fm, behavior);
@@ -44,4 +48,7 @@ public class BrandListAdapter extends FragmentPagerAdapter {
         return brands.get(position).getName();
 
     }
+
+
+
 }

@@ -92,154 +92,6 @@ public class Order_Adapter extends FirebaseRecyclerAdapter<Order, Order_Adapter.
         holder.tv_time.setText("Date : " + dateString);
 
 
-
-
-
-
-        holder.tv_status.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                final DialogPlus dialog = DialogPlus.newDialog(holder.tv_status.getContext())
-                        .setContentHolder(new ViewHolder(R.layout.status))
-                        .setCancelable(false)
-                        .setMargin(util.dpToPx(holder.tv_cancel.getContext(), 20)
-                                , util.dpToPx(holder.tv_cancel.getContext(), 200)
-                                , util.dpToPx(holder.tv_cancel.getContext(), 20)
-                                , util.dpToPx(holder.tv_cancel.getContext(), 200))
-                        .setGravity(Gravity.CENTER)
-                        .create();
-                dialog.show();
-
-                View viewholder = dialog.getHolderView();
-                TextView tv_confirm=viewholder.findViewById(R.id.tv_confirm);
-                TextView tv_Packed=viewholder.findViewById(R.id.tv_Packed);
-                TextView tv_Shipped=viewholder.findViewById(R.id.tv_Shipped);
-                TextView tv_Delivered=viewholder.findViewById(R.id.tv_Delivered);
-
-
-
-                tv_confirm.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                         Map<String, Object> map = new HashMap<>();
-                         map.put(FirebaseConstants.Order.order_status,"Confirm");
-
-                         FirebaseDatabase.getInstance().getReference()
-                                 .child(FirebaseConstants.Order.key)
-                                 .child(getRef(position).getKey())
-                                 .updateChildren(map).addOnCompleteListener(new OnCompleteListener<Void>() {
-                             @Override
-                             public void onComplete(@NonNull Task<Void> task) {
-                                 loader.dismiss();
-                                 dialog.dismiss();
-                             }
-                         }).addOnFailureListener(new OnFailureListener() {
-                             @Override
-                             public void onFailure(@NonNull Exception e) {
-                                 loader.dismiss();
-                             }
-                         });
-                     }
-                });
-                tv_Packed.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        loader.show();
-                         Map<String, Object> map = new HashMap<>();
-                         map.put(FirebaseConstants.Order.order_status,"Packed");
-
-                         FirebaseDatabase.getInstance().getReference()
-                                 .child(FirebaseConstants.Order.key)
-                                 .child(getRef(position).getKey())
-                                 .updateChildren(map).addOnCompleteListener(new OnCompleteListener<Void>() {
-                             @Override
-                             public void onComplete(@NonNull Task<Void> task) {
-                                 loader.dismiss();
-                                 dialog.dismiss();
-                             }
-                         }).addOnFailureListener(new OnFailureListener() {
-                             @Override
-                             public void onFailure(@NonNull Exception e) {
-                                 dialog.dismiss();
-                             }
-                         });
-
-                    }
-                });
-                tv_Shipped.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        loader.show();
-                         Map<String, Object> map = new HashMap<>();
-                         map.put(FirebaseConstants.Order.order_status,"Shipped");
-
-                         FirebaseDatabase.getInstance().getReference()
-                                 .child(FirebaseConstants.Order.key)
-                                 .child(getRef(position).getKey())
-                                 .updateChildren(map).addOnCompleteListener(new OnCompleteListener<Void>() {
-                             @Override
-                             public void onComplete(@NonNull Task<Void> task) {
-                                 dialog.dismiss();
-                                 loader.dismiss();
-
-                             }
-                         }).addOnFailureListener(new OnFailureListener() {
-                             @Override
-                             public void onFailure(@NonNull Exception e) {
-                                 loader.dismiss();
-                             }
-                         });
-                    }
-                });
-                tv_Delivered.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        loader.show();
-                         Map<String, Object> map = new HashMap<>();
-                         map.put(FirebaseConstants.Order.order_status,"Delivered");
-
-                         FirebaseDatabase.getInstance().getReference()
-                                 .child(FirebaseConstants.Order.key)
-                                 .child(getRef(position).getKey())
-                                 .updateChildren(map).addOnCompleteListener(new OnCompleteListener<Void>() {
-                             @Override
-                             public void onComplete(@NonNull Task<Void> task) {
-                                 loader.dismiss();
-                                 dialog.dismiss();
-                             }
-                         }).addOnFailureListener(new OnFailureListener() {
-                             @Override
-                             public void onFailure(@NonNull Exception e) {
-                                 dialog.dismiss();
-                             }
-                         });
-
-                    }
-                });
-
-
-
-
-
-            }
-        });
-
-        FirebaseDatabase.getInstance().getReference().child(FirebaseConstants.Order.key)
-                .child(getRef(position).getKey())
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        String a=snapshot.child(FirebaseConstants.Order.order_status).getValue(String.class);
-                        holder.tv_status.setText(a);
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-
         Picasso.get().load(model.getProduct().getImg()).into(holder.iv_image);
 
 
@@ -314,7 +166,7 @@ public class Order_Adapter extends FirebaseRecyclerAdapter<Order, Order_Adapter.
         LinearLayout order_layout;
 
         TextView tv_cod, tv_order_rs, tv_name, tv_description, tv_size,tv_orderid,
-                tv_quantity,tv_status, tv_off,tv_sellingp, tv_mrp, tv_help, tv_cancel, tv_time;
+                tv_quantity, tv_off,tv_sellingp, tv_mrp, tv_help, tv_cancel, tv_time;
         View colorview;
         ImageView iv_expandqty, iv_image;
 
@@ -322,7 +174,7 @@ public class Order_Adapter extends FirebaseRecyclerAdapter<Order, Order_Adapter.
             super(itemView);
             order_layout = itemView.findViewById(R.id.order_layout);
             tv_cod = itemView.findViewById(R.id.tv_cod);
-            tv_status = itemView.findViewById(R.id.tv_status);
+
             tv_off = itemView.findViewById(R.id.tv_off);
             tv_orderid = itemView.findViewById(R.id.tv_orderid);
             tv_time = itemView.findViewById(R.id.tv_time);

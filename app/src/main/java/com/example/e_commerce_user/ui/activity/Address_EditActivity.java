@@ -278,6 +278,7 @@ public class Address_EditActivity extends AppCompatActivity {
                     if (ComeFrom.equals("OrderSummary")){
                         Intent intent=new Intent(Address_EditActivity.this,Order_Summary_Activity.class);
                         startActivity(intent);
+                        finish();
                     }
                     else {
                         finish();

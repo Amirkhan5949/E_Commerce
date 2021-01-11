@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragment.MenuFragment"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:orientation="vertical"
+    tools:context=".ui.fragment.MenuFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -17,365 +16,382 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:visibility="invisible"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:gravity="center"
+                    android:id="@+id/ll_main"
+                    android:orientation="vertical">
+
+                    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/iv_profile_image"
+                        android:layout_width="96dp"
+                        android:layout_height="96dp"
+                        android:layout_marginVertical="5dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/userpic" />
+
+                    <TextView
+                        android:id="@+id/tv_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:fontFamily="@font/bold"
+                        android:text="Aamir khan"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_emial_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="5dp"
+                        android:fontFamily="@font/simple"
+                        android:text="Aamir@5949gmail.com"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <ProgressBar
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:id="@+id/progress"
+                    android:indeterminateTint="@color/colorDarkblue"
+                    android:layout_centerInParent="true"/>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/dark_gray" />
+
             <LinearLayout
-                android:layout_margin="20dp"
-                android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_marginVertical="5dp"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/iv_profile_image"
-                    android:layout_width="96dp"
-                    android:layout_height="96dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/userpic"
-                    />
-
-                <TextView
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Aamir khan"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/bold"
-                    android:id="@+id/tv_name"/>
-
-                <TextView
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginVertical="5dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Aamir@5949gmail.com"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/simple"
-                    android:id="@+id/tv_emial_id"/>
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/dark_gray"/>
-                            <LinearLayout
-                android:layout_marginVertical="15dp"
-                                android:gravity="center_vertical"
                 android:layout_marginHorizontal="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-
-                    app:tint="@color/black"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/person"
-                    android:id="@+id/iv_person_icon"/>
-
-                <TextView
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Profile"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/simple"
-                    android:id="@+id/p_profile"/>
-
-
-            </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/dark_gray"/>
-
-                            <LinearLayout
-                android:layout_marginVertical="15dp"
-                                android:gravity="center_vertical"
-                android:layout_marginHorizontal="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    app:tint="@color/black"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/orders"
-                    android:id="@+id/iv_order_icon"/>
-
-                <TextView
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Orders"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/simple"
-                    android:id="@+id/orders"/>
-
-            </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/dark_gray"/>
-
-                            <LinearLayout
-                android:layout_marginVertical="15dp"
-                                android:gravity="center_vertical"
-                android:layout_marginHorizontal="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    app:tint="@color/black"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/cartdark"
-                    android:id="@+id/iv_cart_icon"/>
-
-                <TextView
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Cart"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/simple"
-                    android:id="@+id/cart"/>
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/dark_gray"/>
-
-                            <LinearLayout
-                android:layout_marginVertical="15dp"
-                                android:gravity="center_vertical"
-                android:layout_marginHorizontal="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    app:tint="@color/black"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/darkfavorite"
-                    android:id="@+id/iv_fav_icon"/>
-
-                <TextView
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Wishlist"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/simple"
-                    android:id="@+id/wishlist"/>
-
-            </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/dark_gray"/>
-                            <LinearLayout
-                android:layout_marginVertical="15dp"
-                                android:gravity="center_vertical"
-                android:layout_marginHorizontal="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    app:tint="@color/black"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/address"
-                    android:id="@+id/iv_address_icon"/>
-
-                <TextView
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Address"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/simple"
-                    android:id="@+id/address"/>
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/dark_gray"/>
-
-                            <LinearLayout
-                android:layout_marginVertical="15dp"
-                                android:gravity="center_vertical"
-                android:layout_marginHorizontal="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    app:tint="@color/black"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/notofication"
-                    android:id="@+id/iv_icon_notification"/>
-
-                <TextView
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Notification"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/simple"
-                    android:id="@+id/notification"/>
-
-            </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/dark_gray"/>
-
-                            <LinearLayout
-                android:layout_marginVertical="15dp"
-                                android:gravity="center_vertical"
-                android:layout_marginHorizontal="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    app:tint="@color/black"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/policy"
-                    android:id="@+id/iv_policy_icon"/>
-
-                <TextView
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Privacy Policy"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/simple"
-                    android:id="@+id/policy"/>
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/dark_gray"/>
-
-                            <LinearLayout
-                android:layout_marginVertical="15dp"
-                                android:gravity="center_vertical"
-                android:layout_marginHorizontal="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    app:tint="@color/black"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/share"
-                    android:id="@+id/iv_icon_share"/>
-
-                <TextView
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Share"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/simple"
-                    android:id="@+id/share"/>
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/dark_gray"/>
-            <LinearLayout
-
                 android:layout_marginVertical="15dp"
                 android:gravity="center_vertical"
-                android:layout_marginHorizontal="20dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv_person_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:src="@drawable/person"
+                    app:tint="@color/black" />
+
+                <TextView
+                    android:id="@+id/p_profile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:fontFamily="@font/simple"
+                    android:text="Profile"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/dark_gray" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="15dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv_order_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:src="@drawable/orders"
+                    app:tint="@color/black" />
+
+                <TextView
+                    android:id="@+id/orders"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:fontFamily="@font/simple"
+                    android:text="Orders"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/dark_gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="15dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv_cart_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:src="@drawable/cartdark"
+                    app:tint="@color/black" />
+
+                <TextView
+                    android:id="@+id/cart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:fontFamily="@font/simple"
+                    android:text="Cart"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/dark_gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="15dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv_fav_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:src="@drawable/darkfavorite"
+                    app:tint="@color/black" />
+
+                <TextView
+                    android:id="@+id/wishlist"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:fontFamily="@font/simple"
+                    android:text="Wishlist"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/dark_gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="15dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv_address_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:src="@drawable/address"
+                    app:tint="@color/black" />
+
+                <TextView
+                    android:id="@+id/address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:fontFamily="@font/simple"
+                    android:text="Address"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/dark_gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="15dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv_icon_notification"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:src="@drawable/notofication"
+                    app:tint="@color/black" />
+
+                <TextView
+                    android:id="@+id/notification"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:fontFamily="@font/simple"
+                    android:text="Notification"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/dark_gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="15dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv_policy_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:src="@drawable/policy"
+                    app:tint="@color/black" />
+
+                <TextView
+                    android:id="@+id/policy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:fontFamily="@font/simple"
+                    android:text="Privacy Policy"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/dark_gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="15dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv_icon_share"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:src="@drawable/share"
+                    app:tint="@color/black" />
+
+                <TextView
+                    android:id="@+id/share"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:fontFamily="@font/simple"
+                    android:text="Share"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/dark_gray" />
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="15dp"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <ImageView
 
 
-                    app:tint="@color/black"
+                    android:id="@+id/iv_icon_logout"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:layout_marginHorizontal="20dp"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
                     android:src="@drawable/logout"
-                    android:id="@+id/iv_icon_logout"/>
+                    app:tint="@color/black" />
 
                 <TextView
-                    android:layout_marginHorizontal="20dp"
+                    android:id="@+id/logout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Logout"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
+                    android:layout_marginHorizontal="20dp"
                     android:fontFamily="@font/simple"
-                    android:id="@+id/logout"/>
+                    android:text="Logout"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/dark_gray"/>
-
-
+                android:background="@color/dark_gray" />
 
 
         </LinearLayout>
 
 
-
     </ScrollView>
-
 
 
 </LinearLayout>
