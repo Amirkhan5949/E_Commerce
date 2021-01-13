@@ -2,6 +2,7 @@ package com.example.e_commerce_user.ui.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -9,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
+
 
 import com.example.e_commerce_user.R;
 import com.example.e_commerce_user.ui.fragment.CartFragment;
@@ -20,8 +22,9 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class HomeActivity extends AppCompatActivity {
 
-    FrameLayout frameLayout;
-    BottomNavigationView bottomNavigationView;
+
+    private FrameLayout frameLayout;
+    private BottomNavigationView bottomNavigationView;
 
 
      @Override

@@ -32,5 +32,9 @@
     <color name="yellow">#FFC107</color>
     <color name="red">#FF113F</color>
 
+    <color name="color_red">#FF113F</color>
+    <color name="color_green">#00f700</color>
+    <color name="color_purpul">#6F27FD</color>
+
 
 </resources>
