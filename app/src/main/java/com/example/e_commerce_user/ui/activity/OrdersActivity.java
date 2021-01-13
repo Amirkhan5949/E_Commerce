@@ -1,5 +1,6 @@
 package com.example.e_commerce_user.ui.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,12 +13,16 @@ import android.widget.TextView;
 
 import com.example.e_commerce_user.R;
 import com.example.e_commerce_user.model.Order;
+import com.example.e_commerce_user.model.User;
 import com.example.e_commerce_user.ui.adapter.Order_Adapter;
 import com.example.e_commerce_user.utils.FirebaseConstants;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class OrdersActivity extends AppCompatActivity {
 
@@ -26,6 +31,9 @@ public class OrdersActivity extends AppCompatActivity {
     private ProgressBar progress;
     private ImageView iv_back;
     private TextView tv_data;
+    private User user;
+    private int TOTAL_API_CALL = 2,CURRENT_API_CALL;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +41,10 @@ public class OrdersActivity extends AppCompatActivity {
         setContentView(R.layout.activity_orders);
 
        init();
+        order_recycler.setVisibility(View.GONE);
+
+
+
 
         iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,13 +70,32 @@ public class OrdersActivity extends AppCompatActivity {
 
             adapter=new Order_Adapter(options, this, progress, new Order_Adapter.ClickCallBack() {
                 @Override
-                public void click(int count) {
+                public void load(int count) {
                     if(count==0)
                         tv_data.setVisibility(View.VISIBLE);
+                    showui();
+
                 }
             });
             order_recycler.setAdapter(adapter);
 
+        FirebaseDatabase.getInstance().getReference()
+                .child(FirebaseConstants.User.key)
+                .child(FirebaseAuth.getInstance().getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        showui();
+                        user=snapshot.getValue(User.class);
+                        adapter.setUser(user);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                        showui();
+                    }
+                });
 
     }
 
@@ -85,5 +116,15 @@ public class OrdersActivity extends AppCompatActivity {
     public void onStop() {
         super.onStop();
         adapter.stopListening();
+    }
+
+    void showui(){
+
+        CURRENT_API_CALL++;
+        if (TOTAL_API_CALL==CURRENT_API_CALL) {
+            progress.setVisibility(View.GONE);
+            order_recycler.setVisibility(View.VISIBLE);
+        }
+
     }
 }

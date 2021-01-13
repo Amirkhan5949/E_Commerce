@@ -284,7 +284,7 @@
                         android:fontFamily="@font/bold"
                         android:text="Color"
                         android:textColor="@color/black"
-                        android:textSize="24sp" />
+                        android:textSize="20sp" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_color"

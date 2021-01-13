@@ -57,7 +57,8 @@ public class CartAdapter extends FirebaseRecyclerAdapter<Cart,CartAdapter.Review
     @Override
     public void onDataChanged() {
         super.onDataChanged();
-        clickCallBack.load();
+
+        clickCallBack.load(getItemCount());
     }
 
     @NonNull
@@ -249,6 +250,8 @@ public class CartAdapter extends FirebaseRecyclerAdapter<Cart,CartAdapter.Review
 
         void remove( Cart model,String id);
 
-        void load();
+
+
+        void load(int i);
     }
 }

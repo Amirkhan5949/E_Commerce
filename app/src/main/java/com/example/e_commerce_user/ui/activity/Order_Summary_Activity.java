@@ -108,8 +108,9 @@ public class Order_Summary_Activity extends AppCompatActivity {
 
             }
 
+
             @Override
-            public void load() {
+            public void load(int i) {
                 showUi();
             }
         });
@@ -222,16 +223,6 @@ public class Order_Summary_Activity extends AppCompatActivity {
 
                 Intent intent = new Intent(tv_continue.getContext(), PaymentActivity.class);
                 startActivity(intent);
-
-
-                Intent intent1 = new Intent(getApplicationContext(),
-                        PaymentActivity.class);
-                Pair[] pairs = new Pair[1];
-                pairs[0] = new Pair<View, String>(view.findViewById(R.id.tv_continue), "transition_login");
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP)
-                {  ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(Order_Summary_Activity.this, pairs);
-                    startActivity(intent, options.toBundle()); }
-                else { startActivity(intent1); }
             }
         });
 

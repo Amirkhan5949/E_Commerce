@@ -4,7 +4,46 @@ public class Order{
     Product Product;
     String ordered_mrp_price;
     String ordered_selling_price;
+    String order_status;
+    boolean review_status;
+
+    public boolean getReview_status() {
+        return review_status;
+    }
+
+    public void setReview_status(boolean review_status) {
+        this.review_status = review_status;
+    }
+
+    public String getOrder_status() {
+        return order_status;
+    }
+
+    public void setOrder_status(String order_status) {
+        this.order_status = order_status;
+    }
+
+
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
     String payment_type;
+    String color;
+    String size;
     int quantity;
 
     @Override

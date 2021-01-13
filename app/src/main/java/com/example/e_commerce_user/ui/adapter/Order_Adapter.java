@@ -2,23 +2,26 @@ package com.example.e_commerce_user.ui.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.e_commerce_user.R;
-import com.example.e_commerce_user.model.Cart;
 import com.example.e_commerce_user.model.Order;
+import com.example.e_commerce_user.model.User;
 import com.example.e_commerce_user.ui.activity.OrderDetailActivity;
 import com.example.e_commerce_user.utils.FirebaseConstants;
 import com.example.e_commerce_user.utils.Loader;
@@ -28,10 +31,7 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.orhanobut.dialogplus.DialogPlus;
 import com.orhanobut.dialogplus.ViewHolder;
 import com.squareup.picasso.Picasso;
@@ -46,6 +46,11 @@ public class Order_Adapter extends FirebaseRecyclerAdapter<Order, Order_Adapter.
    private Loader loader;
   private  ProgressBar progressBar ;
   private ClickCallBack clickCallBack;
+  private User user;
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public Order_Adapter(@NonNull FirebaseRecyclerOptions<Order> options, Context context, ProgressBar progress, ClickCallBack clickCallBack) {
         super(options);
@@ -66,17 +71,20 @@ public class Order_Adapter extends FirebaseRecyclerAdapter<Order, Order_Adapter.
     public void onDataChanged() {
         super.onDataChanged();
         progressBar.setVisibility(View.GONE);
-        clickCallBack.click(getItemCount());
+        clickCallBack.load(getItemCount());
     }
 
     @Override
     protected void onBindViewHolder(@NonNull final Order_Adapter_View holder, final int position, @NonNull final Order model) {
 
+        String orderId= getRef(position).getKey();
         holder.tv_cod.setText(model.getPayment_type());
         holder.tv_order_rs.setText("₹"+model.getProduct().getSelling_price());
         holder.tv_name.setText(model.getProduct().getName());
         holder.tv_description.setText(model.getProduct().getDetails());
-        holder.tv_size.setText(model.getProduct().getSize().toString());
+        holder.tv_size.setText(model.getSize());
+        holder.colorview.setBackgroundColor(android.graphics.Color.parseColor(model.getColor()+""));
+
         holder.tv_sellingp.setText("₹"+model.getProduct().getSelling_price());
         holder.tv_mrp.setText("₹"+model.getProduct().getMrp_price());
         holder.tv_quantity.setText(model.getQuantity() + "");
@@ -99,66 +107,153 @@ public class Order_Adapter extends FirebaseRecyclerAdapter<Order, Order_Adapter.
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(holder.order_layout.getContext(), OrderDetailActivity.class);
-                intent.putExtra("order_id", getRef(position).getKey());
+                intent.putExtra("order_id", orderId);
                 holder.order_layout.getContext().startActivity(intent);
             }
         });
 
 
+        if (model.getOrder_status().equals("Delivered")&&!model.getReview_status()){
+            holder.tv_cancel.setText("Review");
+        }
+        else if(model.getOrder_status().equals("Delivered")){
+            holder.tv_cancel.setVisibility(View.GONE);
+        }
+
         holder.tv_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final DialogPlus dialog = DialogPlus.newDialog(holder.tv_cancel.getContext())
-                        .setContentHolder(new ViewHolder(R.layout.confirmation))
-                        .setCancelable(false)
-                        .setMargin(util.dpToPx(holder.tv_cancel.getContext(), 20)
-                                , util.dpToPx(holder.tv_cancel.getContext(), 200)
-                                , util.dpToPx(holder.tv_cancel.getContext(), 20)
-                                , util.dpToPx(holder.tv_cancel.getContext(), 200))
-                        .setGravity(Gravity.CENTER)
-                        .create();
-                dialog.show();
 
-                View viewholder = dialog.getHolderView();
-                Button btn_yes = viewholder.findViewById(R.id.btn_yes);
-                Button btn_no = viewholder.findViewById(R.id.btn_no);
+                if (holder.tv_cancel.getText().equals("Review")){
 
-                btn_no.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        dialog.dismiss();
-                    }
-                });
+                    if(user!=null){
+                        final DialogPlus dialog = DialogPlus.newDialog(holder.tv_cancel.getContext())
+                                .setContentHolder(new ViewHolder(R.layout.yourreview))
+                                .setCancelable(false)
+                                .setMargin(util.dpToPx(holder.tv_cancel.getContext(), 20)
+                                        , util.dpToPx(holder.tv_cancel.getContext(), 0)
+                                        , util.dpToPx(holder.tv_cancel.getContext(), 20)
+                                        , util.dpToPx(holder.tv_cancel.getContext(), 0))
+                                .setGravity(Gravity.CENTER)
+                                .create();
+                        dialog.show();
 
-                btn_yes.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        loader.show();
-                        Map<String, Object> map = new HashMap<>();
-                        map.put(FirebaseConstants.Order.order_status, "Cancel");
-                        FirebaseDatabase.getInstance().getReference()
-                                .child(FirebaseConstants.Order.key)
-                                .child(getRef(position).getKey())
-                                .updateChildren(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        View viewholder = dialog.getHolderView();
+                        Button btn_yes = viewholder.findViewById(R.id.btn_yes);
+                        EditText et_review=viewholder.findViewById(R.id.et_review);
+                        Button btn_no = viewholder.findViewById(R.id.btn_no);
+                        RatingBar ratingBar=viewholder.findViewById(R.id.ratingBar);
+
+                        btn_no.setOnClickListener(new View.OnClickListener() {
                             @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-
-                                loader.dismiss();
+                            public void onClick(View view) {
                                 dialog.dismiss();
                             }
-                        }).addOnFailureListener(new OnFailureListener() {
+                        });
+
+                        btn_yes.setOnClickListener(new View.OnClickListener() {
                             @Override
-                            public void onFailure(@NonNull Exception e) {
-                                loader.dismiss();
-                                Log.i("cxxv", "onFailure: " + e.getMessage());
+                            public void onClick(View view) {
+                                dialog.dismiss();
+                                new Handler().postDelayed(() -> loader.show(),500);
+                                String id=model.getProduct().getId();
+
+                                Map<String, Object> map = new HashMap<>();
+                                map.put("comment",et_review.getText().toString());
+                                map.put("review",ratingBar.getRating());
+                                map.put("user",user);
+                                FirebaseDatabase.getInstance().getReference()
+                                        .child(FirebaseConstants.Product.key)
+                                        .child(id)
+                                        .child("Review").push()
+                                        .updateChildren(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+
+                                        Map<String,Object> objectMap=new HashMap<>();
+                                        objectMap.put("review_status",true);
+                                        FirebaseDatabase.getInstance().getReference()
+                                                .child(FirebaseConstants.Order.key)
+                                                .child(orderId)
+                                                .updateChildren(objectMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                loader.dismiss();
+                                            }
+                                        });
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        loader.dismiss();
+                                        Log.i("cxxv", "onFailure: " + e.getMessage());
+                                    }
+                                });
+
                             }
                         });
 
                     }
-                });
+
+
+
+                }
+                else {
+                    final DialogPlus dialog = DialogPlus.newDialog(holder.tv_cancel.getContext())
+                            .setContentHolder(new ViewHolder(R.layout.confirmation))
+                            .setCancelable(false)
+                            .setMargin(util.dpToPx(holder.tv_cancel.getContext(), 20)
+                                    , util.dpToPx(holder.tv_cancel.getContext(), 200)
+                                    , util.dpToPx(holder.tv_cancel.getContext(), 20)
+                                    , util.dpToPx(holder.tv_cancel.getContext(), 200))
+                            .setGravity(Gravity.CENTER)
+                            .create();
+                    dialog.show();
+
+                    View viewholder = dialog.getHolderView();
+                    Button btn_yes = viewholder.findViewById(R.id.btn_yes);
+                    Button btn_no = viewholder.findViewById(R.id.btn_no);
+
+                    btn_no.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    btn_yes.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            loader.show();
+                            Map<String, Object> map = new HashMap<>();
+                            map.put(FirebaseConstants.Order.order_status, "Cancel");
+                            FirebaseDatabase.getInstance().getReference()
+                                    .child(FirebaseConstants.Order.key)
+                                    .child(getRef(position).getKey())
+                                    .updateChildren(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+
+                                    loader.dismiss();
+                                    dialog.dismiss();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    loader.dismiss();
+                                    Log.i("cxxv", "onFailure: " + e.getMessage());
+                                }
+                            });
+
+                        }
+                    });
+
+                }
 
             }
         });
+
+
     }
 
     class Order_Adapter_View extends RecyclerView.ViewHolder {
@@ -193,8 +288,9 @@ public class Order_Adapter extends FirebaseRecyclerAdapter<Order, Order_Adapter.
         }
     }
 
+
     public interface ClickCallBack{
 
-        void click(int count);
+        void load(int count);
     }
 }

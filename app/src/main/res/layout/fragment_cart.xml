@@ -27,7 +27,6 @@
     <LinearLayout
         android:layout_below="@+id/tb_tool"
         android:id="@+id/ll_Main"
-        android:visibility="gone"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -86,7 +85,7 @@
                                 android:id="@+id/review"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Review 2 items"
+                                android:text="Review 0 items"
                                 android:textSize="12sp"
                                 android:textStyle="bold"
                                 android:fontFamily="@font/simple"
@@ -94,7 +93,7 @@
 
                             <TextView
                                 android:layout_marginLeft="5dp"
-                                android:id="@+id/rupees"
+                                android:id="@+id/rev_rupees"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="$69.70"
@@ -124,6 +123,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/ll_Data"
                     android:layout_marginVertical="10dp"
                     android:background="@color/white"
                     android:layout_width="match_parent"
@@ -155,7 +155,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textSize="14sp"
-                            android:text="Price (2items)"
+                            android:text="Price (0items)"
                             android:id="@+id/tv_id_item"/>
 
                         <TextView
@@ -315,6 +315,16 @@
 
     </LinearLayout>
 
+    <TextView
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sorry No Data Found"
+        android:textSize="20sp"
+        android:textColor="@color/colorDarkblue"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:id="@+id/tv_data"/>
 
 
 

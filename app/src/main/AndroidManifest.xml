@@ -24,10 +24,6 @@
         <activity android:name=".ui.activity.SearchActivity" />
         <activity android:name=".ui.activity.DemoActivity" />
         <activity android:name=".ui.activity.LequidActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".ui.activity.BrandActivity" />
         <activity android:name=".ui.activity.ProductListActivity" />
@@ -46,9 +42,14 @@
             android:theme="@style/AppThemeLight" />
         <activity android:name=".ui.activity.AddressActivity" />
         <activity android:name=".ui.activity.OrderDetailActivity" />
-        <activity android:name=".ui.activity.OrdersActivity" />
+        <activity android:name=".ui.activity.OrdersActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity android:name=".ui.activity.WishlistActivity" />
         <activity android:name=".ui.activity.HomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
         <activity android:name=".ui.activity.MainActivity" />

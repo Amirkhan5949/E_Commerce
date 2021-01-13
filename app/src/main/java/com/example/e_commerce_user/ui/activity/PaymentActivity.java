@@ -119,11 +119,14 @@ public class PaymentActivity extends AppCompatActivity {
             Map<String,Object> map = new HashMap<>();
 
             map.put("user_id",FirebaseAuth.getInstance().getUid());
+            map.put(FirebaseConstants.Order.review_status,false);
             map.put(FirebaseConstants.Order.mrp_price,cart.getProduct().getMrp_price());
             map.put(FirebaseConstants.Order.selling_price,cart.getProduct().getSelling_price());
             map.put(FirebaseConstants.Order.ordered_mrp_price,cart.getProduct().getMrp_price());
             map.put(FirebaseConstants.Order.ordered_selling_price,cart.getProduct().getSelling_price());
             map.put(FirebaseConstants.Order.quantity,cart.getQuantity());
+            map.put(FirebaseConstants.Order.color,cart.getColor().getColor());
+            map.put(FirebaseConstants.Order.size,cart.getSize().getTitle());
             map.put(FirebaseConstants.Order.payment_type,"Cash On  Delivery");
             map.put(FirebaseConstants.Order.order_status,"Confirm");
              map.put(FirebaseConstants.Order.Product,cart.getProduct());

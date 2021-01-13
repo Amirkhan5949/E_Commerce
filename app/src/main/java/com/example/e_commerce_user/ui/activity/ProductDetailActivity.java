@@ -369,11 +369,12 @@ public class ProductDetailActivity extends AppCompatActivity {
         }
 
 
+        product.setId(id);
         Map<String,Object> map = new HashMap<>();
         map.put(FirebaseConstants.Cart.Product,product);
         map.put(FirebaseConstants.Cart.quantity,1);
         map.put(FirebaseConstants.Cart.discount,0);
-         map.put(FirebaseConstants.Cart.Color,selectedColor.get(colorAdapter.getSelectedPosition()));
+        map.put(FirebaseConstants.Cart.Color,selectedColor.get(colorAdapter.getSelectedPosition()));
         map.put(FirebaseConstants.Cart.size,sizeList.get(size_adapter.getSelectedPosition()));
 
 

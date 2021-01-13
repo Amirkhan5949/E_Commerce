@@ -38,7 +38,7 @@ import java.util.List;
 
 public class CartFragment extends Fragment {
 
-    private LinearLayout ll_Main;
+    private LinearLayout ll_Main,checkout,ll_Data;
     private View view;
     private Loader loader;
     private ProgressBar progress ;
@@ -46,7 +46,7 @@ public class CartFragment extends Fragment {
     private int finalPrice = 0, mrpPrice = 0, discount = 0,qty=0;
     private CartAdapter cartAdapter;
     private RecyclerView review_recycler;
-    private TextView tv_id_item, tv_totalrs, tv_discount, tv_dis_rs, tv_total_amnt, c_shopping;
+    private TextView tv_id_item,tv_data, review,rev_rupees,tv_totalrs, tv_discount, tv_dis_rs, tv_total_amnt, c_shopping;
     private Button b_checkout;
     private String type;
     private List<String> list = new ArrayList<>();
@@ -172,9 +172,15 @@ public class CartFragment extends Fragment {
 
             }
 
+
+
+
             @Override
-            public void load() {
+            public void load(int i) {
                 showUi();
+                tv_data.setVisibility(i==0?View.VISIBLE:View.GONE);
+                ll_Data.setVisibility(i==0?View.GONE:View.VISIBLE);
+                checkout.setVisibility(i==0?View.GONE:View.VISIBLE);
             }
         });
         review_recycler.setAdapter(cartAdapter);
@@ -189,6 +195,7 @@ public class CartFragment extends Fragment {
             progress.setVisibility(View.GONE);
         }
     }
+
 
     private void cartnapshot() {
         FirebaseDatabase.getInstance().getReference()
@@ -212,9 +219,11 @@ public class CartFragment extends Fragment {
                             finalPrice = finalPrice + qtt*Integer.parseInt( Product.getSelling_price());
                             mrpPrice = mrpPrice + qtt*Integer.parseInt(Product.getMrp_price());
                             tv_id_item.setText("Items "+qty+"");
+                            review.setText("Review "+qty+" items");
                         }
 
                         tv_total_amnt.setText("₹"+finalPrice+"");
+                        rev_rupees.setText("₹"+finalPrice+"");
                         tv_totalrs.setText("₹"+mrpPrice+"");
                         tv_dis_rs.setText("₹"+discount+"");
 
@@ -232,7 +241,10 @@ public class CartFragment extends Fragment {
 //        ((HomeActivity) getActivity()).setCheckedNavigationItem(1);
         review_recycler = view.findViewById(R.id.review_recycler);
         tv_id_item = view.findViewById(R.id.tv_id_item);
+        ll_Data = view.findViewById(R.id.ll_Data);
+        checkout = view.findViewById(R.id.checkout);
         progress = view.findViewById(R.id.progress);
+        tv_data = view.findViewById(R.id.tv_data);
         tb_tool = view.findViewById(R.id.tb_tool);
         tv_totalrs = view.findViewById(R.id.tv_totalrs);
         tv_discount = view.findViewById(R.id.tv_discount);
@@ -241,6 +253,8 @@ public class CartFragment extends Fragment {
         c_shopping = view.findViewById(R.id.c_shopping);
         b_checkout = view.findViewById(R.id.b_checkout);
         ll_Main = view.findViewById(R.id.ll_Main);
+        rev_rupees = view.findViewById(R.id.rev_rupees);
+        review = view.findViewById(R.id.review);
 
         loader = new Loader(getContext());
 
