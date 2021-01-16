@@ -2,6 +2,11 @@
 E-commerce ( electronic commerce ) is the activity of electronically buying or selling of products on online services or over the Internet . 
 This is the User App in it user can easily can purchase what they want in a single tap
 
+# Demo of Movie Hub App 
+
+  <img width="200px"   src="https://github.com/mayankkasera/Movie-Stack/blob/master/gif/gif.gif"></br>
+
+
 Features :-
  * You can also add products to your wishlist with a single tap
  * Check ratings and reviews given by other customers along with seller ratings, price and description of the product while buying
