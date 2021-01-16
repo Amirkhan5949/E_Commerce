@@ -4,10 +4,11 @@ This is the User App in it user can easily can purchase what they want in a sing
 
 # Demo of Movie Hub App 
 
-  <img width="200px"   src="https://github.com/Amirkhan5949/E_Commerce/blob/master/gif/gif.gif"></br>
-   <a style="margin:20;padding:0" href="https://www.youtube.com/watch?v=VKUW-sLmWko">
+ <a style="margin:20;padding:0" href="https://www.youtube.com/watch?v=VKUW-sLmWko">
   <img src="https://raw.githubusercontent.com/mayankkasera/Movie-Stack/master/media/youtube.png" width="200" >
   </a>
+  <img width="200px"   src="https://github.com/Amirkhan5949/E_Commerce/blob/master/gif/gif.gif"></br>
+  
 
 
 
